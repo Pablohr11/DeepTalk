@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="estilo.css" type="text/css">
+</head>
+
+<body>
+    <video id="background-video" autoplay loop muted>
+        <source src="resources/bg_1.mp4" type="video/mp4">
+    </video>
+    <form>
+        <div id="contenedor">
+            <img src="resources/logo.png" id="logoPequeño">
+            <img src="resources/nombre.png" id="logoNombre">
+            <div class="campos">
+                <span>Usuario o Id</span>
+                <input class="input" type="text">
+            </div>
+            <div class="campos">
+                <span id="indicadorContraseña">Contraseña<a href="#" id="spanOlvidada">¿Olvidada?</a></span>
+                <input class="input" type="password">
+            </div>
+            <input id="botonEnvio" type="submit" value="Acceder">
+        </div>
+    </form>
+    <div id="cotenedorImagen">
+        <img src="resources/logo_completo.png" id="logoImage">
+    </div>
+</body>
+</html>

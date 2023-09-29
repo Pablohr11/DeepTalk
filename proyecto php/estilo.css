@@ -1,0 +1,90 @@
+#contenedor {
+    position: relative;
+    margin: auto;
+    align-self: center;
+    display: grid;
+    width: 20vw;
+    min-width: 200px;
+    max-width: 260px;
+    height: 24vh;
+    min-height: 250px;
+    grid-gap: 5%;
+    background-color: rgba(18, 18, 18, 0.96);
+    padding: 15px;
+    border: 2px solid rgb(16, 16, 16);
+    border-radius: 10px;
+    z-index: 10;
+    margin-top: 40vh;
+    align-content: space-evenly;
+}
+
+#background-video {
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: -1;
+}
+
+#contenedor span {
+    color: rgb(170, 175, 170);
+}
+
+.input {
+    background-color: rgba(0, 0, 0, 0.51);
+    border: 2px solid rgb(0, 0, 0);
+    color: rgb(170, 175, 170);
+    border-radius: 8px;
+    min-height: 25px;
+}
+
+#logoImage {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    margin-top: 20px;
+    margin-left: 20px;
+    width: 250px;
+}
+
+a {
+    color: rgb(126, 126, 236);
+    text-decoration: none;
+}
+.campos {
+    width: 100%;
+    display: grid;
+    grid-gap: 5px;
+}
+
+#botonEnvio {
+    background-color: rgb(54, 4, 43);
+    min-height: 30px;
+    border-radius: 10px;
+    border: 2px solid rgb(0, 0, 0);
+    color: rgb(170, 175, 170);
+}
+
+#logoPequeño {
+    width: 30px;
+    margin: auto;
+}
+
+#logoNombre {
+    width: 90px;
+    margin: auto;
+}
+
+#inicioSesionSpan {
+    margin: auto;
+}
+
+#spanOlvidada {
+    position: absolute;
+    right: 20px;
+
+}
