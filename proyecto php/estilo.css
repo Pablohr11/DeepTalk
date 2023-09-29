@@ -14,9 +14,37 @@
     border: 2px solid rgb(16, 16, 16);
     border-radius: 10px;
     z-index: 10;
-    margin-top: 40vh;
+    margin-top: 30vh;
     align-content: space-evenly;
 }
+
+#contenedorSignUp {
+    position: relative;
+    top: 1vh;
+    margin: auto;
+    align-self: center;
+    display: grid;
+    width: 20vw;
+    min-width: 200px;
+    max-width: 260px;
+    height: 5vh;
+    grid-gap: 10%;
+    min-height: 50px;
+    background-color: rgba(18, 18, 18, 0.96);
+    padding: 15px;
+    border: 2px solid rgb(16, 16, 16);
+    border-radius: 10px;
+    color: #8c8d8d;
+}
+
+#signUpButton {
+    background-color: #550358;
+    min-height: 30px;
+    border-radius: 10px;
+    border: 2px solid rgb(0, 0, 0);
+    color: #8c8d8d;
+}
+
 
 #background-video {
     width: 100vw;
@@ -31,13 +59,13 @@
 }
 
 #contenedor span {
-    color: rgb(170, 175, 170);
+    color: #8c8d8d;
 }
 
 .input {
     background-color: rgba(0, 0, 0, 0.51);
     border: 2px solid rgb(0, 0, 0);
-    color: rgb(170, 175, 170);
+    color: #8c8d8d;
     border-radius: 8px;
     min-height: 25px;
 }
@@ -62,11 +90,11 @@ a {
 }
 
 #botonEnvio {
-    background-color: rgb(54, 4, 43);
+    background-color: #550358;
     min-height: 30px;
     border-radius: 10px;
     border: 2px solid rgb(0, 0, 0);
-    color: rgb(170, 175, 170);
+    color: #8c8d8d;
 }
 
 #logoPequeño {
@@ -86,5 +114,4 @@ a {
 #spanOlvidada {
     position: absolute;
     right: 20px;
-
 }
