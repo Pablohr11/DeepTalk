@@ -4,7 +4,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../styles/estilo.css" type="text/css">
-    <script src="../jscript/main.js"></script>
+    <style>
+        #contenedor {
+            height: 27vh;
+            min-height: 310px;
+        }
+    </style>
 </head>
 
 <body>
@@ -16,18 +21,22 @@
             <img src="../resources/logo.png" id="logoPequeño">
             <img src="../resources/nombre.png" id="logoNombre">
             <div class="campos">
-                <span>Usuario o Id</span>
+                <span>Email</span>
+                <input class="input" type="email">
+            </div>
+            <div class="campos">
+                <span>Usuario</span>
                 <input class="input" type="text">
             </div>
             <div class="campos">
-                <span id="indicadorContraseña">Contraseña<a href="#" id="spanOlvidada">¿Olvidada?</a></span>
+                <span id="indicadorContraseña">Contraseña</span>
                 <input class="input" type="password">
             </div>
             <input id="botonEnvio" type="submit" value="Acceder">
         </div>
         <div id="contenedorSignUp">
-            <span>¿No tienes una cuenta?</span>
-            <button onclick="signUpButton()" id="signUpButton">Crea una cuenta</button>
+            <span>¿Ya tienes una cuenta?</span>
+            <input type="button" id="signUpButton" value="Inicia Sesión">
         </div>
     </form>
     <div id="cotenedorImagen">
