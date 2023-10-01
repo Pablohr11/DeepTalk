@@ -1,0 +1,67 @@
+@import url('https://fonts.cdnfonts.com/css/nasalization-2');
+
+body {
+    height: 2000px;
+    background-color: #282C34;
+    overflow-x: hidden;
+}
+
+#background-video {
+    width: 99vw;
+    height: 100vh;
+    object-fit: cover;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: -1;
+}
+
+#wavesImage {
+    width: 99vw;
+    height: 65vh;
+    object-fit: cover;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 35vh;
+    bottom: 0;
+    z-index: -1;
+}
+
+
+#logoImage {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    margin-top: 0px;
+    margin-left: 0px;
+    width: 200px;
+}
+
+#logDiv {
+    float: right;
+    margin-top: 20px;
+    margin-right: 20px;
+}
+
+#logDiv * {
+    display: inline;
+    width: 110px;
+    height: 30px;
+    border-radius: 10px;
+    font-family: Nasalization;
+    padding: 9px;
+}
+
+#signUpButton {
+    border: 2px solid #550358;
+    background-color: #8c8d8d;
+    color: #550358;
+}
+#logInButton {
+    border: 2px solid #8c8d8d;
+    background-color: #550358;
+    color: #8c8d8d;
+}
