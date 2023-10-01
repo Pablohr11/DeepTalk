@@ -20,12 +20,12 @@ body {
 
 #wavesImage {
     width: 99vw;
-    height: 65vh;
+    height: 32vh;
     object-fit: cover;
     position: absolute;
     left: 0;
     right: 0;
-    top: 35vh;
+    top: 68vh;
     bottom: 0;
     z-index: -1;
 }
@@ -61,18 +61,18 @@ body {
     height: 30px;
     border-radius: 10px;
     font-family: Nasalization;
-    padding: 9px;
+    padding: 7px;
 }
 
 #signUpButton {
-    border: 2px solid #6d0470;
-    background-color: #4c4d4d55;
-    color: #6d0470;
+    border: 2px solid #8c8d8d;
+    background-color: #4c4d4d00;
+    color: #8c8d8d;
 }
 #logInButton {
-    border: 2px solid #4c4d4d00;
-    background-color: #550358;
-    color: #707171;
+    border: 2px solid #6d0470;
+    background-color: #4c4d4d00;
+    color: #6d0470;
 }
 
 #contenido {
