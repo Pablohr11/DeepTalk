@@ -34,7 +34,7 @@ body {
     position: fixed;
     top:0;
     left: 0;
-    background-color: #282C34;
+    /* background-color: #282C34; */
     width: 100%;
     height: 85px;
 }
@@ -65,12 +65,17 @@ body {
 }
 
 #signUpButton {
-    border: 2px solid #550358;
-    background-color: #8c8d8d;
-    color: #550358;
+    border: 2px solid #6d0470;
+    background-color: #4c4d4d55;
+    color: #6d0470;
 }
 #logInButton {
-    border: 2px solid #8c8d8d;
+    border: 2px solid #4c4d4d00;
     background-color: #550358;
-    color: #8c8d8d;
+    color: #707171;
+}
+
+#contenido {
+    margin-top: 105vh;
+    padding: 10px;
 }
