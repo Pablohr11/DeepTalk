@@ -114,6 +114,12 @@ body {
     #logDivOculto > form > button{
         margin: auto
     }
+
+    #logoImage {
+        width: 170px;
+        margin: auto;
+    }
+
 }
 
 
