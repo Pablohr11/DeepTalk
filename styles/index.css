@@ -49,19 +49,18 @@ body {
     margin: auto;
 }
 
-#logDiv {
+#logDiv, #logDivOculto {
     float: right;
     margin-top: 27px;
     margin-right: 10px;
 }
 
-#logDiv * {
+#logDiv *, #logDivOculto * {
     display: inline;
     width: 110px;
     height: 30px;
     border-radius: 10px;
     font-family: Nasalization;
-    padding: 7px;
 }
 
 #signUpButton {
@@ -79,3 +78,43 @@ body {
     margin-top: 105vh;
     padding: 10px;
 }
+
+#menuOculto {
+    float: right;
+    width: 45%;
+    height: 100vh;
+    backdrop-filter: blur(6px);
+    text-align: center;
+}
+
+#logDivOculto #signUpButton, #logDivOculto #logInButton{
+    margin: 10px;
+}
+
+.displayMenuOculto, .cruzMenuOculto{
+    margin-top: 20px;
+    margin-right: 20px;
+    width: 45px;
+    float: right;
+}
+
+.oculto{
+    display: none;
+}
+
+@media (max-width: 480px) {
+	#logDiv{
+        display: none;
+    }
+
+    .displayMenuOculto{
+        display: block;
+    }
+
+    #logDivOculto > form > button{
+        margin: auto
+    }
+}
+
+
+/*                 #menuOculto, #menuOculto *,                 */
