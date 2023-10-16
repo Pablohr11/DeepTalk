@@ -23,9 +23,12 @@
                 <button formaction="./pages/login.html" id="logInButton" value="Iniciar Sesion">Iniciar Sesion</button>
             </form>
         </div>
-        <img id="menu" class="displayMenuOculto oculto" src="./resources/menu.png" onclick="mostrarMenu()">
+        <div class="contenedorMenu" onclick="mostrarMenu()">
+            <div class="barra top"></div>
+            <div class="barra middle"></div>
+            <div class="barra bottom"></div>
+        </div>
         <div id="menuOculto" class="oculto">
-            <img id="cruz" class="cruzMenuOculto oculto" src="./resources/cruz.png" onclick="ocultarMenu()">
             <div id="logDivOculto">
                 <form>
                     <button formaction="./pages/signUp.html" id="signUpButton" value="Registrarse">Registrarse</button>

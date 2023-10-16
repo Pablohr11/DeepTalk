@@ -1,19 +1,19 @@
 function mostrarMenu(){
-    var imgMenu = document.querySelector(".displayMenuOculto");
     var menu = document.getElementById("menuOculto");
-    var cruz = document.getElementById("cruz");
+    var top = document.querySelector(".top");
+    var mid = document.querySelector(".middle");
+    var bot = document.querySelector(".bottom");
     menu.classList.toggle("oculto");
-    imgMenu.classList.remove("displayMenuOculto");
-    cruz.classList.add("displayMenuOculto");
+    if(mid.classList.contains("oculto")){
+        top.style.transform = "translateY(0px) rotateZ(0deg)";
+        mid.classList.remove("oculto");
+        bot.style.transform = "translateY(0px) rotateZ(0deg)";
+    }else{
+        top.style.transform = "translateY(12px) rotateZ(45deg)";
+        mid.classList.add("oculto");
+        bot.style.transform = "rotateZ(-45deg)";
+    }
 }
 
-function ocultarMenu(){
-    var imgMenu = document.getElementById("menu");
-    var menu = document.getElementById("menuOculto");
-    var cruz = document.getElementById("cruz");
-    menu.classList.toggle("oculto");
-    imgMenu.classList.add("displayMenuOculto");
-    cruz.classList.remove("displayMenuOculto");
-}
 
-/*Estas dos funciones se usan para mostrar y ocultar el menu del media en el index*/
+/*Estas funciones se usa para mostrar y ocultar el menu del media en el index*/

@@ -85,29 +85,32 @@ body {
     height: 100vh;
     backdrop-filter: blur(6px);
     text-align: center;
+    padding-top: 40px;
 }
 
 #logDivOculto #signUpButton, #logDivOculto #logInButton{
     margin: 10px;
 }
 
-.displayMenuOculto, .cruzMenuOculto{
-    margin-top: 20px;
-    margin-right: 20px;
-    float: right;
-}
-
-.displayMenuOculto{
-    width: 45px;
-}
-
-.cruzMenuOculto{
-    height: 35px;
-    width: 40px;
-}
-
 .oculto{
     display: none;
+}
+
+.contenedorMenu{
+    display: none;
+    cursor: pointer;
+    position: absolute;
+    margin: 20px 20px 20px calc(90% - 20px);
+    padding: 0px;
+}
+
+.barra{
+    margin: 0px;
+    padding: 0px;
+    height: 5px;
+    width: 50px;
+    background: #8c8d8d;
+    margin: 6px 0px;
 }
 
 @media (max-width: 480px) {
@@ -115,8 +118,9 @@ body {
         display: none;
     }
 
-    .displayMenuOculto{
+    .contenedorMenu{
         display: block;
+        z-index: 2;
     }
 
     #logDivOculto > form > button{
