@@ -1,16 +1,21 @@
+* {
+    cursor: url('resources/cursor.png'), auto;
+}
+
+
 #contenedor {
     position: relative;
     margin: auto;
     align-self: center;
     display: grid;
-    grid-template-columns: 50% 50%;
-    width: 50vw;
-    min-width: 500px;
-    max-width: 700px;
+    width: 20vw;
+    min-width: 200px;
+    max-width: 260px;
     height: 24vh;
-    min-height: 350px;
-    grid-gap: 0%;
+    min-height: 250px;
+    grid-gap: 5%;
     background-color: rgba(18, 18, 18, 0.96);
+    padding: 15px;
     border: 2px solid rgb(16, 16, 16);
     border-radius: 10px;
     z-index: 10;
@@ -65,14 +70,11 @@
 }
 
 .input {
-    background-color: rgba(0, 0, 0, 0);
-    border-top-style: none;
-    border-left-style: none;
-    border-right-style: none;
+    background-color: rgba(0, 0, 0, 0.51);
+    border: 2px solid rgb(0, 0, 0);
     color: #8c8d8d;
-    border-radius: 0px;
-    min-height: 35px;
-    font-size: 16;
+    border-radius: 8px;
+    min-height: 25px;
 }
 
 #logoImage {
@@ -89,7 +91,7 @@ a {
     text-decoration: none;
 }
 .campos {
-    width: 85%;
+    width: 100%;
     display: grid;
     grid-gap: 5px;
 }
@@ -97,70 +99,19 @@ a {
 #botonEnvio {
     background-color: #550358;
     min-height: 30px;
-    margin-left: auto;
-    margin-right: auto;
     border-radius: 10px;
     border: 2px solid rgb(0, 0, 0);
     color: #8c8d8d;
 }
 
 #logoPequeño {
-    width: 100px;
-    margin-left: 25%;
-}
-
-#logoNombre {
-    width: 160px;
-}
-
-#contIzq {
-    background-color: rgb(85, 3, 88);
-    background-image: url("../resources/bck_image.png");
-    height: 25vh;
-    min-height: 350px;
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-    display: flex;
-    align-items: normal;
-    justify-content: center;
-    flex-direction: column;
-    gap: 20px;
-}
-
-#contIzq * {
-    margin-left: auto;
-    margin-right: auto;
-}
-#contDcha div {
-    margin-left: auto;
-    margin-right: auto;
-}
-
-#contDcha {
-    height: 300px;
-    min-height: 300px;
-    width: 100%;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-    display: flex;
-    justify-content: space-evenly;
-    flex-direction: column;
-    gap: 0px;
+    width: 30px;
     margin: auto;
 }
 
-#campoBotones {
-    display: flex;
-    flex-direction: row;
-    gap: 5%;
-    justify-content: space-evenly;
-    width: 85%;
-}
-
-#campoBotones * {
-    width: 50%;
-    border-radius: 5px;
-    border-color: #8c8d8d;
+#logoNombre {
+    width: 90px;
+    margin: auto;
 }
 
 #inicioSesionSpan {
@@ -168,7 +119,6 @@ a {
 }
 
 #spanOlvidada {
-    margin-left: auto;
-    margin-right: auto;
-
+    position: absolute;
+    right: 20px;
 }

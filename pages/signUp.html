@@ -14,26 +14,30 @@
     </video>
     <form>
         <div id="contenedor">
-            <img src="../resources/logo.png" id="logoPequeño">
-            <img src="../resources/nombre.png" id="logoNombre">
-            <div class="campos">
-                <span>Email</span>
-                <input class="input" type="email">
+            <div id="contIzq">
+                <img src="../resources/logo.png" id="logoPequeño">
+                <img src="../resources/nombre.png" id="logoNombre">
             </div>
-            <div class="campos">
-                <span>Usuario</span>
-                <input class="input" type="text">
+            <div id="contDcha">
+                <div class="campos">
+                    <input class="input" placeholder="Email" type="text">
+                </div>
+                <div class="campos">
+                    <input class="input" placeholder="Usuario" type="text">
+                </div>
+                <div class="campos">
+                    <input class="input" placeholder="Contraseña" type="password">
+                </div>
+                <div id="campoBotones">
+                    <button id="signUpButton" formaction="signUp.html">Crear cuenta</button>
+                    <button id="botonEnvio" formaction="login.html">Iniciar Sesion</button>
+                </div>
             </div>
-            <div class="campos">
-                <span id="indicadorContraseña">Contraseña</span>
-                <input class="input" type="password">
-            </div>
-            <input id="botonEnvio" type="submit" value="Acceder">
         </div>
-        <div id="contenedorSignUp">
-            <span>¿Ya tienes una cuenta?</span>
-            <button id="signUpButton" formaction="./login.html">Inicia Sesión</button>
-        </div>
+        <!-- <div id="contenedorSignUp">
+            <span>¿No tienes una cuenta?</span>
+            <button id="signUpButton" formaction="signUp.html">Crea una cuenta</button>
+        </div> -->
     </form>
     <div id="cotenedorImagen">
         <a href="../index.html"><img src="../resources/logo_completo.png" id="logoImage"></a>
