@@ -1,0 +1,82 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+#cuerpo{
+    display: grid;
+    grid-template-rows: 100px calc(100vh - 200px) 100px;
+    grid-template-columns: 260px 1fr;
+    grid-template-areas:
+        "menu cabecera cabecera"
+        "menu contenido contenido"
+        "perfil contenido contenido"
+    ;
+}
+
+#cabecera{
+    grid-area: cabecera;
+    background-color: aliceblue;
+}
+
+#barraLateral{
+    grid-area: menu;
+    background-color: antiquewhite;
+}
+
+#barraLateral > ul > li{
+    background-color: black;
+    color: antiquewhite;
+    margin: 20px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.oculto{
+    display: none;
+}
+
+.visible{
+    background-color: lightgray;
+    margin: -20px 20px 20px 20px;
+}
+
+#contenido{
+    grid-area: contenido;
+    background-color: aqua;
+}
+
+#perfil{
+    grid-area: perfil;
+    background-color: aquamarine;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+#engranaje{
+    height: 4vmin;
+    width: 4vmin;
+    min-height: 30px;
+    min-width: 30px;
+}
+
+#usuario{
+    height: 7vmin;
+    width: 7vmin;
+    min-height: 50px;
+    min-width: 50px;
+    max-height: 90px;
+    max-width: 90px;
+}
+
+#nombre{
+    font-weight: bolder;
+}
+
+#id{
+    color: gray;
+}

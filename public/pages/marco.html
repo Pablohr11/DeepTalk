@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepTalk</title>
+    <link rel="stylesheet" href="../styles/marco.css" type="text/css">
+    <script src="../jscript/marco.js"></script>
+    <link rel="icon" type="image/jpg" href="../resources/logo.png"/>
+</head>
+<body>
+    <div id="cuerpo">
+        <header id="cabecera">
+            <!--TODO: Implemnetar que este titulo cambie segun el perfil.-->
+            <p>Nombre Conver</p>
+        </header>
+
+        <div id="barraLateral">
+            <ul>
+                <li onclick="desplegar(0)">Mensajes</li>
+                <div class="oculto"><p>Implemnetar los chats</p></div>
+                <li onclick="desplegar(1)">Grupos</li>
+                <div class="oculto"><p>Implemnetar los chats</p></div>
+                <li onclick="desplegar(2)">Hilos</li>
+                <div class="oculto"><p>Implemnetar los chats</p></div>
+                <li onclick="desplegar(3)">Recomendados</li>
+                <div class="oculto"><p>Implemnetar los chats</p></div>
+            </ul>
+        </div>
+
+        <div id="contenido">
+            
+        </div>
+
+        <div id="perfil">
+            <!--TODO: Implemnetar que esta imagen cambie segun el perfil.-->
+            <img id="usuario" src="../resources/usuarioDefault.png" alt="Imagen usuario">
+            <div>
+                <!--TODO: Implemnetar que estos tesxtos cambien segun el perfil.-->
+                <p id="nombre">Perfil Base</p>
+                <p id="id">#6666</p>
+            </div>
+            <img id="engranaje" src="../resources/engranaje.svg" alt="engranaje">
+        </div>
+    </div>
+</body>
+</html>
