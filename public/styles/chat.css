@@ -1,0 +1,32 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+
+#cuerpo{
+    background-color: lightgrey;
+    height: 100vh;
+    display: flex;
+}
+
+[contentEditable=true]:empty:before{
+    content:attr(placeholder)
+}
+
+#cajaMensaje{
+    align-self: flex-end;
+    border: 1px solid black;
+    width: 100%;
+    height: fit-content;
+    padding: .5rem;
+    min-height: 1rem;
+    max-height: 6rem;
+    border-radius: 20px;
+    margin: 10px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+#cajaMensaje::-webkit-scrollbar{
+    display: none;
+}

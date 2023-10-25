@@ -44,7 +44,12 @@
 
 #contenido{
     grid-area: contenido;
-    background-color: aqua;
+}
+
+#contenido > iframe{
+    width: 100%;
+    height: calc(100% - 4px);
+    border: none;
 }
 
 #perfil{
@@ -79,4 +84,7 @@
 
 #id{
     color: gray;
+}
+body {
+    background-color: lightgray;
 }
