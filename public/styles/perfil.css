@@ -1,0 +1,101 @@
+#cuerpo{
+    background-color: #313338;
+    padding: 10%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#cabecera{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    padding: 0px 20px;
+}
+
+#contendorCuenta{
+    background-color: #DBDBDB;
+    padding-top: 20vh;
+    border-radius: 20px;
+    width: 100%;
+}
+
+#cuenta{
+    background-color: #1E1F22;
+    position: relative;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    padding: 30px;
+    color: #F2F3F4;
+}
+
+.subtitulo{
+    color: #F2F3F4;
+    margin-left: 20px;
+}
+
+#datos{
+    background-color: #2B2D31;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.contDato{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.idDato{
+    font-size: 0.8rem;
+    color: #B5BAC1;
+    display: block;
+    margin: 15px 0px 0px 0px;
+}
+
+.dato{
+    margin: 0px 0px 15px 0px;
+}
+
+.editarDato{
+    background-color: #4E5058;
+    border-radius: 6px;
+    border: none;
+    color: #F2F3F4;
+    height: 33px;
+    width: 66px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#preview{
+    margin-top: -20px;
+    display: flex;
+    align-items: flex-start;
+}
+
+#imagenPerfil{
+    height: 15vmin;
+    width: 15vmin;
+    margin: -7vmin 0px 20px 0px;
+    border: 4px solid #1E1F22;
+    border-radius: 50%;
+}
+
+#infoBasica{
+    margin-left: 10px;
+}
+
+.nombreUsuario{
+    font-weight: bolder;
+    font-size: 16px;
+}
+.trofeo{
+    height: 20px;
+    width: 20px;
+}
