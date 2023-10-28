@@ -16,6 +16,9 @@ body {
     top: 0;
     bottom: 0;
     z-index: -1;
+    background-image: url("../resources/loadingVideoImage.jpg");
+    background-size: 99vw;
+    background-position: center;
 }
 
 #wavesImage {
