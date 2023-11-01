@@ -1,61 +1,69 @@
-CREATE TABLE Usuario(
-    ID_Usuario varchar(25) PRIMARY KEY,
+drop table if exists Hilo cascade;
+drop table if exists Mensaje cascade;
+drop table if exists Conversacion cascade;
+drop table if exists Usuario cascade;
+
+
+CREATE TABLE Usuario (
+    ID_usuario int AUTO_INCREMENT PRIMARY KEY,
     NombreUsuario varchar(25) UNIQUE,
 	Contraseña varchar(25),
     Correo varchar(25),
-    Telefono varchar(9) ,
+    Telefono varchar(9),
 	Tipo varchar(25),
-	Valoracion varchar(10),
-	CONSTRAINT Usuario_Tipo CHECK(Tipo in('Base', 'Admin'));
+	Valoracion varchar(10)
 );
 
-CREATE TABLE Chat(
-	ID_Chat varchar(25),
-    ID_Usuario1 varchar(25),
-	ID_Usuario2 varchar(25),
-    NumeroDeMensajes number,
-	-- Publico BOOLEAN,
-	CONSTRAINT Mensaje_PK PRIMARY KEY(ID_Chat, ID_Usuario1, ID_Usuario2),
-	CONSTRAINT Mensaje_FK FOREIGN KEY(ID_Usuario1) REFERENCES Usuario(ID_Usuario),
-	CONSTRAINT Mensaje_FK1 FOREIGN KEY(ID_Usuario2) REFERENCES Usuario(ID_Usuario)
+CREATE TABLE Conversacion(
+	ID_conversacion int AUTO_INCREMENT,
+    ID_usuario1 int,
+	ID_usuario2 int,
+    constraint fk_us1 foreign key (ID_usuario1) references Usuario(ID_usuario),
+    constraint fk_us2 foreign key (ID_usuario2) references Usuario(ID_usuario),
+    constraint pk_conv primary key(ID_Conversacion, ID_usuario1, ID_usuario2)
 );
-
-
--- CREATE TABLE Grupo(
---     ID_Usuario varchar(25) PRIMARY KEY,
--- 	Contador varchar(25),
---     NumeroDeUsuarios number,
---     Descripcion varchar(150),
--- 	CONSTRAINT Mensaje_PK PRIMARY KEY(ID_Usuario, Contador),
--- 	CONSTRAINT Mensaje_FK FOREIGN KEY(ID_Usuario) REFERENCES Usuario(ID_Usuario)
--- );
 
 CREATE TABLE Mensaje(
-    ID_Usuario varchar(25),
-	Num_Mensaje varchar(25),
-	ID_Chat varchar(25),
+    ID_usuario int,
+	Num_Mensaje int AUTO_INCREMENT,
+	ID_conversacion int,
     Fecha Date,
     Cuerpo varchar(500),
-	CONSTRAINT Chat_FK FOREIGN KEY (ID_Chat) REFERENCES Chat(ID_Chat),
-	CONSTRAINT Mensaje_PK PRIMARY KEY(ID_Usuario, Contador, ID_Chat),
-	CONSTRAINT Mensaje_FK FOREIGN KEY(ID_Usuario) REFERENCES Usuario(ID_Usuario)
+    foreign key (ID_usuario) references Usuario(ID_usuario),
+    foreign key (ID_conversacion) references Conversacion(ID_conversacion),
+    primary key(Num_Mensaje, ID_Conversacion, ID_usuario)
 );
 
 CREATE TABLE Hilo(
-    ID_Usuario varchar(25),
-	Contador varchar(25),
+    ID_hilo int AUTO_INCREMENT primary key,
+    ID_usuario int,
     NombreHilo varchar(25),
-    CantidadDeMensajes number,
-	CONSTRAINT Mensaje_PK PRIMARY KEY(ID_Usuario, Contador),
-	CONSTRAINT Mensaje_FK FOREIGN KEY(ID_Usuario) REFERENCES Usuario(ID_Usuario)
+    CantidadDeMensajes int,
+    foreign key (ID_usuario) references Usuario(ID_usuario)
 );
 
 --SELECTS
 
 --PARA INICIO DE SESION
 
-select NombreUsuario, Contraseña from Usuario where NombreUsuario = (Usuario introducido en el login) and Contraseña = (Contraseña introducido en el login);
+-- select NombreUsuario, Contraseña from Usuario where NombreUsuario = (Usuario introducido en el login) and Contraseña = (Contraseña introducido en el login);
 
 --PARA SELECCIONAR LOS MENSAJES
 
---select Cuerpo from Mensaje, Usuario, Chat where Mensaje.ID_Chat = Chat.ID_Chat;
+-- select Cuerpo, NombreUsuario from Mensaje, Usuario, Chat where Mensaje.ID_Conversacion = Chat.ID_Conversacion order by Mensaje.Num_Mensaje;
+
+--PARA CREACION DE USUARIO
+
+insert into Usuario (NombreUsuario, Contraseña, Correo, Telefono, Tipo, Valoracion) values("Pablohr11", "1234", "pablo993968@gmail.com", null, "admin", null);
+insert into Usuario (NombreUsuario, Contraseña, Correo, Telefono, Tipo, Valoracion) values("EpikEric4", "12345", "lolamento77w@gmail.com", null, "admin", null);
+
+--Para creacion de conversaciones
+
+insert into Conversacion (ID_usuario1, ID_usuario2) values (1,2);
+
+--PARA CREACION DE MENSAJES
+
+insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo) values (1, 1, "2023-10-23", "HOLA EPIERI");
+insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo) values (2, 1, "2023-10-23", "HOLA PABLO");
+insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo) values (1, 1, "2023-10-23", "Que tal epieri");
+insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo) values (2, 1, "2023-10-23", "Bien...");

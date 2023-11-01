@@ -47,3 +47,10 @@
 #cajaMensaje::-webkit-scrollbar{
     display: none;
 }
+
+#background-video {
+    background-color: red;
+    background-image: url("../resources/loadingVideoImage.jpg");
+    background-size: 99vw;
+    background-position: center;
+}

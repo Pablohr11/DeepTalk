@@ -173,3 +173,11 @@ body {
     }
 
 }
+
+#centerImage {
+    width: 40vw;
+    position: absolute;
+    top: 30vh;
+    left: 25vw;
+    float: inline-end;
+}
