@@ -20,7 +20,7 @@
         <div id="logDiv">
             <form>
                 <button formaction="./pages/signUp.html" id="signUpButton" value="Registrarse">Registrarse</button>
-                <button formaction="./pages/login.html" id="logInButton" value="Iniciar Sesion">Iniciar Sesion</button>
+                <button formaction="./pages/login.php" id="logInButton" value="Iniciar Sesion">Iniciar Sesion</button>
             </form>
         </div>
         <div class="contenedorMenu" onclick="mostrarMenu()">
