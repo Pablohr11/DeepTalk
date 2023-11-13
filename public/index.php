@@ -66,7 +66,7 @@
             </div>
         </div>
     </div>
-    <img src="resources/logo_completo.png" id="centerImage">
+
 
 </body>
 </html>
