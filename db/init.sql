@@ -8,7 +8,7 @@ CREATE TABLE Usuario (
     ID_usuario int AUTO_INCREMENT PRIMARY KEY,
     NombreUsuario varchar(25) UNIQUE,
 	Contraseña varchar(25),
-    Correo varchar(25),
+    Correo varchar(50),
     Telefono varchar(9),
 	Tipo varchar(25),
 	Valoracion varchar(10)
@@ -55,7 +55,8 @@ CREATE TABLE Hilo(
 --PARA CREACION DE USUARIO
 
 insert into Usuario (NombreUsuario, Contraseña, Correo, Telefono, Tipo, Valoracion) values("Pablohr11", "1234", "pablo993968@gmail.com", null, "admin", null);
-insert into Usuario (NombreUsuario, Contraseña, Correo, Telefono, Tipo, Valoracion) values("EpikEric4", "12345", "lolamento77w@gmail.com", null, "admin", null);
+insert into Usuario (NombreUsuario, Contraseña, Correo, Telefono, Tipo, Valoracion) values("Epic Erik", "12345", "lolamento77w@gmail.com", null, "admin", null);
+insert into Usuario (NombreUsuario, Contraseña, Correo, Telefono, Tipo, Valoracion) values("Merlinicos", "Lobos", "mariapallares03@gmail.com", null, "base", null);
 
 --Para creacion de conversaciones
 

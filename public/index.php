@@ -1,3 +1,9 @@
+<?php 
+
+    include("../storage/classes/DbConector.php");
+
+?>
+
 <html lang="es">
 
 <head>
@@ -19,7 +25,7 @@
         <img src="resources/logo_completo.png" id="logoImage">
         <div id="logDiv">
             <form>
-                <button formaction="./pages/signUp.html" id="signUpButton" value="Registrarse">Registrarse</button>
+                <button formaction="./pages/signUp.php" id="signUpButton" value="Registrarse">Registrarse</button>
                 <button formaction="./pages/login.php" id="logInButton" value="Iniciar Sesion">Iniciar Sesion</button>
             </form>
         </div>
@@ -66,7 +72,6 @@
             </div>
         </div>
     </div>
-    <img src="resources/logo_completo.png" id="centerImage">
 
 </body>
 </html>
