@@ -18,8 +18,8 @@ CREATE TABLE Conversacion(
 	ID_conversacion int AUTO_INCREMENT,
     ID_usuario1 int,
 	ID_usuario2 int,
-    constraint fk_us1 foreign key (ID_usuario1) references Usuario(ID_usuario),
-    constraint fk_us2 foreign key (ID_usuario2) references Usuario(ID_usuario),
+    constraint fk_us1 foreign key (ID_usuario1) references Usuario(ID_usuario) ON DELETE CASCADE,
+    constraint fk_us2 foreign key (ID_usuario2) references Usuario(ID_usuario) ON DELETE CASCADE,
     constraint pk_conv primary key(ID_Conversacion, ID_usuario1, ID_usuario2)
 );
 
@@ -29,8 +29,8 @@ CREATE TABLE Mensaje(
 	ID_conversacion int,
     Fecha Date,
     Cuerpo varchar(500),
-    foreign key (ID_usuario) references Usuario(ID_usuario),
-    foreign key (ID_conversacion) references Conversacion(ID_conversacion),
+    foreign key (ID_usuario) references Usuario(ID_usuario) ON DELETE CASCADE,
+    foreign key (ID_conversacion) references Conversacion(ID_conversacion) ON DELETE CASCADE,
     primary key(Num_Mensaje, ID_Conversacion, ID_usuario)
 );
 
@@ -39,7 +39,7 @@ CREATE TABLE Hilo(
     ID_usuario int,
     NombreHilo varchar(25),
     CantidadDeMensajes int,
-    foreign key (ID_usuario) references Usuario(ID_usuario)
+    foreign key (ID_usuario) references Usuario(ID_usuario) ON DELETE CASCADE
 );
 
 --SELECTS
