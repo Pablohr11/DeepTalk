@@ -1,8 +1,9 @@
 <?php
 
 include("../../storage/classes/DbConector.php");
+include("../../storage/classes/CurrentUser.php");
 
-
+$userData = "";
 $user = "";
 $passwd = "";
 
@@ -12,10 +13,12 @@ if (isset($_POST['usuario']) && $_POST['usuario'] != "" && isset($_POST['passwor
     $passwd = $_POST['password'];
 
     $consultor = DbConector::singleton();
-    $ok = $consultor->checkLogin($user, $passwd);
+    $ok = $consultor->checkLogin($user, $passwd, $userData);
 
     if ($ok) {
-        header("Location: marco.html");
+        $user = CurrentUser::singleton();
+        $ser = CurrentUser->setConfig($userData["NombreUsuario"], $userData["Correo"]);
+        header("Location: marco.php");
     }
 }
 ?>

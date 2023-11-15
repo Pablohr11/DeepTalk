@@ -3,7 +3,7 @@
 
 class DbConector {
     
-    private const DB_DATA = "mysql:host=localhost;dbname=deeptalk";
+    private const DB_DATA = "mysql:host=localhost;dbname=Deeptalk";
     private const USERNAME = "pablohr11" ;
     private const PASSWD = "";
     private $db = "";
@@ -24,9 +24,9 @@ class DbConector {
         $this->db = new PDO($this::DB_DATA, $this::USERNAME, $this::PASSWD);
     }
 
-    public function checkLogin($user, $passwd) {
+    public function checkLogin($user, $passwd, &$userData) {
         try {
-            $consulta = $this->db->prepare("select NombreUsuario, Contraseña from Usuario where NombreUsuario = :username and Contraseña = :passwd");
+            $consulta = $this->db->prepare("select NombreUsuario, Contraseña, Correo, Telefono from Usuario where NombreUsuario = :username and Contraseña = :passwd");
             
             $consulta->bindParam(":username", $user, PDO::PARAM_STR);
             $consulta->bindParam(":passwd", $passwd, PDO::PARAM_STR);
@@ -35,8 +35,9 @@ class DbConector {
             $data = $consulta->fetch(PDO::FETCH_ASSOC);
     
     //        foreach ($data as $usuario) {
-            echo "Usuario ".$data["NombreUsuario"]." Contraseñas ".$data["Contraseña"];
+            
             if ($data["NombreUsuario"] == $user && $data["Contraseña"] == $passwd) {
+                $userData = $data;
                 return true;
             }
       //      }
@@ -48,7 +49,7 @@ class DbConector {
 
     public function insertUser($user, $passwd, $mail):bool {
         try {
-            $consulta = $this->db->prepare("insert into Usuario (NombreUsuario, Contraseña, Correo) values (:username, :passwd, :mail)");
+            $consulta = $this->db->prepare("insert into Usuario (NombreUsuario, Contraseña, Correo, Tipo) values (:username, :passwd, :mail, base)");
             
             $consulta->bindParam(":username", $user, PDO::PARAM_STR);
             $consulta->bindParam(":passwd", $passwd, PDO::PARAM_STR);
