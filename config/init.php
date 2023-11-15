@@ -1,7 +1,7 @@
 <?php 
 
     spl_autoload_register(function ($clase) {
-        require("../storage/classes/".$clase."php");
+        require_once("../../storage/classes/".$clase.".php");
     });
 
 ?>

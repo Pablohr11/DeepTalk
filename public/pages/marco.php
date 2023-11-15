@@ -1,8 +1,14 @@
 <?php 
 
-include("../../storage/classes/CurrentUser.php");
-$user = CurrentUser::singleton();
-echo $user;
+include("../../config/init.php");
+
+$user = CurrentUser::getConfig();
+
+$consultor = DbConector::singleton();
+$userChats = $consultor->getUserChats($user["ID_usuario"]);
+
+$chatName = $consultor->getUsernameFromChat(3,1);
+echo($chatName);
 ?>
 
 <!DOCTYPE html>
@@ -30,7 +36,11 @@ echo $user;
         <div id="barraLateral">
             <ul>
                 <li onclick="desplegar(0)">Mensajes</li>
-                <div class="oculto"><p>Implementar los chats</p></div>
+                <div class="oculto">
+                <?php foreach ($userChats as $userChat) { ?>
+                    <p><?php echo $consultor->getUsernameFromChat($userChat[0],$user["ID_usuario"]) ?></p>
+                <?php } ?>
+                </div>
                 <li onclick="desplegar(1)">Grupos</li>
                 <div class="oculto"><p>Implementar los chats</p></div>
                 <li onclick="desplegar(2)">Hilos</li>
@@ -49,8 +59,8 @@ echo $user;
             <img id="usuario" src="../resources/usuarioDefault.png" alt="Imagen usuario">
             <div id="contendedorInfo">
                 <!--TODO: Implemnetar que estos tesxtos cambien segun el perfil.-->
-                <p id="nombre"><?php echo $user->getUsername()?></p>
-                <span id="id">#6666</span>
+                <p id="nombre"><?php echo $user["NombreUsuario"]?></p>
+                <span id="id">#<?php echo $user["ID_usuario"]?></span>
             </div>
             <a href="./perfil.html">
                 <svg id="engranaje" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-gear" viewBox="0 0 16 16">

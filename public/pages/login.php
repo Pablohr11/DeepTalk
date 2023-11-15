@@ -1,7 +1,6 @@
 <?php
 
-include("../../storage/classes/DbConector.php");
-include("../../storage/classes/CurrentUser.php");
+include("../../config/init.php");
 
 $userData = "";
 $user = "";
@@ -16,8 +15,8 @@ if (isset($_POST['usuario']) && $_POST['usuario'] != "" && isset($_POST['passwor
     $ok = $consultor->checkLogin($user, $passwd, $userData);
 
     if ($ok) {
-        $user = CurrentUser::singleton();
-        $ser = CurrentUser->setConfig($userData["NombreUsuario"], $userData["Correo"]);
+        
+        file_put_contents('../../config/userData.dat',serialize($userData));
         header("Location: marco.php");
     }
 }

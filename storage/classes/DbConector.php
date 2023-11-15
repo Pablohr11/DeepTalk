@@ -3,7 +3,7 @@
 
 class DbConector {
     
-    private const DB_DATA = "mysql:host=localhost;dbname=Deeptalk";
+    private const DB_DATA = "mysql:host=localhost;dbname=deeptalk";
     private const USERNAME = "pablohr11" ;
     private const PASSWD = "";
     private $db = "";
@@ -26,7 +26,7 @@ class DbConector {
 
     public function checkLogin($user, $passwd, &$userData) {
         try {
-            $consulta = $this->db->prepare("select NombreUsuario, Contraseña, Correo, Telefono from Usuario where NombreUsuario = :username and Contraseña = :passwd");
+            $consulta = $this->db->prepare("select ID_usuario, NombreUsuario, Contraseña, Correo, Telefono from Usuario where NombreUsuario = :username and Contraseña = :passwd");
             
             $consulta->bindParam(":username", $user, PDO::PARAM_STR);
             $consulta->bindParam(":passwd", $passwd, PDO::PARAM_STR);
@@ -65,8 +65,33 @@ class DbConector {
         }
         return false;
     }
+
+    public function getUserChats(int $id) {
+        $consulta = $this->db->prepare("select ID_conversacion from Conversacion, Usuario where (Conversacion.ID_usuario1 = Usuario.ID_usuario or
+        Conversacion.ID_usuario2 = Usuario.ID_usuario) and Usuario.ID_usuario = :id_usuario");
+            
+        $consulta->bindParam(":id_usuario", $id, PDO::PARAM_STR);
+
+        $results = $consulta->execute();
+        $data = $consulta->fetchAll(PDO::FETCH_NUM);
+
+        return $data;
+    }
+
+    public function getUsernameFromChat($chatId, $currentUserId) {
+        $consulta = $this->db->prepare("select NombreUsuario from Conversacion, Usuario where (Conversacion.ID_conversacion = :id_chat) and 
+        (Usuario.ID_usuario = Conversacion.ID_usuario2 or Usuario.ID_usuario = Conversacion.ID_usuario1) and 
+        Usuario.NombreUsuario not like (select NombreUsuario from Usuario where ID_usuario = :id_usuario)");
+            
+        $consulta->bindParam(":id_usuario", $currentUserId, PDO::PARAM_INT);
+        $consulta->bindParam(":id_chat", $chatId, PDO::PARAM_INT);
+
+        $results = $consulta->execute();
+        $data = $consulta->fetch(PDO::FETCH_NUM);
+        return $data[0];
+        
+    }
 }
 
-
-
 ?>
+

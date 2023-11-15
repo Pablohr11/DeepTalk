@@ -3,9 +3,9 @@
 
 class CurrentUser {
     
-    public $username;
-    private $mail;
-    private $tlf;
+    public static $username;
+    private static $mail;
+    private static $tlf;
 
     // Hold an instance of the class
     private static $instance;
@@ -20,15 +20,18 @@ class CurrentUser {
         return self::$instance;
     }
 
-    private function __construct() {
+    private function __construct() {}
 
+    static function setConfig(string $username, string $mail, int $tlf = 0) {
+        self::$username = $username;
+        self::$mail = $mail;
+        self::$tlf = $tlf;
+
+        echo self::$username;
     }
-    public function setConfig(string $username, string $mail, int $tlf = 0) {
-        $this->username = $username;
-        $this->mail = $mail;
-        $this->tlf = $tlf;
 
-        echo "aaaa".$this->username;
+    static function getConfig() {
+        return unserialize(file_get_contents('../../config/userData.dat'));
     }
 
     function getUsername() {

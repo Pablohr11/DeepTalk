@@ -80,8 +80,10 @@
     color: #F2F3F4;
     margin: -20px 20px 20px 20px;
     border-radius: 10px;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1;
     justify-content: center;
+    padding: 10px;
 }
 
 #contenido{

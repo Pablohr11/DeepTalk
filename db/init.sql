@@ -8,7 +8,7 @@ CREATE TABLE Usuario (
     ID_usuario int AUTO_INCREMENT PRIMARY KEY,
     NombreUsuario varchar(25) UNIQUE,
 	Contraseña varchar(25),
-    Correo varchar(50),
+    Correo varchar(50) UNIQUE,
     Telefono varchar(9),
 	Tipo varchar(25),
 	Valoracion varchar(10)
@@ -61,6 +61,7 @@ insert into Usuario (NombreUsuario, Contraseña, Correo, Telefono, Tipo, Valorac
 --Para creacion de conversaciones
 
 insert into Conversacion (ID_usuario1, ID_usuario2) values (1,2);
+insert into Conversacion (ID_usuario1, ID_usuario2) values (3,1);
 
 --PARA CREACION DE MENSAJES
 

@@ -1,6 +1,9 @@
 <?php 
 
     include("../storage/classes/DbConector.php");
+    include("../storage/classes/CurrentUser.php");
+
+    
 
 ?>
 
