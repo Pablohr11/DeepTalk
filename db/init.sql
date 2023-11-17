@@ -69,3 +69,9 @@ insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo) values (1, 1, "
 insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo) values (2, 1, "2023-10-23", "HOLA PABLO");
 insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo) values (1, 1, "2023-10-23", "Que tal epieri");
 insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo) values (2, 1, "2023-10-23", "Bien...");
+
+
+insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo) values (1, 2, "2023-10-23", "HOLA MARIAAAA QUE TAAAAAAAAAAL");
+insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo) values (3, 2, "2023-10-23", "HOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA BIEEEEEEEEEEEEEEN");
+insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo) values (1, 2, "2023-10-23", "WEOOOOOOOOOOOOOOOOOOOOOOOOON");
+insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo) values (3, 2, "2023-10-23", "(COMPLETA AUSENCIA DE RESPUESTA)");

@@ -3,7 +3,7 @@
 
 class DbConector {
     
-    private const DB_DATA = "mysql:host=localhost;dbname=deeptalk";
+    private const DB_DATA = "mysql:host=localhost;dbname=Deeptalk";
     private const USERNAME = "pablohr11" ;
     private const PASSWD = "";
     private $db = "";
@@ -90,6 +90,16 @@ class DbConector {
         $data = $consulta->fetch(PDO::FETCH_NUM);
         return $data[0];
         
+    }
+
+    public function getMessages($idChat) {
+        $consulta = $this->db->prepare("select * from Mensaje where ID_conversacion = :id_chat");
+            
+        $consulta->bindParam(":id_chat", $idChat, PDO::PARAM_INT);
+
+        $results = $consulta->execute();
+        $data = $consulta->fetchAll(PDO::FETCH_NUM);
+        return $data;
     }
 }
 

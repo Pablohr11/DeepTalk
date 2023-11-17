@@ -7,8 +7,10 @@ $user = CurrentUser::getConfig();
 $consultor = DbConector::singleton();
 $userChats = $consultor->getUserChats($user["ID_usuario"]);
 
-$chatName = $consultor->getUsernameFromChat(3,1);
-echo($chatName);
+function ei() {
+    echo "<script>alert('a')</script>";
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -37,8 +39,8 @@ echo($chatName);
             <ul>
                 <li onclick="desplegar(0)">Mensajes</li>
                 <div class="oculto">
-                <?php foreach ($userChats as $userChat) { ?>
-                    <p><?php echo $consultor->getUsernameFromChat($userChat[0],$user["ID_usuario"]) ?></p>
+                <?php foreach ($userChats as $key=>$userChat) { ?>
+                    <a class="marcoButton" target="iframe" href="chat.php?conversacion=<?php echo $userChat[0]?>"><button class="Button" formaction="<?php ei() ?>" value="<?=$key?>"><?php echo $consultor->getUsernameFromChat($userChat[0],$user["ID_usuario"]) ?></button></a>
                 <?php } ?>
                 </div>
                 <li onclick="desplegar(1)">Grupos</li>
@@ -51,7 +53,7 @@ echo($chatName);
         </div>
 
         <div id="contenido">
-            <iframe src="./chat.html"></iframe>
+            <iframe name="iframe" src="./chat.php?<?php echo $userChats[0][0]?>"></iframe>
         </div>
 
         <div id="perfil">
