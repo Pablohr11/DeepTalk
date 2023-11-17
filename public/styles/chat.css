@@ -33,9 +33,12 @@
 }
 
 #cajaMensaje{
+    position: fixed;
+    bottom: 0;
     background-color: #383A40;
     color: lavender;
     border: 1px solid black;
+    width: 98%;
     max-width: 98%;
     height: fit-content;
     padding: .5rem;
@@ -45,16 +48,22 @@
     margin: 10px;
     overflow: hidden;
     overflow-y: scroll;
+    
 }
 
 #cajaMensaje::-webkit-scrollbar{
     display: none;
 }
 
+#contenido::-webkit-scrollbar{
+    display: none;
+}
+
 #contenido {
     display: grid;
-    grid-template-rows: 92% 8%;
+    grid-template-rows: 92fr 8fr;
     width: 100%;
+    overflow-x: hidden;
 }
 
 #mensajes {
@@ -63,6 +72,7 @@
     display: flex;
     flex-direction: column;
     margin-top: auto;
+    margin-bottom: 6rem;
 }
 
 .mensaje {
