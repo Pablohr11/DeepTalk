@@ -23,7 +23,10 @@ $messages = $consultor->getMessages($_GET['conversacion']);
         <div id="contenido">
             <div id="mensajes">
                 <?php foreach ($messages as $key => $mensaje) { ?>
-                    <div class="mensaje <?php echo ($mensaje[0] == $user["ID_usuario"])?"propio":"ajeno" ?>"><?php echo $mensaje[4]?></div>
+                    <div class="mensaje <?php echo ($mensaje[0] == $user["ID_usuario"])?"propio":"ajeno" ?>">
+                        <div class="remitente"><?php echo $consultor->getUsernameById($mensaje[0])?></div>
+                        <label class="texto"><?php echo $mensaje[4]?></label>
+                    </div>
                 <?php } ?>
             </div>
             <div contentEditable=true placeholder="Enviar mensaje a //IntroducirNombreChat" id="cajaMensaje"></div>

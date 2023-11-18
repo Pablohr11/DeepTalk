@@ -92,6 +92,16 @@ class DbConector {
         
     }
 
+    public function getUsernameById($userId) {
+        $consulta = $this->db->prepare("select NombreUsuario from Usuario where ID_usuario = :id_usuario");
+            
+        $consulta->bindParam(":id_usuario", $userId, PDO::PARAM_INT);
+
+        $results = $consulta->execute();
+        $data = $consulta->fetch(PDO::FETCH_NUM);
+        return $data[0];
+    }
+
     public function getMessages($idChat) {
         $consulta = $this->db->prepare("select * from Mensaje where ID_conversacion = :id_chat");
             

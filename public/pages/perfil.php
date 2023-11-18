@@ -5,7 +5,6 @@ include("../../config/init.php");
 
 $user = CurrentUser::getConfig();
 
-print_r($user);
 ?>
 
 <!DOCTYPE html>
