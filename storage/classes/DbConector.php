@@ -60,7 +60,7 @@ class DbConector {
             
         } catch (PDOException $e) {
             echo $e->getMessage();
-        return false;
+            return false;
         }
         return true;
     }
@@ -109,6 +109,22 @@ class DbConector {
         $results = $consulta->execute();
         $data = $consulta->fetchAll(PDO::FETCH_NUM);
         return $data;
+    }
+
+    function insertMessage($id_conversacion, $userId, $mensaje) {
+        try {
+            $consulta = $this->db->prepare("insert into Mensaje (ID_usuario, ID_conversacion, Cuerpo) values (:userId, :chatId, :mensaje)");
+            
+            $consulta->bindParam(":userId", $userId, PDO::PARAM_INT);
+            $consulta->bindParam(":chatId", $id_conversacion, PDO::PARAM_INT);
+            $consulta->bindParam(":mensaje", $mensaje, PDO::PARAM_STR);
+    
+            $results = $consulta->execute();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        }
+        return true;
     }
 }
 

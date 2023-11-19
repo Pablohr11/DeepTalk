@@ -53,7 +53,7 @@ function ei() {
         </div>
 
         <div id="contenido">
-            <iframe name="iframe" src="./chat.php?<?php echo $userChats[0][0]?>"></iframe>
+            <iframe name="iframe" src="./chat.php?<?php echo $userChats[0]?>"></iframe>
         </div>
 
         <div id="perfil">

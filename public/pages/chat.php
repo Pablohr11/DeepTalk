@@ -6,6 +6,14 @@ session_start();
 $user = CurrentUser::getConfig();
 $consultor = DbConector::singleton();
 $messages = $consultor->getMessages($_GET['conversacion']);
+$otherUserName = $consultor->getUsernameFromChat($_GET['conversacion'], $user["ID_usuario"]);
+$chatId = $_GET['conversacion'];
+
+if (isset($_POST["mensajeEscrito"]) && $_POST["mensajeEscrito"] != "Enviar mensaje a $otherUserName") {
+    if ($consultor->insertMessage($_GET['conversacion'], $user["ID_usuario"], $_POST["mensajeEscrito"])) {
+        header("Location: chat.php?conversacion=$chatId");
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -15,8 +23,9 @@ $messages = $consultor->getMessages($_GET['conversacion']);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/chat.css">
     <title>DeepTalk</title>
+    <script src="../jscript/chat.js"></script>
 </head>
-<body>
+<body onload="init()">
     <div id="cuerpo">
         <video id="background-video" autoplay loop muted>
             <source src="../resources/bg_3.mp4" type="video/mp4">
@@ -30,7 +39,10 @@ $messages = $consultor->getMessages($_GET['conversacion']);
                     </div>
                 <?php } ?>
             </div>
-            <div contentEditable=true placeholder="Enviar mensaje a //IntroducirNombreChat" id="cajaMensaje"></div>
+            <div contentEditable=true placeholder="Enviar mensaje a <?php echo $otherUserName?>" id="cajaMensaje"></div>
+            <form id="formulario" method="post" action="chat.php?conversacion=<?php echo $_GET['conversacion']?>">
+                <input type="text" name="mensajeEscrito" id="mensajeEscrito">
+            </form>
         </div>
     </div>
 </body>
