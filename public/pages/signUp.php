@@ -19,9 +19,6 @@ if (isset($_POST["envio"])) {
             sendMail($mail, $user, "Te has registrado en Deeptalk", "El usuario $user se ha registrado correctamente en nuestro servicio ¡Un saludo!");
             //header("Location: login.php");
         }
-    } else {
-        print_r($errores);
-        echo "no ha tirao";
     }
 }
 ?>
@@ -59,6 +56,9 @@ if (isset($_POST["envio"])) {
                 <div id="campoBotones">
                     <button id="signUpButton" name="envio" value="envio">Crear cuenta</button>
                     <button id="botonEnvio" formaction="login.php">Iniciar Sesion</button>
+                </div>
+                <div id="errores">
+                    <?php echo (isset($errores["user"])?"<p class='info error'>El usuario no es válido</p>":"")  ?>
                 </div>
             </div>
         </div>

@@ -1,9 +1,10 @@
 <?php
 include("../../config/init.php");
 
+
+session_start();
 $user = CurrentUser::getConfig();
 $consultor = DbConector::singleton();
-
 $messages = $consultor->getMessages($_GET['conversacion']);
 ?>
 

@@ -22,16 +22,14 @@ class CurrentUser {
 
     private function __construct() {}
 
-    static function setConfig(string $username, string $mail, int $tlf = 0) {
-        self::$username = $username;
-        self::$mail = $mail;
-        self::$tlf = $tlf;
-
-        echo self::$username;
+    static function setConfig(array $userData) {
+        session_start();
+        $_SESSION["user"]=[$userData];
     }
 
     static function getConfig() {
-        return unserialize(file_get_contents('../../config/userData.dat'));
+        session_start();
+        return $_SESSION["user"][0];
     }
 
     function getUsername() {

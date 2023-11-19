@@ -1,9 +1,9 @@
 <?php 
 
+session_start();
 include("../../config/init.php");
 
 $user = CurrentUser::getConfig();
-
 $consultor = DbConector::singleton();
 $userChats = $consultor->getUserChats($user["ID_usuario"]);
 

@@ -57,16 +57,15 @@ class DbConector {
 
             $results = $consulta->execute();
 
-            if ($results) {
-                return true;
-            }
+            
         } catch (PDOException $e) {
             echo $e->getMessage();
-        }
         return false;
+        }
+        return true;
     }
 
-    public function getUserChats(int $id) {
+    public function getUserChats($id) {
         $consulta = $this->db->prepare("select ID_conversacion from Conversacion, Usuario where (Conversacion.ID_usuario1 = Usuario.ID_usuario or
         Conversacion.ID_usuario2 = Usuario.ID_usuario) and Usuario.ID_usuario = :id_usuario");
             

@@ -4,7 +4,7 @@
 include("../../config/init.php");
 
 $user = CurrentUser::getConfig();
-
+session_start();
 ?>
 
 <!DOCTYPE html>

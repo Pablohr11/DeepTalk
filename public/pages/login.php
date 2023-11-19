@@ -2,7 +2,7 @@
 
 include("../../config/init.php");
 
-$userData = "";
+$userData = [];
 $user = "";
 $passwd = "";
 
@@ -15,8 +15,7 @@ if (isset($_POST['usuario']) && $_POST['usuario'] != "" && isset($_POST['passwor
     $ok = $consultor->checkLogin($user, $passwd, $userData);
 
     if ($ok) {
-        
-        file_put_contents('../../config/userData.dat',serialize($userData));
+        CurrentUser::setConfig($userData);
         header("Location: marco.php");
     }
 }
