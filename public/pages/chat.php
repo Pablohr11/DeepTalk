@@ -27,9 +27,7 @@ if (isset($_POST["mensajeEscrito"]) && $_POST["mensajeEscrito"] != "Enviar mensa
 </head>
 <body onload="init()">
     <div id="cuerpo">
-        <video id="background-video" autoplay loop muted>
-            <source src="../resources/bg_3.mp4" type="video/mp4">
-        </video>
+
         <div id="contenido">
             <div id="mensajes">
                 <?php foreach ($messages as $key => $mensaje) { ?>

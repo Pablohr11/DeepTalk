@@ -17,7 +17,7 @@ if (isset($_POST["envio"])) {
         $insert = $consultor->insertUser($user, $passwd, $mail);
         if( $insert ) {
             sendMail($mail, $user, "Te has registrado en Deeptalk", "El usuario $user se ha registrado correctamente en nuestro servicio ¡Un saludo!");
-            //header("Location: login.php");
+            header("Location: login.php?user=$user");
         }
     }
 }

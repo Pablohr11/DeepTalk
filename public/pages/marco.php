@@ -53,7 +53,10 @@ function ei() {
         </div>
 
         <div id="contenido">
-            <iframe name="iframe" src="./chat.php?<?php echo $userChats[0]?>"></iframe>
+            <video id="background-video" autoplay loop muted>
+                <source src="../resources/bg_3.mp4" type="video/mp4">
+            </video>
+            <iframe name="iframe" ></iframe>
         </div>
 
         <div id="perfil">

@@ -44,7 +44,7 @@ if (isset($_POST['usuario']) && $_POST['usuario'] != "" && isset($_POST['passwor
             </div>
             <div id="contDcha">
                 <div class="campos">
-                    <input class="input" name="usuario" placeholder="Usuario" type="text">
+                    <input class="input" name="usuario" placeholder="Usuario" type="text" value="<?=$_GET["user"]?>">
                 </div>
                 <div class="campos">
                     <input class="input" name="password" placeholder="Contraseña" type="password">

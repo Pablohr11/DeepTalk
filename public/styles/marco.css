@@ -154,3 +154,19 @@
     width: 100%;
     color: #cecece;
 }
+
+#background-video {
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: -1;
+    opacity: 100%;
+    background-image: url("../resources/loadingVideoImage.jpg");
+    background-size: 99vw;
+    background-position: center;
+}
