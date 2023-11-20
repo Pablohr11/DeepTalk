@@ -1,4 +1,9 @@
 function init() {
+
+    var objDiv = document.getElementById("contenido");
+    objDiv.scrollTop = objDiv.scrollHeight;
+
+
     var caja = document.getElementById("cajaMensaje");
 
     var inpu = document.getElementById("mensajeEscrito");

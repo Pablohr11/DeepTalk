@@ -9,7 +9,7 @@ $messages = $consultor->getMessages($_GET['conversacion']);
 $otherUserName = $consultor->getUsernameFromChat($_GET['conversacion'], $user["ID_usuario"]);
 $chatId = $_GET['conversacion'];
 
-if (isset($_POST["mensajeEscrito"]) && $_POST["mensajeEscrito"] != "Enviar mensaje a $otherUserName") {
+if (isset($_POST["mensajeEscrito"]) && $_POST["mensajeEscrito"] != "Enviar mensaje a $otherUserName" && trim($_POST["mensajeEscrito"]) != "") {
     if ($consultor->insertMessage($_GET['conversacion'], $user["ID_usuario"], $_POST["mensajeEscrito"])) {
         header("Location: chat.php?conversacion=$chatId");
     }
