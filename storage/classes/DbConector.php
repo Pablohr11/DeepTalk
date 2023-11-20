@@ -50,6 +50,7 @@ class DbConector {
     public function insertUser($user, $passwd, $mail):bool {
         try {
             $consulta = $this->db->prepare("insert into Usuario (NombreUsuario, Contraseña, Correo, Tipo) values (:username, :passwd, :mail, 'base')");
+
             
             $consulta->bindParam(":username", $user, PDO::PARAM_STR);
             $consulta->bindParam(":passwd", $passwd, PDO::PARAM_STR);
