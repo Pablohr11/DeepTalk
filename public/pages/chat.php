@@ -8,12 +8,16 @@ $consultor = DbConector::singleton();
 $messages = $consultor->getMessages($_GET['conversacion']);
 $otherUserName = $consultor->getUsernameFromChat($_GET['conversacion'], $user["ID_usuario"]);
 $chatId = $_GET['conversacion'];
+$lastMessage = $consultor->getLastMessageFromChat($chatId);
+
 
 if (isset($_POST["mensajeEscrito"]) && $_POST["mensajeEscrito"] != "Enviar mensaje a $otherUserName" && trim($_POST["mensajeEscrito"]) != "") {
     if ($consultor->insertMessage($_GET['conversacion'], $user["ID_usuario"], $_POST["mensajeEscrito"])) {
         header("Location: chat.php?conversacion=$chatId");
     }
 }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -24,6 +28,14 @@ if (isset($_POST["mensajeEscrito"]) && $_POST["mensajeEscrito"] != "Enviar mensa
     <link rel="stylesheet" href="../styles/chat.css">
     <title>DeepTalk</title>
     <script src="../jscript/chat.js"></script>
+    <script defer>
+        function myFunction() {
+            var prueba = <?php echo $consultor->getLastMessageFromChat($_GET['conversacion'])?>;
+            console.log(prueba);
+            <?php  //} ?>
+        }
+        setInterval(myFunction, 1000);
+    </script>
 </head>
 <body onload="init()">
     <div id="cuerpo">

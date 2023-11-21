@@ -127,7 +127,19 @@ class DbConector {
         }
         return true;
     }
+
+    function getLastMessageFromChat($idChat) {
+        $consulta = $this->db->prepare("select Num_Mensaje from Mensaje where ID_conversacion = :id_chat order by Num_Mensaje desc");
+            
+        $consulta->bindParam(":id_chat", $idChat, PDO::PARAM_INT);
+
+        $results = $consulta->execute();
+        $data = $consulta->fetch(PDO::FETCH_NUM);
+        return $data[0];
+    }
+
 }
+
 
 ?>
 
