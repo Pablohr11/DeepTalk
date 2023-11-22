@@ -138,6 +138,17 @@ class DbConector {
         return $data[0];
     }
 
+    public function getChatLeftMessages($idChat, $lastMessage) {
+        $consulta = $this->db->prepare("select * from Mensaje where ID_conversacion = :id_chat and Num_Mensaje > :last_message");
+            
+        $consulta->bindParam(":id_chat", $idChat, PDO::PARAM_INT);
+        $consulta->bindParam(":last_message", $lastMessage, PDO::PARAM_INT);
+
+        $results = $consulta->execute();
+        $data = $consulta->fetchAll(PDO::FETCH_NUM);
+        return $data;
+    }
+
 }
 
 
