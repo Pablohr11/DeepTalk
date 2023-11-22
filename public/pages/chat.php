@@ -69,7 +69,7 @@ if (isset($_POST["mensajeEscrito"]) && $_POST["mensajeEscrito"] != "Enviar mensa
                     </div>
                 <?php } ?>
             </div>
-            <div contentEditable=true placeholder="Enviar mensaje a <?php echo $otherUserName ?>" id="cajaMensaje"></div>
+            <div contentEditable=true tabindex="0" placeholder="Enviar mensaje a <?php echo $otherUserName ?>" id="cajaMensaje"></div>
             <form id="formulario" method="post" action="chat.php?conversacion=<?php echo $_GET['conversacion'] ?>">
                 <input type="text" name="mensajeEscrito" id="mensajeEscrito">
                 <input type="text" id="varDePaso">

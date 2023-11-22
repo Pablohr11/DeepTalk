@@ -9,9 +9,10 @@ function init() {
     var caja = document.getElementById("cajaMensaje");
 
     var inpu = document.getElementById("mensajeEscrito");
+    caja.focus();
 
     caja.addEventListener('keypress', function(event) {
-        if (event.code == "Enter") {
+        if (event.code == "Enter" && caja.textContent.trim() != "") {
             inpu.value = caja.textContent;
             document.getElementById("formulario").submit();
         }
@@ -27,4 +28,3 @@ function showMessage(message, nombreRemitente, userId) {
     var objDiv = document.getElementById("contenido");
     objDiv.scrollTop = objDiv.scrollHeight;
 }
- 
