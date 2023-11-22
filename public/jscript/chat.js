@@ -9,14 +9,20 @@ function init() {
     var caja = document.getElementById("cajaMensaje");
 
     var inpu = document.getElementById("mensajeEscrito");
-    caja.focus();
 
     caja.addEventListener('keypress', function(event) {
-        if (event.code == "Enter" && caja.textContent.trim() != "") {
+        if (event.code == "Enter" && !event.shiftKey) {
+            event.preventDefault();
             inpu.value = caja.textContent;
             document.getElementById("formulario").submit();
         }
-    })
+    });
+
+    var botonEnviarMsg = document.getElementById("enviarMsg");
+    botonEnviarMsg.addEventListener('click', function(event) {
+        inpu.value = caja.textContent;
+        document.getElementById("formulario").submit();
+    });
 }
 
 function showMessage(message, nombreRemitente, userId) {

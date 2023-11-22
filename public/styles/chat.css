@@ -16,23 +16,32 @@
     content:attr(placeholder)
 }
 
-#cajaMensaje{
+#contenedorBarraMensaje{
     position: fixed;
     bottom: 0;
     background-color: #383A40;
+    height: max-content;
+    width: 99%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px;
+}
+
+#cajaMensaje{
+    background-color: transparent;
     color: lavender;
     border: 1px solid black;
-    width: 98%;
+    width: 90%;
     max-width: 98%;
     height: fit-content;
     padding: .5rem;
     min-height: 1rem;
     max-height: 6rem;
     border-radius: 20px;
-    margin: 10px;
     overflow: hidden;
     overflow-y: scroll;
-    
+    display: inline-block;
 }
 
 #cajaMensaje::-webkit-scrollbar{
@@ -88,4 +97,35 @@
 
 #formulario {
     display: none;
+}
+
+.contFuncionBarra{
+    display: inline-block;
+    padding: 5px;
+    border-radius: 50%;
+    height: 25px;
+    width: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 1px solid white;
+}
+
+.funcionBarra{
+    color: white;
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+.enter{
+    background-color: #DD1789;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.enter >img{
+    height: 16px;
+    width: 24.64px;
 }

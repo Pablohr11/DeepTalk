@@ -14,6 +14,7 @@ $lastMessage = $consultor->getLastMessageFromChat($chatId);
 if (isset($_POST["mensajeEscrito"]) && $_POST["mensajeEscrito"] != "Enviar mensaje a $otherUserName" && trim($_POST["mensajeEscrito"]) != "") {
     if ($consultor->insertMessage($_GET['conversacion'], $user["ID_usuario"], $_POST["mensajeEscrito"])) {
         header("Location: chat.php?conversacion=$chatId");
+        die();
     }
 }
 
@@ -69,11 +70,16 @@ if (isset($_POST["mensajeEscrito"]) && $_POST["mensajeEscrito"] != "Enviar mensa
                     </div>
                 <?php } ?>
             </div>
-            <div contentEditable=true tabindex="0" placeholder="Enviar mensaje a <?php echo $otherUserName ?>" id="cajaMensaje"></div>
-            <form id="formulario" method="post" action="chat.php?conversacion=<?php echo $_GET['conversacion'] ?>">
-                <input type="text" name="mensajeEscrito" id="mensajeEscrito">
-                <input type="text" id="varDePaso">
-            </form>
+            
+            <div id="contenedorBarraMensaje">
+                <div contentEditable=true placeholder="Enviar mensaje a <?=$otherUserName?>" id="cajaMensaje"></div>
+                <div class="contFuncionBarra recurso"><span class="funcionBarra">+</span></div>
+                <div id="enviarMsg" class="contFuncionBarra enter"><img src="../resources/avion.png"></div>
+                <form id="formulario" method="post" action="chat.php?conversacion=<?=$_GET['conversacion'] ?>">
+                    <textarea name="mensajeEscrito" id="mensajeEscrito"></textarea>
+                    <input type="text" id="varDePaso">
+                </form>
+            </div>
         </div>
     </div>
 </body>
