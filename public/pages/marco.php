@@ -39,9 +39,12 @@ function ei() {
             <ul>
                 <li onclick="desplegar(0)">Mensajes</li>
                 <div class="oculto">
-                <?php foreach ($userChats as $key=>$userChat) { ?>
-                    <a class="marcoButton" target="iframe" href="chat.php?conversacion=<?php echo $userChat[0]?>"><button class="Button" formaction="<?php ei() ?>" value="<?=$key?>"><?php echo $consultor->getUsernameFromChat($userChat[0],$user["ID_usuario"]) ?></button></a>
-                <?php } ?>
+                    <?php foreach ($userChats as $key=>$userChat) { ?>
+                        <a class="marcoButton" target="iframe" href="chat.php?conversacion=<?php echo $userChat[0]?>"><button class="Button" formaction="<?php ei() ?>" value="<?=$key?>"><?php echo $consultor->getUsernameFromChat($userChat[0],$user["ID_usuario"]) ?></button></a>
+                    <?php } ?>
+                    <div class="addDivButton">
+                        <button class="addNew">+</button>
+                    </div>
                 </div>
                 <li onclick="desplegar(1)">Grupos</li>
                 <div class="oculto"><p>Implementar los chats</p></div>
