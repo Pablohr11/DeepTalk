@@ -149,6 +149,35 @@ class DbConector {
         return $data;
     }
 
+
+    public function getUserIdFromName($otherUserName) {
+        $consulta = $this->db->prepare("select ID_usuario from Usuario where NombreUsuario = :userName");
+            
+        $consulta->bindParam(":userName", $otherUserName, PDO::PARAM_STR);
+
+        $results = $consulta->execute();
+        $data = $consulta->fetch(PDO::FETCH_NUM);
+        return $data[0];
+    }
+
+    public function createPrivateChat($userId, $otherUserName) {
+        try {
+
+            $otherUserId = $this->getUserIdFromName($otherUserName);
+
+            $consulta = $this->db->prepare("insert into Conversacion (ID_usuario1, ID_usuario2) values (:userId, :otherUserId)");
+            
+            $consulta->bindParam(":userId", $userId, PDO::PARAM_INT);
+            $consulta->bindParam(":otherUserId", $otherUserId, PDO::PARAM_INT);
+    
+            $results = $consulta->execute();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        }
+        return true;
+    }
+
 }
 
 
