@@ -72,7 +72,7 @@ if (isset($_POST["mensajeEscrito"]) && $_POST["mensajeEscrito"] != "Enviar mensa
             </div>
             
             <div id="contenedorBarraMensaje">
-                <div contentEditable=true tabindex="0" placeholder="Enviar mensaje a <?=$otherUserName?>" id="cajaMensaje"></div>
+                <div contentEditable=true placeholder="Enviar mensaje a <?=$otherUserName?>" id="cajaMensaje"></div>
                 <div class="contFuncionBarra recurso"><span class="funcionBarra">+</span></div>
                 <div id="enviarMsg" class="contFuncionBarra enter"><img src="../resources/avion.png"></div>
                 <form id="formulario" method="post" action="chat.php?conversacion=<?=$_GET['conversacion'] ?>">

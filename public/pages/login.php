@@ -1,24 +1,37 @@
 <?php
 
 include("../../config/init.php");
+include("../../storage/classes/DbConector.php");
+include("../../storage/classes/FormChecker.php");
+
+
+if(isset($_GET["user"])){
+    $user = $_GET["user"];
+}else{
+    $user = "";
+}
 
 $userData = [];
-$user = "";
 $passwd = "";
 
-if (isset($_POST['usuario']) && $_POST['usuario'] != "" && isset($_POST['password']) && $_POST['password'] != "") {
+if(isset($_POST['acceder'])){
+    $user = $_POST["usuario"];
+    $passwd = $_POST["password"];
+    $errores = [];
 
-    $user = $_POST['usuario']; 
-    $passwd = $_POST['password'];
+    $formularioValido = checkSignInForm($user, $passwd, $errores);
 
-    $consultor = DbConector::singleton();
-    $ok = $consultor->checkLogin($user, $passwd, $userData);
+    if($formularioValido){
+        $consultor = DbConector::singleton();
+        $ok = $consultor->checkLogin($user, $passwd, $userData);
 
-    if ($ok) {
-        CurrentUser::setConfig($userData);
-        header("Location: marco.php");
+        if ($ok) {
+            CurrentUser::setConfig($userData);
+            header("Location: marco.php");
+        }
     }
 }
+
 ?>
 
 
@@ -44,17 +57,24 @@ if (isset($_POST['usuario']) && $_POST['usuario'] != "" && isset($_POST['passwor
             </div>
             <div id="contDcha">
                 <div class="campos">
-                    <input class="input" name="usuario" placeholder="Usuario" type="text" value="<?=$_GET["user"]?>">
+                    <input class="input" name="usuario" placeholder="Usuario" type="text" value="<?=$user?>">
                 </div>
                 <div class="campos">
-                    <input class="input" name="password" placeholder="Contraseña" type="password">
+                    <input class="input" name="password" placeholder="Contraseña" type="password" value="<?=$passwd?>">
                 </div>
                 <div id="campoBotones">
-                    <input id="botonEnvio" type="submit" value="Acceder">
+                    <input id="botonEnvio" type="submit" value="Acceder" name="acceder">
                     <button id="signUpButton" formaction="signUp.php">Crear cuenta</button>
                 </div>
                 <div id="campoOlvidada">
                     <a href="#" id="spanOlvidada">¿Has Olvidado la Contraseña?</a>
+                </div>
+                <div id="errores">
+                    <?php if(isset($errores["usuario"])){ ?>
+                        <p class="info error"><?=$errores["usuario"]?></p>
+                    <?php }else if(isset($errores["contrasena"])){ ?>
+                        <p class="info error"><?=$errores["contrasena"]?></p>
+                    <?php } ?>
                 </div>
             </div>
         </div>
