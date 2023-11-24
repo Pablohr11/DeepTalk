@@ -1,7 +1,10 @@
 drop table if exists Hilo cascade;
 drop table if exists Mensaje cascade;
+drop table if exists MensajeGrupal cascade;
 drop table if exists Conversacion cascade;
+drop table if exists GrupoUsuario cascade;
 drop table if exists Usuario cascade;
+drop table if exists Grupo cascade;
 
 
 CREATE TABLE Usuario (
@@ -23,6 +26,31 @@ CREATE TABLE Conversacion(
     constraint pk_conv primary key(ID_Conversacion, ID_usuario1, ID_usuario2)
 );
 
+
+CREATE TABLE Grupo(
+	ID_grupo int AUTO_INCREMENT primary key,
+    NombreGrupo varchar(50)
+);
+
+CREATE TABLE GrupoUsuario (
+	ID_grupo int,
+    ID_usuario int,
+    constraint fk_us foreign key (ID_usuario) references Usuario(ID_usuario) ON DELETE CASCADE,
+    constraint fk_grp foreign key (ID_grupo) references Grupo(ID_grupo) ON DELETE CASCADE,
+    constraint pk_grupo primary key (ID_grupo, ID_usuario) 
+);
+
+CREATE TABLE MensajeGrupal (
+    ID_usuario int,
+	Num_Mensaje int AUTO_INCREMENT,
+	ID_grupo int,
+    Fecha Date,
+    Cuerpo varchar(500),
+    foreign key (ID_usuario) references Usuario(ID_usuario) ON DELETE CASCADE,
+    foreign key (ID_grupo) references Conversacion(ID_conversacion) ON DELETE CASCADE,
+    primary key(Num_Mensaje, ID_grupo, ID_usuario) 
+);
+
 CREATE TABLE Mensaje(
     ID_usuario int,
 	Num_Mensaje int AUTO_INCREMENT,
@@ -31,7 +59,7 @@ CREATE TABLE Mensaje(
     Cuerpo varchar(500),
     foreign key (ID_usuario) references Usuario(ID_usuario) ON DELETE CASCADE,
     foreign key (ID_conversacion) references Conversacion(ID_conversacion) ON DELETE CASCADE,
-    primary key(Num_Mensaje, ID_Conversacion, ID_usuario)
+    primary key(Num_Mensaje, ID_Conversacion, ID_usuario) 
 );
 
 CREATE TABLE Hilo(
@@ -41,16 +69,6 @@ CREATE TABLE Hilo(
     CantidadDeMensajes int,
     foreign key (ID_usuario) references Usuario(ID_usuario) ON DELETE CASCADE
 );
-
---SELECTS
-
---PARA INICIO DE SESION
-
--- select NombreUsuario, Contraseña from Usuario where NombreUsuario = (Usuario introducido en el login) and Contraseña = (Contraseña introducido en el login);
-
---PARA SELECCIONAR LOS MENSAJES
-
--- select Cuerpo, NombreUsuario from Mensaje, Usuario, Chat where Mensaje.ID_Conversacion = Chat.ID_Conversacion order by Mensaje.Num_Mensaje;
 
 --PARA CREACION DE USUARIO
 
@@ -62,6 +80,26 @@ insert into Usuario (NombreUsuario, Contraseña, Correo, Telefono, Tipo, Valorac
 
 insert into Conversacion (ID_usuario1, ID_usuario2) values (1,2);
 insert into Conversacion (ID_usuario1, ID_usuario2) values (3,1);
+
+--Para creacion de grupos
+
+insert into Grupo(NombreGrupo) values ("Grupo de prueba");
+insert into Grupo(NombreGrupo) values ("Grupo entre maria y pablo");
+
+--Para usuarios de grupos
+
+insert into GrupoUsuario(ID_grupo, ID_usuario) values (1, 1);
+insert into GrupoUsuario(ID_grupo, ID_usuario) values (1, 2);
+insert into GrupoUsuario(ID_grupo, ID_usuario) values (1, 3);
+
+insert into GrupoUsuario(ID_grupo, ID_usuario) values (2, 1);
+insert into GrupoUsuario(ID_grupo, ID_usuario) values (2, 3);
+
+--PARA CREACION DE MENSAJES GRUPALES
+
+insert into MensajeGrupal(ID_usuario, ID_grupo, Fecha, Cuerpo) values (1, 1, "2023-10-23", "Mensaje para el grupo");
+insert into MensajeGrupal(ID_usuario, ID_grupo, Fecha, Cuerpo) values (1, 2, "2023-10-23", "Mensaje para el grupo");
+
 
 --PARA CREACION DE MENSAJES
 
