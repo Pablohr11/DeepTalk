@@ -6,6 +6,7 @@ include("../../config/init.php");
 $user = CurrentUser::getConfig();
 $consultor = DbConector::singleton();
 $userChats = $consultor->getUserChats($user["ID_usuario"]);
+$userGroups = $consultor->getUserGroups($user["ID_usuario"]);
 
 function ei() {
     echo "<script>alert('a')</script>";
@@ -46,9 +47,16 @@ function ei() {
                         <?php } ?>
                     <?php } ?>
                 </div>
-                <li onclick="desplegar(1)">Grupos</li>
-                <div class="oculto"><p>Implementar los chats</p></div>
-                <li onclick="desplegar(2)">Hilos</li>
+                <li onclick="desplegar(2)">Grupos</li>
+                <div class="oculto">
+                    <?php foreach ($userGroups as $userGroup) {?>
+                        <a class="marcoButton" target="iframe" href="chatGrupal.php?conversacion=<?= $userGroup[0]?>"><button class="Button" formaction="<?php ei() ?>" value="<?=$key?>"><?= $userGroup[1] ?></button></a>
+                    <?php } ?>
+                    <div class="addDivButton">
+                        <a target="iframe" href="./addGroup.php"><button class="addNew" >+</button></a>
+                    </div>
+                </div>
+                <li onclick="desplegar(3)">Hilos</li>
                 <div class="oculto"><p>Implementar los chats</p></div>
                 <!--<li onclick="desplegar(3)">Recomendados</li>
                 <div class="oculto"><p>Implementar los chats</p></div>!-->

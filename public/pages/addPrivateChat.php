@@ -8,7 +8,7 @@ $consultor = DbConector::singleton();
 
 if (isset($_POST["enviar"])) {
     if ($consultor->createPrivateChat($user["ID_usuario"], $_POST["userName"])) {
-
+        echo '<script>parent.location.reload()</script>';
     }
 }
 

@@ -78,6 +78,17 @@ class DbConector {
         return $data;
     }
 
+    public function getUserGroups($id) {
+        $consulta = $this->db->prepare("select * from Grupo where Grupo.ID_grupo in (select ID_grupo from GrupoUsuario where ID_usuario = :id_usuario)");
+            
+        $consulta->bindParam(":id_usuario", $id, PDO::PARAM_STR);
+
+        $results = $consulta->execute();
+        $data = $consulta->fetchAll(PDO::FETCH_NUM);
+
+        return $data;
+    }
+
     public function getUsernameFromChat($chatId, $currentUserId) {
         $consulta = $this->db->prepare("select NombreUsuario from Conversacion, Usuario where (Conversacion.ID_conversacion = :id_chat) and 
         (Usuario.ID_usuario = Conversacion.ID_usuario2 or Usuario.ID_usuario = Conversacion.ID_usuario1) and 
@@ -112,9 +123,36 @@ class DbConector {
         return $data;
     }
 
+
+    public function getGroupMessages($idChat) {
+        $consulta = $this->db->prepare("select * from MensajeGrupal where ID_grupo = :id_chat");
+            
+        $consulta->bindParam(":id_chat", $idChat, PDO::PARAM_INT);
+
+        $results = $consulta->execute();
+        $data = $consulta->fetchAll(PDO::FETCH_NUM);
+        return $data;
+    }
+
     function insertMessage($id_conversacion, $userId, $mensaje) {
         try {
             $consulta = $this->db->prepare("insert into Mensaje (ID_usuario, ID_conversacion, Cuerpo) values (:userId, :chatId, :mensaje)");
+            
+            $consulta->bindParam(":userId", $userId, PDO::PARAM_INT);
+            $consulta->bindParam(":chatId", $id_conversacion, PDO::PARAM_INT);
+            $consulta->bindParam(":mensaje", $mensaje, PDO::PARAM_STR);
+    
+            $results = $consulta->execute();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        }
+        return true;
+    }
+
+    function insertGroupMessage($id_conversacion, $userId, $mensaje) {
+        try {
+            $consulta = $this->db->prepare("insert into Mensaje (ID_usuario, ID_grupo, Cuerpo) values (:userId, :chatId, :mensaje)");
             
             $consulta->bindParam(":userId", $userId, PDO::PARAM_INT);
             $consulta->bindParam(":chatId", $id_conversacion, PDO::PARAM_INT);
