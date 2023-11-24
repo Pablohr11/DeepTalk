@@ -4,11 +4,11 @@ include("../../storage/data.php");
 include("../../storage/classes/DbConector.php");
 include("../../storage/classes/FormChecker.php");
 
-$errores;
 if (isset($_POST["envio"])) {
     $user = $_POST["user"];
     $mail = $_POST["email"];
     $passwd = $_POST["passwd"];
+    $errores = [];
 
     $validForm = checkSignUpForm($user, $mail, $passwd, $errores);
 
@@ -45,20 +45,26 @@ if (isset($_POST["envio"])) {
             </div>
             <div id="contDcha">
                 <div class="campos">
-                    <input class="input" name="email" placeholder="Email" type="text">
+                    <input class="input" name="email" placeholder="Email" type="text" value="<?=((isset($mail))?$mail:"")?>">
                 </div>
                 <div class="campos">
-                    <input class="input" name="user" placeholder="Usuario" type="text">
+                    <input class="input" name="user" placeholder="Usuario" type="text" value="<?=((isset($user))?$user:"")?>">
                 </div>
                 <div class="campos">
-                    <input class="input" name="passwd" placeholder="Contraseña" type="password">
+                    <input class="input" name="passwd" placeholder="Contraseña" type="password" value="<?=((isset($passwd))?$passwd:"")?>">
                 </div>
                 <div id="campoBotones">
                     <button id="signUpButton" name="envio" value="envio">Crear cuenta</button>
                     <button id="botonEnvio" formaction="login.php">Iniciar Sesion</button>
                 </div>
                 <div id="errores">
-                    <?php echo (isset($errores["user"])?"<p class='info error'>El usuario no es válido</p>":"")  ?>
+                    <?php if(isset($errores["usuario"])){ ?>
+                        <p class="info error"><?=$errores["usuario"]?></p>
+                    <?php }else if(isset($errores["mail"])){ ?>
+                        <p class="info error"><?=$errores["mail"]?></p>
+                    <?php }else if(isset($errores["contrasena"])){ ?>
+                        <p class="info error"><?=$errores["contrasena"]?></p>
+                    <?php } ?>
                 </div>
             </div>
         </div>

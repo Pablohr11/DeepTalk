@@ -21,15 +21,14 @@ function ei() {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DeepTalk</title>
     <link rel="stylesheet" href="../styles/marco.css" type="text/css">
-    <script src="../jscript/marco.js"></script>
+    <script src="../jscript/marco.js" defer></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="icon" type="image/jpg" href="../resources/logo.png"/>
 </head>
 <body>
     <div id="cuerpo">
         <header id="cabecera">
-            <!--TODO: Implemnetar que este titulo cambie segun el perfil.-->
-            <p>Nombre Conversación</p>
+            <p id="nombreDeConversacion"></p>
         </header>
 
         <div id="contendedorLogo">
@@ -40,12 +39,13 @@ function ei() {
             <ul>
                 <li onclick="desplegar(0)">Mensajes</li>
                 <div class="oculto">
-                    <?php foreach ($userChats as $userChat) { ?>
-                        <a class="marcoButton" target="iframe" href="chat.php?conversacion=<?php echo $userChat[0]?>"><button class="Button" formaction="<?php ei() ?>" value="<?=$key?>"><?php echo $consultor->getUsernameFromChat($userChat[0],$user["ID_usuario"]) ?></button></a>
+                    <?php if(empty($userChats)){ ?>
+                        <span class="menuVacio">Aqui no hay nada :(</span>
+                    <?php }else{ ?>
+                        <?php foreach ($userChats as $key=>$userChat) { ?>
+                            <a class="marcoButton" target="iframe" href="chat.php?conversacion=<?= $userChat[0]?>"><button class="Button" formaction="<?php ei() ?>" value="<?=$key?>"><?php echo $consultor->getUsernameFromChat($userChat[0],$user["ID_usuario"]) ?></button></a>
+                        <?php } ?>
                     <?php } ?>
-                    <div class="addDivButton">
-                        <a target="iframe" href="./addPrivateChat.php"><button class="addNew" >+</button></a>
-                    </div>
                 </div>
                 <li onclick="desplegar(2)">Grupos</li>
                 <div class="oculto">
