@@ -150,12 +150,12 @@ class DbConector {
         return true;
     }
 
-    function insertGroupMessage($id_conversacion, $userId, $mensaje) {
+    function insertGroupMessage($id_grupo, $userId, $mensaje) {
         try {
-            $consulta = $this->db->prepare("insert into Mensaje (ID_usuario, ID_grupo, Cuerpo) values (:userId, :chatId, :mensaje)");
+            $consulta = $this->db->prepare("insert into MensajeGrupal (ID_usuario, ID_grupo, Cuerpo) values (:userId, :chatId, :mensaje)");
             
             $consulta->bindParam(":userId", $userId, PDO::PARAM_INT);
-            $consulta->bindParam(":chatId", $id_conversacion, PDO::PARAM_INT);
+            $consulta->bindParam(":chatId", $id_grupo, PDO::PARAM_INT);
             $consulta->bindParam(":mensaje", $mensaje, PDO::PARAM_STR);
     
             $results = $consulta->execute();
@@ -187,6 +187,29 @@ class DbConector {
         return $data;
     }
 
+
+    function getLastMessageFromGroup($idGroup) {
+        $consulta = $this->db->prepare("select Num_Mensaje from MensajeGrupal where ID_grupo = :id_chat order by Num_Mensaje desc");
+            
+        $consulta->bindParam(":id_chat", $idGroup, PDO::PARAM_INT);
+
+        $results = $consulta->execute();
+        $data = $consulta->fetch(PDO::FETCH_NUM);
+        return $data[0];
+    }
+
+    public function getGroupLeftMessages($idGrupo, $lastMessage) {
+        $consulta = $this->db->prepare("select * from MensajeGrupal where ID_grupo = :id_chat and Num_Mensaje > :last_message");
+            
+        $consulta->bindParam(":id_chat", $idGrupo, PDO::PARAM_INT);
+        $consulta->bindParam(":last_message", $lastMessage, PDO::PARAM_INT);
+
+        $results = $consulta->execute();
+        $data = $consulta->fetchAll(PDO::FETCH_NUM);
+        return $data;
+    }
+
+
     public function obtenerUsuario($userName){
         $consulta = $this->db->prepare("SELECT NombreUsuario FROM Usuario WHERE NombreUsuario=:userName");
         $consulta->bindParam(":userName", $userName, PDO::PARAM_STR);
@@ -209,6 +232,44 @@ class DbConector {
         $resultado = $consulta->execute();
         $contra = $consulta->fetch(PDO::FETCH_NUM);
         return $contra;
+    }
+
+    public function getUserIdFromName($otherUserName) {
+        $consulta = $this->db->prepare("select ID_usuario from Usuario where NombreUsuario = :userName");
+
+        $consulta->bindParam(":userName", $otherUserName, PDO::PARAM_STR);
+
+        $results = $consulta->execute();
+        $data = $consulta->fetch(PDO::FETCH_NUM);
+        return $data[0];
+    }
+
+    public function createPrivateChat($userId, $otherUserName) {
+        try {
+
+            $otherUserId = $this->getUserIdFromName($otherUserName);
+
+            $consulta = $this->db->prepare("insert into Conversacion (ID_usuario1, ID_usuario2) values (:userId, :otherUserId)");
+
+            $consulta->bindParam(":userId", $userId, PDO::PARAM_INT);
+            $consulta->bindParam(":otherUserId", $otherUserId, PDO::PARAM_INT);
+
+            $results = $consulta->execute();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        }
+        return true;
+    }
+
+    function getGroupName($groupId) {
+        $consulta = $this->db->prepare("select NombreGrupo from Grupo where ID_grupo = :id_grupo");
+            
+        $consulta->bindParam(":id_grupo", $groupId, PDO::PARAM_INT);
+
+        $results = $consulta->execute();
+        $data = $consulta->fetch(PDO::FETCH_NUM);
+        return $data[0];
     }
 
 }

@@ -175,3 +175,17 @@
     text-align: center;
     text-decoration: underline;
 }
+
+.addDivButton {
+    display: flex;
+    justify-content: center;
+}
+
+.addNew {
+    height: 30px;
+    width: 30px;
+    border: 2px solid aliceblue;
+    border-radius: 5px;
+    background-color: #6d047000;
+    color: aliceblue;
+}

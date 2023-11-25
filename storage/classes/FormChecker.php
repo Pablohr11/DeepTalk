@@ -39,19 +39,19 @@ function checkSignInForm($user, $passwd, &$array):bool {
     $existeUsuario = $db->obtenerUsuario($user);
     $contraUser = $db->obtenerContraDeUsuario($user);
 
-    if (!isset($user)  || strlen($user) < 4) {
-        $array["usuario"] = "El usuario debe tener al menos 4 caracteres";
+    if (!isset($user) || $user == "") {
+        $array["usuario"] = "El usuario no puede estar vacio";
         $formValid = false;
     }else if($existeUsuario==null){
-        $array["usuario"] = "El usuario '". $user ."' no existe.";
+        $array["usuario"] = "Las credenciales no son correctas.";
         $formValid = false;
     }
     if($formValid){
-        if (!isset($passwd) || strlen($passwd) < 8) {
-            $array["contrasena"] = "La contraseña debe tener al menos 8 caracteres";
+        if (!isset($passwd) || $passwd == "") {
+            $array["contrasena"] = "La contraseña no puede estar vacia";
             $formValid = false;
         }else if($contraUser[0]!=$passwd){
-            $array["contrasena"] = "La contraseña no es correcta.";
+            $array["contrasena"] = "Las credenciales no son correctas.";
             $formValid = false;
         }
     }

@@ -46,6 +46,9 @@ function ei() {
                             <a class="marcoButton" target="iframe" href="chat.php?conversacion=<?= $userChat[0]?>"><button class="Button" formaction="<?php ei() ?>" value="<?=$key?>"><?php echo $consultor->getUsernameFromChat($userChat[0],$user["ID_usuario"]) ?></button></a>
                         <?php } ?>
                     <?php } ?>
+                    <div class="addDivButton">
+                        <a target="iframe" href="./addPrivateChat.php"><button class="addNew" >+</button></a>
+                    </div>
                 </div>
                 <li onclick="desplegar(2)">Grupos</li>
                 <div class="oculto">

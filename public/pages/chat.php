@@ -35,7 +35,7 @@ if (isset($_POST["mensajeEscrito"]) && $_POST["mensajeEscrito"] != "Enviar mensa
         var ultimoMensaje = <?php echo $lastMessage?>;
         function obtenerLosNuevos() {
             $.ajax({
-                url: 'test.php',
+                url: 'ajax.php',
                 method: 'GET',
                 data: {
                     idChat: <?= $_GET['conversacion']?>,

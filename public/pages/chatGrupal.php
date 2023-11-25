@@ -6,10 +6,9 @@ session_start();
 $user = CurrentUser::getConfig();
 $consultor = DbConector::singleton();
 $messages = $consultor->getGroupMessages($_GET['conversacion']);
-$otherUserName = $consultor->getUsernameFromChat($_GET['conversacion'], $user["ID_usuario"]);
+$groupName = $consultor->getGroupName($_GET['conversacion']);
 $chatId = $_GET['conversacion'];
-$lastMessage = $consultor->getLastMessageFromChat($chatId);
-
+$lastMessage = $consultor->getLastMessageFromGroup($chatId);
 
 if (isset($_POST["mensajeEscrito"]) && $_POST["mensajeEscrito"] != "Enviar mensaje a $otherUserName" && trim($_POST["mensajeEscrito"]) != "") {
     if ($consultor->insertGroupMessage($_GET['conversacion'], $user["ID_usuario"], $_POST["mensajeEscrito"])) {
@@ -35,7 +34,7 @@ if (isset($_POST["mensajeEscrito"]) && $_POST["mensajeEscrito"] != "Enviar mensa
         var ultimoMensaje = <?php echo $lastMessage?>;
         function obtenerLosNuevos() {
             $.ajax({
-                url: 'test.php',
+                url: 'ajax_group.php',
                 method: 'GET',
                 data: {
                     idChat: <?= $_GET['conversacion']?>,
@@ -72,7 +71,7 @@ if (isset($_POST["mensajeEscrito"]) && $_POST["mensajeEscrito"] != "Enviar mensa
             </div>
             
             <div id="contenedorBarraMensaje">
-                <div contentEditable=true tabindex="0" placeholder="Enviar mensaje a <?=$otherUserName?>" id="cajaMensaje"></div>
+                <div contentEditable=true tabindex="0" placeholder="Enviar mensaje a <?=$groupName?>" id="cajaMensaje"></div>
                 <div class="contFuncionBarra recurso"><span class="funcionBarra">+</span></div>
                 <div id="enviarMsg" class="contFuncionBarra enter"><img src="../resources/avion.png"></div>
                 <form id="formulario" method="post" action="chatGrupal.php?conversacion=<?=$_GET['conversacion'] ?>">
