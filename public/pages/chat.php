@@ -30,7 +30,7 @@ if (isset($_POST["mensajeEscrito"]) && $_POST["mensajeEscrito"] != "Enviar mensa
     <link rel="stylesheet" href="../styles/chat.css">
     <title>DeepTalk</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="../jscript/chat.js"></script>
+    <script src="../jscript/chat.js" defer></script>
     <script>
         var ultimoMensaje = <?php echo $lastMessage?>;
         function obtenerLosNuevos() {
@@ -60,26 +60,25 @@ if (isset($_POST["mensajeEscrito"]) && $_POST["mensajeEscrito"] != "Enviar mensa
 
 <body onload="init()">
     <div id="cuerpo">
-
         <div id="contenido">
+
             <div id="mensajes">
                 <?php foreach ($messages as $key => $mensaje) { ?>
-                    <div class="mensaje <?php echo ($mensaje[0] == $user["ID_usuario"]) ? "propio" : "ajeno" ?>">
-                        <div class="remitente"><?php echo $consultor->getUsernameById($mensaje[0]) ?></div>
-                        <label class="texto"><?php echo $mensaje[4] ?></label>
+                    <div class="mensaje <?=($mensaje[0] == $user["ID_usuario"]) ? "propio" : "ajeno" ?>">
+                        <div class="remitente"><?= $consultor->getUsernameById($mensaje[0]) ?></div>
+                        <pre class="contenedorTexto"><p class="texto"><?= $mensaje[4] ?></p></pre>
                     </div>
                 <?php } ?>
             </div>
             
             <div id="contenedorBarraMensaje">
-                <div contentEditable=true placeholder="Enviar mensaje a <?=$otherUserName?>" id="cajaMensaje"></div>
+                <form id="formulario" method="post" action="chat.php?conversacion=<?=$_GET['conversacion'] ?>">
+                    <textarea name="mensajeEscrito" placeholder="Enviar mensaje a <?=$otherUserName?>" id="cajaMensaje"></textarea>
+                </form>
                 <div class="contFuncionBarra recurso"><span class="funcionBarra">+</span></div>
                 <div id="enviarMsg" class="contFuncionBarra enter"><img src="../resources/avion.png"></div>
-                <form id="formulario" method="post" action="chat.php?conversacion=<?=$_GET['conversacion'] ?>">
-                    <textarea name="mensajeEscrito" id="mensajeEscrito"></textarea>
-                    <input type="text" id="varDePaso">
-                </form>
             </div>
+
         </div>
     </div>
 </body>

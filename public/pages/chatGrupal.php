@@ -29,7 +29,7 @@ if (isset($_POST["mensajeEscrito"]) && $_POST["mensajeEscrito"] != "Enviar mensa
     <link rel="stylesheet" href="../styles/chat.css">
     <title>DeepTalk</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="../jscript/chat.js"></script>
+    <script src="../jscript/chat.js" defer></script>
     <script>
         var ultimoMensaje = <?php echo $lastMessage?>;
         function obtenerLosNuevos() {
@@ -71,13 +71,11 @@ if (isset($_POST["mensajeEscrito"]) && $_POST["mensajeEscrito"] != "Enviar mensa
             </div>
             
             <div id="contenedorBarraMensaje">
-                <div contentEditable=true tabindex="0" placeholder="Enviar mensaje a <?=$groupName?>" id="cajaMensaje"></div>
+                <form id="formulario" method="post" action="chatGrupal.php?conversacion=<?=$_GET['conversacion']?>">
+                    <textarea name="mensajeEscrito" placeholder="Enviar mensaje a <?=$groupName?>" id="cajaMensaje"></textarea>
+                </form>
                 <div class="contFuncionBarra recurso"><span class="funcionBarra">+</span></div>
                 <div id="enviarMsg" class="contFuncionBarra enter"><img src="../resources/avion.png"></div>
-                <form id="formulario" method="post" action="chatGrupal.php?conversacion=<?=$_GET['conversacion'] ?>">
-                    <textarea name="mensajeEscrito" id="mensajeEscrito"></textarea>
-                    <input type="text" id="varDePaso">
-                </form>
             </div>
         </div>
     </div>
