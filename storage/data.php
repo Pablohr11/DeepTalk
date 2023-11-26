@@ -1,5 +1,6 @@
 <?php
 
+define("DIRECTORIO_IMAGENES_MENSAJES", "/public/resources/mensajes/");
 //Import PHPMailer classes into the global namespace
 //These must be at the top of your script, not inside a function
 use PHPMailer\PHPMailer\PHPMailer;
