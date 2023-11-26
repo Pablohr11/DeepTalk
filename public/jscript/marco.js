@@ -5,11 +5,19 @@ function desplegar(pestañaDesplegar){
     contenedorDesplegar.classList.toggle("desplegableVisible");
 }
 
-var nombreDeConversacion = document.getElementById("nombreDeConversacion")
+var nombreDeConversacion = document.getElementById("nombreDeConversacion");
 var botonesDeConversaciones = document.getElementsByClassName("Button");
 
 for(let botonConversacion of botonesDeConversaciones){
     botonConversacion.addEventListener('click', function(){
         nombreDeConversacion.innerText = botonConversacion.innerText;
+    });
+}
+
+var coleccioneBotonesMas = document.getElementsByClassName("addDivButton");
+
+for(let botonesMas of coleccioneBotonesMas){
+    botonesMas.addEventListener('click', function(){
+        nombreDeConversacion.innerText = "";
     });
 }

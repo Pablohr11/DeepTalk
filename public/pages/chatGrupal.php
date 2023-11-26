@@ -11,7 +11,7 @@ $chatId = $_GET['conversacion'];
 $lastMessage = $consultor->getLastMessageFromGroup($chatId);
 
 if (isset($_POST["mensajeEscrito"]) && $_POST["mensajeEscrito"] != "Enviar mensaje a $otherUserName" && trim($_POST["mensajeEscrito"]) != "") {
-    if ($consultor->insertGroupMessage($_GET['conversacion'], $user["ID_usuario"], $_POST["mensajeEscrito"])) {
+    if ($consultor->insertGroupMessage($_GET['conversacion'], $user["ID_usuario"], $_POST["mensajeEscrito"], "texto")) {
         header("Location: chatGrupal.php?conversacion=$chatId");
         die();
     }
@@ -63,9 +63,9 @@ if (isset($_POST["mensajeEscrito"]) && $_POST["mensajeEscrito"] != "Enviar mensa
         <div id="contenido">
             <div id="mensajes">
                 <?php foreach ($messages as $key => $mensaje) { ?>
-                    <div class="mensaje <?php echo ($mensaje[0] == $user["ID_usuario"]) ? "propio" : "ajeno" ?>">
-                        <div class="remitente"><?php echo $consultor->getUsernameById($mensaje[0]) ?></div>
-                        <label class="texto"><?php echo $mensaje[4] ?></label>
+                    <div class="mensaje <?=($mensaje[0] == $user["ID_usuario"]) ? "propio" : "ajeno" ?>">
+                        <div class="remitente"><?= $consultor->getUsernameById($mensaje[0]) ?></div>
+                        <pre class="contenedorTexto"><?php if($mensaje[5]==="texto"){ ?><p class="texto"><?=htmlspecialchars($mensaje[4])?></p><?php }else if($mensaje[5]==="imagen"){ ?><p class="texto"><?=htmlspecialchars($mensaje[4])?></p><?php } ?></pre>
                     </div>
                 <?php } ?>
             </div>

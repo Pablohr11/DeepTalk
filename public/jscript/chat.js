@@ -32,3 +32,15 @@ caja.addEventListener('keypress', function(event) {
         document.getElementById("formulario").submit();
     }
 });
+
+var enviarRecurso = document.getElementById("enviarRecurso");
+enviarRecurso.addEventListener('click', function(){
+    let pantallaRecurso = document.getElementById("pantallaRecurso");
+    pantallaRecurso.classList.remove("oculto");
+});
+
+var cerrarRecurso = document.getElementById("cerrarRecurso");
+cerrarRecurso.addEventListener('click', function(){
+    let pantallaRecurso = document.getElementById("pantallaRecurso");
+    pantallaRecurso.classList.add("oculto");
+});
