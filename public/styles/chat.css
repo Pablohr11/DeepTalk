@@ -103,6 +103,7 @@
     width: fit-content;
     max-width: 100%;
     display: inline-block;
+    border-radius: 6px;
 }
 
 .texto {
@@ -120,6 +121,7 @@
     float: right;
     margin-top: 2px;
     margin-right: 2px;
+    font-size: smaller;
 }
 
 .horaMensaje > span{
@@ -229,3 +231,9 @@
     margin-top: 2rem;
 }
 
+#usersDiv {
+    padding: 5px;
+    padding-left: 10px;
+    background-color: #383a40b4;
+    color: aliceblue;
+}

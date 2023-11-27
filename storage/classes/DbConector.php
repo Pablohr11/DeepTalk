@@ -274,8 +274,16 @@ class DbConector {
         return $data[0];
     }
 
+    function getGroupUsers($groupId) {
+            $consulta = $this->db->prepare("select ID_usuario, NombreUsuario from Usuario where ID_usuario in (select ID_usuario from GrupoUsuario where GrupoUsuario.ID_grupo = :id_grupo);");
+                
+            $consulta->bindParam(":id_grupo", $groupId, PDO::PARAM_INT);
+    
+            $results = $consulta->execute();
+            $data = $consulta->fetchAll(PDO::FETCH_NUM);
+            return $data;
+    }
+
 }
-
-
 ?>
 

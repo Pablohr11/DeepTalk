@@ -8,10 +8,15 @@ define("DIRECTORIO_IMAGENES_MENSAJES", "../resources/mensajes/");
 session_start();
 $user = CurrentUser::getConfig();
 $consultor = DbConector::singleton();
-$messages = $consultor->getGroupMessages($_GET['conversacion']);
-$groupName = $consultor->getGroupName($_GET['conversacion']);
 $chatId = $_GET['conversacion'];
+$messages = $consultor->getGroupMessages($chatId);
+$groupName = $consultor->getGroupName($chatId);
 $lastMessage = $consultor->getLastMessageFromGroup($chatId);
+$arrayAux = $consultor->getGroupUsers($chatId);
+$groupUsers;
+foreach ($arrayAux as $groupUser) {
+    $groupUsers[$groupUser[0]] = $groupUser[1];
+}
 
 if (isset($_POST["mensajeEscrito"]) && $_POST["mensajeEscrito"] != "Enviar mensaje a $otherUserName" && trim($_POST["mensajeEscrito"]) != "") {
     if ($consultor->insertGroupMessage($_GET['conversacion'], $user["ID_usuario"], $_POST["mensajeEscrito"], "texto")) {
@@ -76,6 +81,7 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
     <script>
         var ultimoMensaje = <?php echo $lastMessage?>;
         function obtenerLosNuevos() {
+            var arrayUsuarios = <?php echo(json_encode($groupUsers))?>;
             $.ajax({
                 url: 'ajax_group.php',
                 method: 'GET',
@@ -87,7 +93,7 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
                 success: function(mensajesFaltantes) {
                     for (var mensaje of mensajesFaltantes) {
                         
-                        showMessage(mensaje, "<?= $otherUserName?>", <?php echo $user["ID_usuario"]?>);
+                        showGroupMessage(mensaje, arrayUsuarios, <?php echo $user["ID_usuario"]?>);
                         ultimoMensaje = mensaje[1];
                     }
                 },
@@ -104,6 +110,11 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
     <div id="cuerpo">
 
         <div id="contenido">
+            <div id="usersDiv">
+                <?php foreach ($arrayAux as $key => $auxUser) { ?>
+                    <label><?php echo (($key == count($arrayAux)-1)?$auxUser[1].".":$auxUser[1].",")?></label>
+                <?php } ?>
+            </div>
             <div id="mensajes">
                 <?php foreach ($messages as $key => $mensaje) { ?>
                     <div class="mensaje <?=($mensaje[0] == $user["ID_usuario"]) ? "propio" : "ajeno" ?>">
