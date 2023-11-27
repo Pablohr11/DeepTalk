@@ -73,8 +73,7 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="../jscript/chat.js" defer></script>
     <script>
-        var ultimoMensaje = <?php echo (isset($lastMessage))?$lastMessage:"0"?>;
-        console.log(ultimoMensaje);
+        var ultimoMensaje = <?php echo $lastMessage?>;
         function obtenerLosNuevos() {
             $.ajax({
                 url: 'ajax.php',

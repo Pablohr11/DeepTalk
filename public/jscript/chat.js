@@ -1,5 +1,3 @@
-
-
 function init() {
     var objDiv = document.getElementById("contenido");
     objDiv.scrollTop = objDiv.scrollHeight;
@@ -7,9 +5,22 @@ function init() {
     caja.focus();
 }
 
+function obtenerHoraDeFecha(fecha){
+    return fecha.substring(11,16);
+}
+
 function showMessage(message, nombreRemitente, userId) {
     var container = document.getElementById("mensajes");
-    container.innerHTML+= '<div class="mensaje '+ ((userId != message[0])?'ajeno':'propio') +'"><div class="remitente">'+nombreRemitente+'</div><label class="texto">'+message[4]+'</label></div>';
+    var html = '<div class="mensaje '+ ((userId != message[0])?'ajeno':'propio') +'"><div class="remitente">'+nombreRemitente+'</div><pre class="contenedorTexto">';
+    
+
+    if(message[5]==="texto"){
+        html+= '<p class="texto">'+message[4]+'</p>';
+    }else if(message[5]==="imagen"){
+        html+= '<img class="imagen" src="'+message[4]+'"></img>';
+    }
+    html+= '</pre><div class="horaMensaje"><span>'+obtenerHoraDeFecha(message[3])+'</span></div></div>';
+    container.innerHTML+= html;
 
     var objDiv = document.getElementById("contenido");
     objDiv.scrollTop = objDiv.scrollHeight;
