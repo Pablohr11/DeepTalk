@@ -1,0 +1,1 @@
+Esta es la ruta en la que se almacenan las imagenes que los usuarios mandan.
