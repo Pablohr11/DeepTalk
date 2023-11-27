@@ -3,6 +3,8 @@
 function init() {
     var objDiv = document.getElementById("contenido");
     objDiv.scrollTop = objDiv.scrollHeight;
+    var caja = document.getElementById("cajaMensaje");
+    caja.focus();
 }
 
 function showMessage(message, nombreRemitente, userId) {
