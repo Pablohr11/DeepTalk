@@ -99,6 +99,12 @@
     word-wrap: break-word;
 }
 
+.imagen{
+    width: fit-content;
+    max-width: 100%;
+    display: inline-block;
+}
+
 .texto {
     color: aliceblue;
     height: fit-content;
@@ -106,8 +112,18 @@
 }
 
 .remitente {
-    font-size: smaller;
+    font-size: 14px;
     margin-bottom: 2px;
+}
+
+.horaMensaje{
+    float: right;
+    margin-top: 2px;
+    margin-right: 2px;
+}
+
+.horaMensaje > span{
+    color: gray;
 }
 
 .contFuncionBarra{
@@ -212,3 +228,4 @@
     font-weight: bold;
     margin-top: 2rem;
 }
+

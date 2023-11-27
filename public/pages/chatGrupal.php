@@ -1,5 +1,8 @@
 <?php
 include("../../config/init.php");
+require_once("../../storage/data.php");
+define('TAMANO_MAX_IMG', 5000000);
+define("DIRECTORIO_IMAGENES_MENSAJES", "../resources/mensajes/");
 
 
 session_start();
@@ -17,6 +20,46 @@ if (isset($_POST["mensajeEscrito"]) && $_POST["mensajeEscrito"] != "Enviar mensa
     }
 }
 
+if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FILES["recursoSubir"]["name"]=="")){
+
+    $nombreArchivo = basename($_FILES["recursoSubir"]["name"]);
+    $archivo = DIRECTORIO_IMAGENES_MENSAJES . $nombreArchivo;
+    $formatoImagen = strtolower(pathinfo($archivo, PATHINFO_EXTENSION));
+    $tamanoImagen = getimagesize($_FILES["recursoSubir"]["tmp_name"]);
+
+    if($tamanoImagen !== false){
+        $subidaCorrecta = true;
+    }else{
+        $subidaCorrecta = false;
+    }
+
+    $contador = 0;
+    while (file_exists($archivo)) {
+        $nombreSinExtension = pathinfo($nombreArchivo, PATHINFO_FILENAME);
+        $archivo = DIRECTORIO_IMAGENES_MENSAJES . $nombreSinExtension . '-' . $contador . '.' . $formatoImagen;
+        $contador++;
+    }
+
+    if ($_FILES["recursoSubir"]["size"] > TAMANO_MAX_IMG) {
+        $subidaCorrecta = false;
+    }
+
+    if($formatoImagen != "jpg" && $formatoImagen != "png" && $formatoImagen != "jpeg" && $formatoImagen != "gif" ){
+        $subidaCorrecta = false;
+    }
+    
+    if ($subidaCorrecta) {
+        if (move_uploaded_file($_FILES["recursoSubir"]["tmp_name"], $archivo)) {
+            if ($consultor->insertGroupMessage($_GET['conversacion'], $user["ID_usuario"], $archivo, "imagen")) {
+                header("Location: chatGrupal.php?conversacion=$chatId");
+                die();
+            }
+        } else {
+            echo "Hubo un error al subir tu archivo: ". $_FILES["recursoSubir"]["tmp_name"]. $archivo;
+        }
+    }
+
+}
 
 ?>
 
@@ -65,7 +108,8 @@ if (isset($_POST["mensajeEscrito"]) && $_POST["mensajeEscrito"] != "Enviar mensa
                 <?php foreach ($messages as $key => $mensaje) { ?>
                     <div class="mensaje <?=($mensaje[0] == $user["ID_usuario"]) ? "propio" : "ajeno" ?>">
                         <div class="remitente"><?= $consultor->getUsernameById($mensaje[0]) ?></div>
-                        <pre class="contenedorTexto"><?php if($mensaje[5]==="texto"){ ?><p class="texto"><?=htmlspecialchars($mensaje[4])?></p><?php }else if($mensaje[5]==="imagen"){ ?><p class="texto"><?=htmlspecialchars($mensaje[4])?></p><?php } ?></pre>
+                        <pre class="contenedorTexto"><?php if($mensaje[5]==="texto"){ ?><p class="texto"><?=htmlspecialchars($mensaje[4])?></p><?php }else if($mensaje[5]==="imagen"){ ?><img class="imagen" src="<?=htmlspecialchars($mensaje[4])?>"><?php } ?></pre>
+                        <div class="horaMensaje"><span><?=obtenerHoraDeFecha($mensaje[3])?></span></div>
                     </div>
                 <?php } ?>
             </div>
@@ -74,9 +118,21 @@ if (isset($_POST["mensajeEscrito"]) && $_POST["mensajeEscrito"] != "Enviar mensa
                 <form id="formulario" method="post" action="chatGrupal.php?conversacion=<?=$_GET['conversacion']?>">
                     <textarea name="mensajeEscrito" placeholder="Enviar mensaje a <?=$groupName?>" id="cajaMensaje"></textarea>
                 </form>
-                <div class="contFuncionBarra recurso"><span class="funcionBarra">+</span></div>
+                <div id="enviarRecurso" class="contFuncionBarra recurso"><span class="funcionBarra">+</span></div>
                 <div id="enviarMsg" class="contFuncionBarra enter"><img src="../resources/avion.png"></div>
             </div>
+
+            <div id="pantallaRecurso" class="oculto">
+                <div id="interfazRecurso">
+                    <p id="cerrarRecurso">X</p>
+                    <form enctype="multipart/form-data" action="chatGrupal.php?conversacion=<?=$_GET['conversacion']?>" method="post">
+                        <label for="seleccionRecurso">Seleccione la imagen que desea subir: </label>
+                        <input type="file" name="recursoSubir" id="seleccionRecurso">
+                        <br><input name="recursoEnviado" type="submit" value="¡Subir!">
+                    </form>
+                </div>
+            </div>
+
         </div>
     </div>
 </body>
