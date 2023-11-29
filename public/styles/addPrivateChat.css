@@ -29,17 +29,18 @@ body {
     width: 150px;
 }
 
-#inpu {
-    width: 84%;
+.inpu {
+    width: 70%;
     font-size: large;
     height: 30px;
     border: 2px solid black;
     border-radius: 3px;
 }
 
-#botDiv {
+#inputContainer div {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    align-items: center;
 }
 
 #enviar {
@@ -49,4 +50,9 @@ body {
     border-radius: 3px;
     background-color: #6d0470;
     color: black;
+}
+
+#inputContainer {
+    display: flex;
+    flex-direction: column;
 }

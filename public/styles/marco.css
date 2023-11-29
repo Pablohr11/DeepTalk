@@ -1,3 +1,5 @@
+@import url('https://fonts.cdnfonts.com/css/nasalization-2');
+
 *{
     margin: 0px;
     padding: 0px;
@@ -17,21 +19,27 @@
 
 #cabecera{
     grid-area: cabecera;
-    background-color: #313338;
+    background-color: #232428;
     display: flex;
     align-items: center;
     justify-content: center;
+    
 }
 
 #cabecera > p{
     color: #F2F3F4;
     font-size: 20px;
     margin: 0px;
+    font-family: "Nasalization";
+    font-size: 30px;
+    letter-spacing: 2px;
+    color: #7e7f7f;
 }
 
 #contendedorLogo{
     grid-area: logo;
-    background-color: #313338;
+    background-color: #1E1F22;
+    
 }
 
 #contendedorLogo > a{

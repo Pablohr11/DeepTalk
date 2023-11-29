@@ -21,7 +21,6 @@ if (isset($_POST["enviar"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../styles/addPrivateChat.css">
-    <script src="addPrivateChat.js"></script>
 </head>
 <body>
     <form method="post" action="addPrivateChat.php">

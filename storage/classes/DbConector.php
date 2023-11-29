@@ -26,17 +26,17 @@ class DbConector {
 
     public function checkLogin($user, $passwd, &$userData) {
         try {
-            $consulta = $this->db->prepare("select ID_usuario, NombreUsuario, Contraseña, Correo, Telefono from Usuario where NombreUsuario = :username and Contraseña = :passwd");
+            $consulta = $this->db->prepare("select ID_usuario, NombreUsuario, Contraseña, Correo, Telefono from Usuario where NombreUsuario = :username");
             
             $consulta->bindParam(":username", $user, PDO::PARAM_STR);
-            $consulta->bindParam(":passwd", $passwd, PDO::PARAM_STR);
+            //$consulta->bindParam(":passwd", $passwd, PDO::PARAM_STR);
     
             $results = $consulta->execute();
             $data = $consulta->fetch(PDO::FETCH_ASSOC);
     
     //        foreach ($data as $usuario) {
-            
-            if ($data["NombreUsuario"] == $user && $data["Contraseña"] == $passwd) {
+            echo "Hola: ".$data["Contraseña"];
+            if ($data["NombreUsuario"] == $user && password_verify($passwd, $data["Contraseña"] )) {
                 $userData = $data;
                 return true;
             }
@@ -49,11 +49,14 @@ class DbConector {
 
     public function insertUser($user, $passwd, $mail):bool {
         try {
+            
+            $passwdHash = password_hash($passwd, PASSWORD_DEFAULT);
+            echo $passwdHash;
             $consulta = $this->db->prepare("insert into Usuario (NombreUsuario, Contraseña, Correo, Tipo) values (:username, :passwd, :mail, 'base')");
 
             
             $consulta->bindParam(":username", $user, PDO::PARAM_STR);
-            $consulta->bindParam(":passwd", $passwd, PDO::PARAM_STR);
+            $consulta->bindParam(":passwd", $passwdHash, PDO::PARAM_STR);
             $consulta->bindParam(":mail", $mail, PDO::PARAM_STR);
 
             $results = $consulta->execute();
@@ -282,6 +285,62 @@ class DbConector {
             $results = $consulta->execute();
             $data = $consulta->fetchAll(PDO::FETCH_NUM);
             return $data;
+    }
+
+    public function getGroupId($groupName) {
+
+        echo "joderFoco";
+
+        $consulta = $this->db->prepare("select ID_grupo from Grupo where NombreGrupo = :nombre_grupo");
+                
+        $consulta->bindParam(":nombre_grupo", $groupName, PDO::PARAM_INT);
+
+        $results = $consulta->execute();
+        $data = $consulta->fetchAll(PDO::FETCH_NUM);
+        return $data;
+    }
+
+    public function createGroupChat($groupName, $otherUser1Name, $otherUser2Name, $userId) {
+        try {
+
+            echo "joder general";
+
+
+            $otherUser1Id = $this->getUserIdFromName($otherUser1Name);
+            $otherUser2Id = $this->getUserIdFromName($otherUser2Name);
+
+            $consulta = $this->db->prepare("insert into Grupo (NombreGrupo) values (:groupName)");
+
+            $consulta->bindParam(":groupName", $groupName, PDO::PARAM_STR);
+
+            $results = $consulta->execute();
+
+            $groupId = $this->getGroupId($groupName);
+
+            $this->insertIntoGroup($otherUser1Name, $groupId);
+            $this->insertIntoGroup($otherUser2Name, $groupId);
+
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        }
+        return true;
+    }
+
+    public function insertIntoGroup($userId, $groupId) {
+        try {
+            echo "joder";
+            $consulta = $this->db->prepare("insert into GrupoUsuario values(:groupId, :userId)");
+
+            $consulta->bindParam(":userId", $userId, PDO::PARAM_INT);
+            $consulta->bindParam(":groupId", $groupId, PDO::PARAM_INT);
+
+            $results = $consulta->execute();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        }
+        return true;
     }
 
 }

@@ -10,7 +10,7 @@ drop table if exists Grupo cascade;
 CREATE TABLE Usuario (
     ID_usuario int AUTO_INCREMENT PRIMARY KEY,
     NombreUsuario varchar(25) UNIQUE,
-	Contraseña varchar(25),
+	Contraseña varchar(100),
     Correo varchar(50) UNIQUE,
     Telefono varchar(9),
 	Tipo varchar(25),
@@ -74,9 +74,9 @@ CREATE TABLE Hilo(
 
 --PARA CREACION DE USUARIO
 
-insert into Usuario (NombreUsuario, Contraseña, Correo, Telefono, Tipo, Valoracion) values("Pablohr11", "1234", "pablo993968@gmail.com", null, "admin", null);
-insert into Usuario (NombreUsuario, Contraseña, Correo, Telefono, Tipo, Valoracion) values("Epic Erik", "123456", "lolamento77w@gmail.com", null, "admin", null);
-insert into Usuario (NombreUsuario, Contraseña, Correo, Telefono, Tipo, Valoracion) values("Merlinicos", "Lobos", "mariapallares03@gmail.com", null, "base", null);
+insert into Usuario (NombreUsuario, Contraseña, Correo, Telefono, Tipo, Valoracion) values("Pablohr11", "$2y$10$UaepmEegovq1Qm4vbl7cnutgHivrusQl5.chLfk8UeGwPnkKpdAwm", "pablo993968@gmail.com", null, "admin", null);
+insert into Usuario (NombreUsuario, Contraseña, Correo, Telefono, Tipo, Valoracion) values("Epic Erik", "$2y$10$HmLPVyYjMJZIChqNSaBUaOjMmxbw1lTb/ejT02IReXAu8gGU.qcL2", "lolamento77w@gmail.com", null, "admin", null);
+insert into Usuario (NombreUsuario, Contraseña, Correo, Telefono, Tipo, Valoracion) values("Merlinicos", "$2y$10$ZxRL.REa30Ppmlakypip9.rrla6oykP2IwYs6nQV5XS/ZAdgyMpUu", "mariapallares03@gmail.com", null, "base", null);
 
 --Para creacion de conversaciones
 

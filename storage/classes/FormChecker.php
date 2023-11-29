@@ -46,15 +46,6 @@ function checkSignInForm($user, $passwd, &$array):bool {
         $array["usuario"] = "Las credenciales no son correctas.";
         $formValid = false;
     }
-    if($formValid){
-        if (!isset($passwd) || $passwd == "") {
-            $array["contrasena"] = "La contraseña no puede estar vacia";
-            $formValid = false;
-        }else if($contraUser[0]!=$passwd){
-            $array["contrasena"] = "Las credenciales no son correctas.";
-            $formValid = false;
-        }
-    }
 
     return $formValid;
 }

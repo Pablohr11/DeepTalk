@@ -28,6 +28,8 @@ if(isset($_POST['acceder'])){
         if ($ok) {
             CurrentUser::setConfig($userData);
             header("Location: marco.php");
+        } else {
+            $errores["usuario"] = "Las credenciales no son correctas.";
         }
     }
 }
@@ -72,8 +74,6 @@ if(isset($_POST['acceder'])){
                 <div id="errores">
                     <?php if(isset($errores["usuario"])){ ?>
                         <p class="info error"><?=$errores["usuario"]?></p>
-                    <?php }else if(isset($errores["contrasena"])){ ?>
-                        <p class="info error"><?=$errores["contrasena"]?></p>
                     <?php } ?>
                 </div>
             </div>
