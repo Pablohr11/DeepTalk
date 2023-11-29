@@ -71,13 +71,13 @@
 
 .propio {
     margin-left: auto;
-    color: blueviolet;
+    color: bisque;
 }
 
 .ajeno {
     margin-right: auto;
     color: orange;
-    background-color: rgb(109, 4, 112, 0.55) !important;
+    background-color: rgba(109, 4, 112, 0.75) !important;
 }
 
 .mensaje {
@@ -86,9 +86,10 @@
     padding: 10px;
     width: fit-content;
     height: min-content;
-    background-color: #383a40a8;
+    background-color: rgba(56, 58, 64, 0.75);
     max-width: 48%;
     margin-top: 10px;
+    position: relative;
 }
 
 .contenedorTexto{
@@ -119,13 +120,21 @@
 
 .horaMensaje{
     float: right;
-    margin-top: 2px;
-    margin-right: 2px;
-    font-size: smaller;
+    margin: 5px 0px 0px 5px;
 }
 
-.horaMensaje > span{
-    color: gray;
+.horaImagen{
+    position: absolute;
+    bottom:15px;
+    right: 15px;
+    background-color: rgba(127, 127, 127, 0.7);
+    border-radius: 6px;
+    box-sizing: border-box;
+    padding: 3px;
+}
+
+.horaMensaje > span, .horaImagen > span{
+    color: wheat;
 }
 
 .contFuncionBarra{
@@ -231,9 +240,3 @@
     margin-top: 2rem;
 }
 
-#usersDiv {
-    padding: 5px;
-    padding-left: 10px;
-    background-color: #383a40b4;
-    color: aliceblue;
-}

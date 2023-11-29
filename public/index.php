@@ -40,8 +40,8 @@
         <div id="menuOculto" class="oculto">
             <div id="logDivOculto">
                 <form>
-                    <button formaction="./pages/signUp.html" id="signUpButton" value="Registrarse">Registrarse</button>
-                    <button formaction="./pages/login.html" id="logInButton" value="Iniciar Sesion">Iniciar Sesion</button>
+                    <button formaction="./pages/signUp.php" id="signUpButton" value="Registrarse">Registrarse</button>
+                    <button formaction="./pages/signUp.php" id="logInButton" value="Iniciar Sesion">Iniciar Sesion</button>
                 </form>
             </div>
         </div>
@@ -68,7 +68,7 @@
             <div class="contenedorPresentacion">
                 <div>
                     <h2>¡Empecemos el viaje!</h2>
-                    <p>Si ahs llegado hasta aqui no sabemos a que esperas, registrate y empecemos juntos este viaje por el espacio de diversión infinita, te esperamos dentro ;)</p>
+                    <p>Si has llegado hasta aqui no sabemos a que esperas, registrate y empecemos juntos este viaje por el espacio de diversión infinita, te esperamos dentro ;)</p>
                 </div>
                 
                 <img src="./resources/presentacion3.jpg">
