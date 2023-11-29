@@ -25,6 +25,23 @@ function showMessage(message, nombreRemitente, userId) {
     objDiv.scrollTop = objDiv.scrollHeight;
 }
 
+function showGroupMessage(message, arrayUsuarios, userId) {
+    var container = document.getElementById("mensajes");
+    var html = '<div class="mensaje '+ ((userId != message[0])?'ajeno':'propio') +'"><div class="remitente">'+arrayUsuarios[message[0]]+'</div><pre class="contenedorTexto">';
+
+
+    if(message[5]==="texto"){
+        html+= '<p class="texto">'+message[4]+'</p>';
+    }else if(message[5]==="imagen"){
+        html+= '<img class="imagen" src="'+message[4]+'"></img>';
+    }
+    html+= '</pre><div class="horaMensaje"><span>'+obtenerHoraDeFecha(message[3])+'</span></div></div>';
+    container.innerHTML+= html;
+
+    var objDiv = document.getElementById("contenido");
+    objDiv.scrollTop = objDiv.scrollHeight;
+}
+
 const barraMensaje = document.getElementById("cajaMensaje");
 barraMensaje.addEventListener('input', function(){
     barraMensaje.style.height = "2rem";
