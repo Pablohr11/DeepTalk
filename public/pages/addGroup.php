@@ -27,24 +27,16 @@ if (isset($_POST["enviar"])) {
     <form method="post" action="addGroup.php">
         <div id="container">
             <div id="image">
-                <img src="../resources/pmImage.png" id="image">
+                <img src="../resources/gmImage.png" id="image">
             </div>
             <h3>Nuevo Grupo</h3>
-            <p>Por favor, introduce el nombre de otro usuario para crear la conversación</p>
+            <p>Por favor, introduce el nombre del grupo</p>
             <div id="inputContainer">
                 <div id="topDiv">
                     <label>Nombre</label>
                     <input type="text" class="inpu" name="groupName">
                 </div>
-                <div id="midDiv">
-                    <label>Usuario 1</label>
-                    <input type="text" class="inpu" name="firstUserName">
-                </div>
-                <div id="botDiv">
-                    <label>Usuario 2</label>
-                    <input type="text" class="inpu" name="secondUserName">
-                </div>
-                <input type="submit" name="enviar" id="enviar" value="+">
+                <input type="submit" name="enviar" id="enviar" value="Crear grupo">
             </div>
         </div>
     </form>

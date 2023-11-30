@@ -300,25 +300,15 @@ class DbConector {
         return $data;
     }
 
-    public function createGroupChat($groupName, $otherUser1Name, $otherUser2Name, $userId) {
+    public function createGroupChat($groupName, $userId) {
         try {
 
-            echo "joder general";
-
-
-            $otherUser1Id = $this->getUserIdFromName($otherUser1Name);
-            $otherUser2Id = $this->getUserIdFromName($otherUser2Name);
-
-            $consulta = $this->db->prepare("insert into Grupo (NombreGrupo) values (:groupName)");
+            $consulta = $this->db->prepare("insert into Grupo (NombreGrupo, ID_usuario) values (:groupName, :userId)");
 
             $consulta->bindParam(":groupName", $groupName, PDO::PARAM_STR);
+            $consulta->bindParam(":userId", $userId, PDO::PARAM_INT);
 
             $results = $consulta->execute();
-
-            $groupId = $this->getGroupId($groupName);
-
-            $this->insertIntoGroup($otherUser1Name, $groupId);
-            $this->insertIntoGroup($otherUser2Name, $groupId);
 
         } catch (PDOException $e) {
             echo $e->getMessage();

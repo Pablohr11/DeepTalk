@@ -3,8 +3,8 @@ drop table if exists Mensaje cascade;
 drop table if exists MensajeGrupal cascade;
 drop table if exists Conversacion cascade;
 drop table if exists GrupoUsuario cascade;
-drop table if exists Usuario cascade;
 drop table if exists Grupo cascade;
+drop table if exists Usuario cascade;
 
 
 CREATE TABLE Usuario (
@@ -29,7 +29,9 @@ CREATE TABLE Conversacion(
 
 CREATE TABLE Grupo(
 	ID_grupo int AUTO_INCREMENT primary key,
-    NombreGrupo varchar(50)
+    NombreGrupo varchar(50),
+    ID_usuario int,
+    constraint fk_usuario foreign key (ID_usuario) references Usuario(ID_usuario)
 );
 
 CREATE TABLE GrupoUsuario (
@@ -85,8 +87,8 @@ insert into Conversacion (ID_usuario1, ID_usuario2) values (3,1);
 
 --Para creacion de grupos
 
-insert into Grupo(NombreGrupo) values ("Grupo de prueba");
-insert into Grupo(NombreGrupo) values ("Grupo entre maria y pablo");
+insert into Grupo(NombreGrupo, ID_usuario) values ("Grupo de prueba", 1);
+insert into Grupo(NombreGrupo, ID_usuario) values ("Grupo entre maria y pablo", 1);
 
 --Para usuarios de grupos
 
