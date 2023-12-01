@@ -82,10 +82,56 @@
 #imagenPerfil{
     height: 15vmin;
     width: 15vmin;
-    margin: -7vmin 0px 20px 0px;
-    border: 4px solid #1E1F22;
     border-radius: 50%;
     background-color: #2B2D31;
+}
+
+#contenedorImagenPerfil{
+    height: 15vmin;
+    width: 15vmin;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: -7vmin 0px 20px 0px;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 4px solid #1E1F22;
+}
+
+#editarImg{
+    position: absolute;
+    margin: 0px;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(128, 128, 128, 0.6);
+    border-radius: 50%;
+    cursor: pointer !important;
+    animation: subidita;
+    animation-duration: 1s;
+}
+
+#editarImg > span{
+    font-size: 55px;
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+}
+
+.oculto{
+    display: none !important;
+}
+
+@keyframes subidita{
+    from{
+        margin-top: 133px;
+    }
+
+    to{
+        margin-top: 0px;
+    }
 }
 
 #infoBasica{
@@ -99,4 +145,80 @@
 .trofeo{
     height: 20px;
     width: 20px;
+}
+
+#pantallaRecurso{
+    background-color: transparent;
+    backdrop-filter: blur(2px);
+    height: 100vh;
+    width: 100%;
+    box-sizing: border-box;
+    position: absolute;
+    z-index: 66;
+    top: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#cerrarRecurso{
+    color: white;
+    border-radius: 50%;
+    box-sizing: border-box;
+    border: 1px solid white;
+    font-family: Georgia;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    cursor: pointer;
+}
+
+#interfazRecurso{
+    background-color: #313338;
+    box-sizing: border-box;
+    height: 40vmin;
+    width: 40vmin;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    position: relative;
+    border-radius: 6px;
+    border: 1px solid white;
+}
+
+#interfazRecurso > form{
+    text-align: center;
+}
+
+#interfazRecurso > form > label{
+    font-weight: bold;
+}
+
+#interfazRecurso > form > input[type="file"]{
+    color: white;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+#interfazRecurso > form > input[type="submit"]{
+    box-sizing: border-box;
+    padding: 6px;
+    color: white;
+    font-weight: bold;
+    margin-top: 2rem;
+    background-color: transparent;
+}
+
+#usersDiv {
+    padding: 5px;
+    padding-left: 10px;
+    background-color: #383a40b4;
+    color: aliceblue;
 }
