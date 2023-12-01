@@ -38,7 +38,6 @@ CREATE TABLE GrupoUsuario (
 	ID_grupo int,
     ID_usuario int,
     constraint fk_us foreign key (ID_usuario) references Usuario(ID_usuario) ON DELETE CASCADE,
-    constraint fk_grp foreign key (ID_grupo) references Grupo(ID_grupo) ON DELETE CASCADE,
     constraint pk_grupo primary key (ID_grupo, ID_usuario) 
 );
 
