@@ -10,7 +10,11 @@ if (!isset($user["rutaImagenPerfil"])) {
     die();
 }
 $consultor = DbConector::singleton();
-session_start();
+
+if (isset($_POST["closeSession"])) {
+    session_unset();
+    header("Location: ../index.php");
+}
 
 if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FILES["recursoSubir"]["name"]=="")){
 
@@ -93,15 +97,7 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
                     <div class="contDato">
                         <div class="textoDato">
                             <span class="idDato">NOMBRE DE USUARIO</span>
-                            <span class="dato"><?php echo $user["NombreUsuario"]?></span>
-                        </div>
-                        <button class="editarDato">Editar</button>
-                    </div>
-
-                    <div class="contDato">
-                        <div class="textoDato">
-                            <span class="idDato">ID DE USUARIO</span>
-                            <span class="dato">#<?php echo $user["ID_usuario"]?></span>
+                            <span class="dato"><?php echo $user["NombreUsuario"]?>#<?php echo $user["ID_usuario"]?></span>
                         </div>
                     </div>
 
@@ -110,17 +106,20 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
                             <span class="idDato">CORREO ELECTRONICO</span>
                             <span class="dato"><?php echo $user["Correo"]?></span>
                         </div>
-                        <button class="editarDato">Editar</button>
                     </div>
 
                     <div class="contDato">
                         <div class="textoDato">
                             <span class="idDato">NÚMERO DE TELEFONO</span>
-                            <span class="dato"><?= (isset($user["Telefono"]))?$user["Telefono"]:"No has introducido ningún telefono"?></span>
+                            <span class="dato"><?php echo (isset($user["Telefono"]))?$user["Telefono"]:"No has introducido ningún telefono"?></span>
                         </div>
-                        <button class="editarDato">Editar</button>
                     </div>
 
+                    <div class="contDato ultimo">
+                        <form method="post" action="./perfil.php">
+                            <button id="closeButton" name="closeSession">Cerrar Sesión</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
