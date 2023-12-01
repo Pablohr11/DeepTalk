@@ -221,3 +221,11 @@
     color: gray;
     font-size: 0.9rem;
 }
+
+#closeButton {   
+    margin-top: 10px;
+    border: 2px solid #b41e1e;
+    background-color: #4d4c4c00;
+    color: #b41e1e;
+    border-radius: 5px;
+}
