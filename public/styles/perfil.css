@@ -216,13 +216,6 @@
     background-color: transparent;
 }
 
-#usersDiv {
-    padding: 5px;
-    padding-left: 10px;
-    background-color: #383a40b4;
-    color: aliceblue;
-}
-
 .recordatorio{
     text-decoration: underline;
     color: gray;
