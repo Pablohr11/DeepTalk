@@ -48,6 +48,7 @@ class DbConector {
 
     public function insertUser($user, $passwd, $mail):bool {
         try {
+            $passwdHash = password_hash($passwd, PASSWORD_DEFAULT);
             $consulta = $this->db->prepare("insert into Usuario (NombreUsuario, Contraseña, Correo, Tipo, rutaImagenPerfil) values (:username, :passwd, :mail, 'base', '../resources/perfiles/usuarioDefault.png')");
 
             
