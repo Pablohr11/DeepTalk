@@ -135,6 +135,7 @@
     min-width: 50px;
     max-height: 90px;
     max-width: 90px;
+    border-radius: 50%;
 }
 
 #nombre{

@@ -42,8 +42,8 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
     if ($subidaCorrecta) {
         if (move_uploaded_file($_FILES["recursoSubir"]["tmp_name"], $archivo)) {
             if ($consultor->actualizarRutaFotoPerfil($user["ID_usuario"], $archivo)) {
-                $user["rutaImagenPerfil"] = $archivo;
                 header("Location: perfil.php");
+                $user["rutaImagenPerfil"] = $archivo;
                 die();
             }
         } else {
