@@ -4,8 +4,11 @@ require_once("../../storage/data.php");
 define('TAMANO_MAX_IMG', 5000000);
 define("DIRECTORIO_IMAGENES_MENSAJES", "../resources/mensajes/");
 
+if (!isset($_SESSION["user"])) {
+    header("Location: ../index.php");
+    die();
+}
 
-session_start();
 $user = CurrentUser::getConfig();
 $consultor = DbConector::singleton();
 $chatId = $_GET['conversacion'];
@@ -13,6 +16,19 @@ $messages = $consultor->getGroupMessages($chatId);
 $groupName = $consultor->getGroupName($chatId);
 $lastMessage = $consultor->getLastMessageFromGroup($chatId);
 $arrayAux = $consultor->getGroupUsers($chatId);
+
+$allowedUser = false;
+foreach ($arrayAux as $checkableUser) {
+    if ($checkableUser[0] == $user["ID_usuario"]) {
+        $allowedUser = true;
+    }
+}
+
+if (!$allowedUser) {
+    header("Location: ../index.php");
+    die();
+}
+
 $groupUsers;
 foreach ($arrayAux as $groupUser) {
     $groupUsers[$groupUser[0]] = $groupUser[1];
@@ -113,6 +129,7 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
                 <?php foreach ($arrayAux as $key => $auxUser) { ?>
                     <label><?php echo (($key == count($arrayAux)-1)?$auxUser[1].".":$auxUser[1].",")?></label>
                 <?php } ?>
+                <a href="addGroupMember.php?conversacion=<?=$chatId?>"><button id="addGroupMember">+</button></a>
             </div>
             <div id="mensajes">
                 <?php foreach ($messages as $key => $mensaje) { ?>

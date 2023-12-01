@@ -3,6 +3,11 @@
 
 include("../../config/init.php");
 
+if (!isset($_SESSION["user"])) {
+    header("Location: ../index.php");
+    die();
+}
+
 $user = CurrentUser::getConfig();
 session_start();
 ?>

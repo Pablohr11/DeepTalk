@@ -32,32 +32,6 @@ class CurrentUser {
         return $_SESSION["user"][0];
     }
 
-    function getUsername() {
-        return $this->username;
-    }
-
-    function getMail(): string {
-        return $this->mail;
-    }
-
-    function getTlf(): int {
-        return $this->tlf;
-    }
-
-
-    function setUsername(string $username) {
-        $this->username = $username;
-    }
-
-    function setMail(string $mail) {
-        $this->mail = $mail;
-    }
-
-    function setTlf(int $tlf) {
-        $this->tlf = $tlf;
-    }
-
-
     function __toString() {
         return $this->username ."asdasd ". $this->mail ." ". $this->tlf;
     }

@@ -3,7 +3,13 @@
     include("../storage/classes/DbConector.php");
     include("../storage/classes/CurrentUser.php");
 
-    
+    $userSet = false;
+
+    session_start();
+    if (isset($_SESSION["user"])) {
+        $userSet = true;
+        $user = CurrentUser::getConfig();
+    }   
 
 ?>
 
@@ -27,10 +33,17 @@
     <div id="contenedorImagen">
         <img src="resources/logo_completo.png" id="logoImage">
         <div id="logDiv">
-            <form>
-                <button formaction="./pages/signUp.php" id="signUpButton" value="Registrarse">Registrarse</button>
-                <button formaction="./pages/login.php" id="logInButton" value="Iniciar Sesion">Iniciar Sesion</button>
-            </form>
+            <?php if (!$userSet) { ?>
+                <form>
+                    <button formaction="./pages/signUp.php" id="signUpButton" value="Registrarse">Registrarse</button>
+                    <button formaction="./pages/login.php" id="logInButton" value="Iniciar Sesion">Iniciar Sesion</button>
+                </form>
+            <?php } else { ?>
+                <form>
+                    <label id="userLabel"><?= $user["NombreUsuario"]?></label>
+                    <button formaction="./pages/marco.php" id="logInButton" value="Iniciar Sesion">Mis chats</button>
+                </form>
+            <?php } ?>
         </div>
         <div class="contenedorMenu" onclick="mostrarMenu()">
             <div class="barra top"></div>

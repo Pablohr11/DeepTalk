@@ -18,6 +18,10 @@ var coleccioneBotonesMas = document.getElementsByClassName("addDivButton");
 
 for(let botonesMas of coleccioneBotonesMas){
     botonesMas.addEventListener('click', function(){
-        nombreDeConversacion.innerText = "";
+        if (botonesMas == coleccioneBotonesMas[0]) {
+            nombreDeConversacion.innerText = "Crear Chat";
+        } else if (botonesMas == coleccioneBotonesMas[1]) {
+            nombreDeConversacion.innerText = "Crear Grupo";
+        }
     });
 }
