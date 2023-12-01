@@ -1,15 +1,24 @@
 <?php
 include("../../config/init.php");
 
+if (!isset($_SESSION["user"])) {
+    header("Location: ../index.php");
+    die();
+}
 
-session_start();
 $user = CurrentUser::getConfig();
 $consultor = DbConector::singleton();
 
-if (isset($_POST["enviar"])) {
+if (isset($_POST["enviar"]) && isset($_POST["groupName"])) {
     //if ($consultor->createGroupChat($user["ID_usuario"], $_POST["userName"])) {
-    if ($consultor->createGroupChat($_POST["groupName"], $_POST["firstUserName"], $_POST["secondUserName"], $user["ID_usuario"])) {
-        echo '<script>parent.location.reload()</script>';
+    
+    $gid;
+
+    if ($consultor->createGroupChat( $_POST["groupName"], $user["ID_usuario"], $gid)) {
+        $gname = $_POST["groupName"];
+        $idUsuario = $user["ID_usuario"];
+        $_SESSION["ngId"] = $gid;
+        header("Location: addGroupStage2.php?gkey=$gid");
     }
 }
 

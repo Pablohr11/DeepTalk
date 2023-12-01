@@ -48,9 +48,6 @@ class DbConector {
 
     public function insertUser($user, $passwd, $mail):bool {
         try {
-            
-            $passwdHash = password_hash($passwd, PASSWORD_DEFAULT);
-            echo $passwdHash;
             $consulta = $this->db->prepare("insert into Usuario (NombreUsuario, Contraseña, Correo, Tipo, rutaImagenPerfil) values (:username, :passwd, :mail, 'base', '../resources/perfiles/usuarioDefault.png')");
 
             
@@ -168,6 +165,16 @@ class DbConector {
             return false;
         }
         return true;
+    }
+
+    function getChatIds($chatId) {
+        $consulta = $this->db->prepare("select ID_usuario1, ID_usuario2 from Conversacion where ID_conversacion = :id_chat");
+            
+        $consulta->bindParam(":id_chat", $chatId, PDO::PARAM_INT);
+
+        $results = $consulta->execute();
+        $data = $consulta->fetchAll(PDO::FETCH_NUM);
+        return $data[0];
     }
 
     function getLastMessageFromChat($idChat) {
@@ -288,8 +295,6 @@ class DbConector {
 
     public function getGroupId($groupName) {
 
-        echo "joderFoco";
-
         $consulta = $this->db->prepare("select ID_grupo from Grupo where NombreGrupo = :nombre_grupo");
                 
         $consulta->bindParam(":nombre_grupo", $groupName, PDO::PARAM_INT);
@@ -299,16 +304,16 @@ class DbConector {
         return $data;
     }
 
-    public function createGroupChat($groupName, $userId) {
+    public function createGroupChat($groupName, $userId, &$id) {
         try {
 
-            $consulta = $this->db->prepare("insert into Grupo (NombreGrupo, ID_usuario) values (:groupName, :userId)");
+            $consulta = $this->db->prepare("insert into Grupo (NombreGrupo, ID_usuario) values (:groupName, :userId) returning ID_grupo");
 
             $consulta->bindParam(":groupName", $groupName, PDO::PARAM_STR);
             $consulta->bindParam(":userId", $userId, PDO::PARAM_INT);
 
             $results = $consulta->execute();
-
+            $id = $consulta->fetch(PDO::FETCH_NUM)[0];
         } catch (PDOException $e) {
             echo $e->getMessage();
             return false;
@@ -316,9 +321,10 @@ class DbConector {
         return true;
     }
 
-    public function insertIntoGroup($userId, $groupId) {
+    public function insertIntoGroup($userName, $groupId) {
         try {
-            echo "joder";
+            $userId = $this->getUserIdFromName($userName);
+
             $consulta = $this->db->prepare("insert into GrupoUsuario values(:groupId, :userId)");
 
             $consulta->bindParam(":userId", $userId, PDO::PARAM_INT);

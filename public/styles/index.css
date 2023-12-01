@@ -7,8 +7,8 @@ body {
 }
 
 #background-video {
-    width: 99vw;
-    height: 99vh;
+    width: 100vw;
+    height: 100vh;
     object-fit: cover;
     position: absolute;
     left: 0;
@@ -22,8 +22,8 @@ body {
 }
 
 #wavesImage {
-    width: 99vw;
-    height: 32vh;
+    width: 100vw;
+    height: 33vh;
     object-fit: cover;
     position: absolute;
     left: 0;
@@ -31,6 +31,10 @@ body {
     top: 68vh;
     bottom: 0;
     z-index: -1;
+}
+
+#userLabel {
+    color: #8c8d8d !important;
 }
 
 #contenedorImagen {
@@ -135,8 +139,8 @@ body {
 
 .contenedorPresentacion > img{
     border-radius: 50%;
-    height: 50vmin;
-    width: 50vmin;
+    height: 30vmin;
+    width: 30vmin;
     margin: 0px 30px;
 }
 

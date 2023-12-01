@@ -1,7 +1,12 @@
 <?php 
 
-session_start();
 include("../../config/init.php");
+
+if (!isset($_SESSION["user"])) {
+    header("Location: ../index.php");
+    die();
+}
+
 
 $user = CurrentUser::getConfig();
 $consultor = DbConector::singleton();

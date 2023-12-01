@@ -4,6 +4,11 @@ require_once("../../storage/data.php");
 define('TAMANO_MAX_IMG', 5000000);
 define("DIRECTORIO_IMAGENES_PERFIL", "../resources/perfiles/");
 
+if (!isset($_SESSION["user"])) {
+    header("Location: ../index.php");
+    die();
+}
+
 $user = CurrentUser::getConfig();
 $consultor = DbConector::singleton();
 session_start();

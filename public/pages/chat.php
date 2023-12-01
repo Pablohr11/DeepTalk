@@ -1,12 +1,25 @@
 <?php
 include("../../config/init.php");
+
+if (!isset($_SESSION["user"])) {
+    header("Location: ../index.php");
+    die();
+}
+
 require_once("../../storage/data.php");
 define('TAMANO_MAX_IMG', 5000000);
 define("DIRECTORIO_IMAGENES_MENSAJES", "../resources/mensajes/");
 
-session_start();
 $user = CurrentUser::getConfig();
 $consultor = DbConector::singleton();
+
+$usersId = $consultor->getChatIds($_GET["conversacion"]);
+
+if ($usersId[0] != $user["ID_usuario"] && $usersId[1] != $user["ID_usuario"]) {
+        header("Location: ../index.php");
+        die();
+}
+
 $messages = $consultor->getMessages($_GET['conversacion']);
 $otherUserName = $consultor->getUsernameFromChat($_GET['conversacion'], $user["ID_usuario"]);
 $chatId = $_GET['conversacion'];
