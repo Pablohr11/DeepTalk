@@ -4,11 +4,6 @@ require_once("../../storage/data.php");
 define('TAMANO_MAX_IMG', 5000000);
 define("DIRECTORIO_IMAGENES_PERFIL", "../resources/perfiles/");
 
-if (!isset($_SESSION["user"])) {
-    header("Location: ../index.php");
-    die();
-}
-
 $user = CurrentUser::getConfig();
 $consultor = DbConector::singleton();
 session_start();
@@ -35,12 +30,12 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
     if($formatoImagen != "jpg" && $formatoImagen != "png" && $formatoImagen != "jpeg" && $formatoImagen != "gif" ){
         $subidaCorrecta = false;
     }
-    
+
     if ($subidaCorrecta) {
         if (move_uploaded_file($_FILES["recursoSubir"]["tmp_name"], $archivo)) {
             if ($consultor->actualizarRutaFotoPerfil($user["ID_usuario"], $archivo)) {
-                $user["rutaImagenPerfil"] = $archivo;
                 header("Location: perfil.php");
+                $user["rutaImagenPerfil"] = $archivo;
                 die();
             }
         } else {
@@ -74,7 +69,7 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
                 </svg>
             </a>
         </div>
-        
+
         <div id="contendorCuenta">
             <div id="cuenta">
                 <div id="preview">
@@ -125,7 +120,7 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
                 </div>
             </div>
         </div>
-        
+
         <div id="pantallaRecurso" class="oculto">
             <div id="interfazRecurso">
                 <p id="cerrarRecurso">X</p>
