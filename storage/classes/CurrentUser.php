@@ -14,7 +14,6 @@ class CurrentUser {
     public static function singleton()
     {
         if (!isset(self::$instance)) {
-            echo "hola";
             self::$instance = new self();
         }
         return self::$instance;

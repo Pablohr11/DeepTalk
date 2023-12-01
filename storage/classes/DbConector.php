@@ -26,7 +26,7 @@ class DbConector {
 
     public function checkLogin($user, $passwd, &$userData) {
         try {
-            $consulta = $this->db->prepare("select ID_usuario, NombreUsuario, Contraseña, Correo, Telefono from Usuario where NombreUsuario = :username");
+            $consulta = $this->db->prepare("select ID_usuario, NombreUsuario, Contraseña, Correo, Telefono, rutaImagenPerfil from Usuario where NombreUsuario = :username");
             
             $consulta->bindParam(":username", $user, PDO::PARAM_STR);
             //$consulta->bindParam(":passwd", $passwd, PDO::PARAM_STR);
@@ -35,7 +35,6 @@ class DbConector {
             $data = $consulta->fetch(PDO::FETCH_ASSOC);
     
     //        foreach ($data as $usuario) {
-            echo "Hola: ".$data["Contraseña"];
             if ($data["NombreUsuario"] == $user && password_verify($passwd, $data["Contraseña"] )) {
                 $userData = $data;
                 return true;
@@ -52,7 +51,7 @@ class DbConector {
             
             $passwdHash = password_hash($passwd, PASSWORD_DEFAULT);
             echo $passwdHash;
-            $consulta = $this->db->prepare("insert into Usuario (NombreUsuario, Contraseña, Correo, Tipo) values (:username, :passwd, :mail, 'base')");
+            $consulta = $this->db->prepare("insert into Usuario (NombreUsuario, Contraseña, Correo, Tipo, rutaImagenPerfil) values (:username, :passwd, :mail, 'base', '../resources/perfiles/usuarioDefault.png')");
 
             
             $consulta->bindParam(":username", $user, PDO::PARAM_STR);
@@ -331,6 +330,16 @@ class DbConector {
             return false;
         }
         return true;
+    }
+
+    public function actualizarRutaFotoPerfil($userId, $ruta) {
+        
+        $consulta = $this->db->prepare("UPDATE Usuario SET rutaImagenPerfil=:rutaImagen WHERE ID_usuario = :username");
+
+        $consulta->bindParam(":rutaImagen", $ruta, PDO::PARAM_STR);
+        $consulta->bindParam(":username", $userId, PDO::PARAM_INT);
+        $results = $consulta->execute();
+        
     }
 
 }
