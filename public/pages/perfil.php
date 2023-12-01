@@ -5,6 +5,10 @@ define('TAMANO_MAX_IMG', 5000000);
 define("DIRECTORIO_IMAGENES_PERFIL", "../resources/perfiles/");
 
 $user = CurrentUser::getConfig();
+if (!isset($user["rutaImagenPerfil"])) {
+    header("Location: ../index.php");
+    die();
+}
 $consultor = DbConector::singleton();
 session_start();
 
@@ -30,12 +34,12 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
     if($formatoImagen != "jpg" && $formatoImagen != "png" && $formatoImagen != "jpeg" && $formatoImagen != "gif" ){
         $subidaCorrecta = false;
     }
-
+    
     if ($subidaCorrecta) {
         if (move_uploaded_file($_FILES["recursoSubir"]["tmp_name"], $archivo)) {
             if ($consultor->actualizarRutaFotoPerfil($user["ID_usuario"], $archivo)) {
-                header("Location: perfil.php");
                 $user["rutaImagenPerfil"] = $archivo;
+                header("Location: perfil.php");
                 die();
             }
         } else {
@@ -69,7 +73,7 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
                 </svg>
             </a>
         </div>
-
+        
         <div id="contendorCuenta">
             <div id="cuenta">
                 <div id="preview">
@@ -112,7 +116,7 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
                     <div class="contDato">
                         <div class="textoDato">
                             <span class="idDato">NÚMERO DE TELEFONO</span>
-                            <span class="dato"><?php echo (isset($user["Telefono"]))?$user["Telefono"]:"No has introducido ningún telefono"?></span>
+                            <span class="dato"><?= (isset($user["Telefono"]))?$user["Telefono"]:"No has introducido ningún telefono"?></span>
                         </div>
                         <button class="editarDato">Editar</button>
                     </div>
@@ -120,13 +124,14 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
                 </div>
             </div>
         </div>
-
+        
         <div id="pantallaRecurso" class="oculto">
             <div id="interfazRecurso">
                 <p id="cerrarRecurso">X</p>
                 <form enctype="multipart/form-data" action="./perfil.php" method="post">
                     <label for="seleccionRecurso">Seleccione la imagen que desea subir: </label>
                     <input type="file" name="recursoSubir" id="seleccionRecurso">
+                    <br><span class="recordatorio">Solo se aceptaran archivos de tipo : .jpg, .png, .jpeg y .gif</span>
                     <br><input name="recursoEnviado" type="submit" value="¡Subir!">
                 </form>
             </div>
