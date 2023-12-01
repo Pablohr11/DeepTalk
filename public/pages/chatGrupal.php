@@ -135,8 +135,7 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
                 <?php foreach ($messages as $key => $mensaje) { ?>
                     <div class="mensaje <?=($mensaje[0] == $user["ID_usuario"]) ? "propio" : "ajeno" ?>">
                         <div class="remitente"><?= $consultor->getUsernameById($mensaje[0]) ?></div>
-                        <pre class="contenedorTexto"><?php if($mensaje[5]==="texto"){ ?><p class="texto"><?=htmlspecialchars($mensaje[4])?></p><?php }else if($mensaje[5]==="imagen"){ ?><img class="imagen" src="<?=htmlspecialchars($mensaje[4])?>"><?php } ?></pre>
-                        <div class="horaMensaje"><span><?=obtenerHoraDeFecha($mensaje[3])?></span></div>
+                        <pre class="contenedorTexto"><?php if($mensaje[5]==="texto"){ ?><span class="texto"><?=htmlspecialchars($mensaje[4])?></span><div class="horaMensaje"><span><?=obtenerHoraDeFecha($mensaje[3])?></span></div><?php }else if($mensaje[5]==="imagen"){ ?><img class="imagen" src="<?=htmlspecialchars($mensaje[4])?>"><div class="horaImagen"><span><?=obtenerHoraDeFecha($mensaje[3])?></span></div><?php } ?></pre>
                     </div>
                 <?php } ?>
             </div>

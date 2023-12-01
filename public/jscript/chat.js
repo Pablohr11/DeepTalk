@@ -31,11 +31,10 @@ function showGroupMessage(message, arrayUsuarios, userId) {
 
 
     if(message[5]==="texto"){
-        html+= '<p class="texto">'+message[4]+'</p>';
+        html+= '<span class="texto">'+message[4]+'</span></pre><div class="horaMensaje"><span>'+obtenerHoraDeFecha(message[3])+'</span></div></div>';
     }else if(message[5]==="imagen"){
-        html+= '<img class="imagen" src="'+message[4]+'"></img>';
+        html+= '<img class="imagen" src="'+message[4]+'"></img></pre><div class="horaImagen"><span>'+obtenerHoraDeFecha(message[3])+'</span></div></div>';
     }
-    html+= '</pre><div class="horaMensaje"><span>'+obtenerHoraDeFecha(message[3])+'</span></div></div>';
     container.innerHTML+= html;
 
     var objDiv = document.getElementById("contenido");
