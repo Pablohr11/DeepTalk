@@ -1,10 +1,49 @@
 <?php 
-
-
 include("../../config/init.php");
+require_once("../../storage/data.php");
+define('TAMANO_MAX_IMG', 5000000);
+define("DIRECTORIO_IMAGENES_PERFIL", "../resources/perfiles/");
 
 $user = CurrentUser::getConfig();
+$consultor = DbConector::singleton();
 session_start();
+
+if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FILES["recursoSubir"]["name"]=="")){
+
+    $nombreArchivo = basename($_FILES["recursoSubir"]["name"]);
+    $archivo = DIRECTORIO_IMAGENES_PERFIL . $nombreArchivo;
+    $formatoImagen = strtolower(pathinfo($archivo, PATHINFO_EXTENSION));
+    $tamanoImagen = getimagesize($_FILES["recursoSubir"]["tmp_name"]);
+    $archivo = DIRECTORIO_IMAGENES_PERFIL . $user["NombreUsuario"] .'.'. $formatoImagen;
+    $nombreArchivo = $user["NombreUsuario"] .'.'. $formatoImagen;
+
+    if($tamanoImagen !== false){
+        $subidaCorrecta = true;
+    }else{
+        $subidaCorrecta = false;
+    }
+
+    if ($_FILES["recursoSubir"]["size"] > TAMANO_MAX_IMG) {
+        $subidaCorrecta = false;
+    }
+
+    if($formatoImagen != "jpg" && $formatoImagen != "png" && $formatoImagen != "jpeg" && $formatoImagen != "gif" ){
+        $subidaCorrecta = false;
+    }
+    
+    if ($subidaCorrecta) {
+        if (move_uploaded_file($_FILES["recursoSubir"]["tmp_name"], $archivo)) {
+            if ($consultor->actualizarRutaFotoPerfil($user["ID_usuario"], $archivo)) {
+                header("Location: perfil.php");
+                die();
+            }
+        } else {
+            echo "Hubo un error al subir tu archivo: ". $_FILES["recursoSubir"]["tmp_name"]. $archivo;
+        }
+    }
+
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -16,6 +55,7 @@ session_start();
     <link rel="stylesheet" href="../styles/perfil.css" type="text/css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="icon" type="image/jpg" href="../resources/logo.png"/>
+    <script src="../jscript/perfil.js" defer></script>
 </head>
 <body>
     <div id="cuerpo">
@@ -32,7 +72,10 @@ session_start();
         <div id="contendorCuenta">
             <div id="cuenta">
                 <div id="preview">
-                    <img id="imagenPerfil" src="../resources/usuarioDefault.png"/>
+                    <div id="contenedorImagenPerfil">
+                        <img id="imagenPerfil" src="<?=$user["rutaImagenPerfil"]?>"/>
+                        <div id="editarImg" class="oculto"><span>&#9998;</span></div>
+                    </div>
                     <div id="infoBasica">
                         <span class="nombreUsuario"><?php echo $user["NombreUsuario"]?></span>
                         <div id="logros">
@@ -77,6 +120,17 @@ session_start();
             </div>
         </div>
         
+        <div id="pantallaRecurso" class="oculto">
+            <div id="interfazRecurso">
+                <p id="cerrarRecurso">X</p>
+                <form enctype="multipart/form-data" action="./perfil.php" method="post">
+                    <label for="seleccionRecurso">Seleccione la imagen que desea subir: </label>
+                    <input type="file" name="recursoSubir" id="seleccionRecurso">
+                    <br><input name="recursoEnviado" type="submit" value="¡Subir!">
+                </form>
+            </div>
+        </div>
+
     </div>
 </body>
 </html>

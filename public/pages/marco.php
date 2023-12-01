@@ -79,7 +79,7 @@ function ei() {
 
         <div id="perfil">
             <!--TODO: Implemnetar que esta imagen cambie segun el perfil.-->
-            <img id="usuario" src="../resources/usuarioDefault.png" alt="Imagen usuario">
+            <img id="usuario" src="<?=$user["rutaImagenPerfil"]?>" alt="Imagen usuario">
             <div id="contendedorInfo">
                 <!--TODO: Implemnetar que estos tesxtos cambien segun el perfil.-->
                 <p id="nombre"><?php echo $user["NombreUsuario"]?></p>

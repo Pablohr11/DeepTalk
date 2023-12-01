@@ -14,6 +14,7 @@ CREATE TABLE Usuario (
     Correo varchar(50) UNIQUE,
     Telefono varchar(9),
 	Tipo varchar(25),
+    rutaImagenPerfil varchar(66),
 	Valoracion varchar(10)
 );
 
@@ -76,9 +77,9 @@ CREATE TABLE Hilo(
 
 --PARA CREACION DE USUARIO
 
-insert into Usuario (NombreUsuario, Contraseña, Correo, Telefono, Tipo, Valoracion) values("Pablohr11", "$2y$10$UaepmEegovq1Qm4vbl7cnutgHivrusQl5.chLfk8UeGwPnkKpdAwm", "pablo993968@gmail.com", null, "admin", null);
-insert into Usuario (NombreUsuario, Contraseña, Correo, Telefono, Tipo, Valoracion) values("Epic Erik", "$2y$10$HmLPVyYjMJZIChqNSaBUaOjMmxbw1lTb/ejT02IReXAu8gGU.qcL2", "lolamento77w@gmail.com", null, "admin", null);
-insert into Usuario (NombreUsuario, Contraseña, Correo, Telefono, Tipo, Valoracion) values("Merlinicos", "$2y$10$ZxRL.REa30Ppmlakypip9.rrla6oykP2IwYs6nQV5XS/ZAdgyMpUu", "mariapallares03@gmail.com", null, "base", null);
+insert into Usuario (NombreUsuario, Contraseña, Correo, Telefono, Tipo, rutaImagenPerfil, Valoracion) values("Pablohr11", "$2y$10$UaepmEegovq1Qm4vbl7cnutgHivrusQl5.chLfk8UeGwPnkKpdAwm", "pablo993968@gmail.com", null, "admin", "../resources/perfiles/usuarioDefault.png", null);
+insert into Usuario (NombreUsuario, Contraseña, Correo, Telefono, Tipo, rutaImagenPerfil, Valoracion) values("Epic Erik", "$2y$10$HmLPVyYjMJZIChqNSaBUaOjMmxbw1lTb/ejT02IReXAu8gGU.qcL2", "lolamento77w@gmail.com", null, "admin", "../resources/perfiles/usuarioDefault.png", null);
+insert into Usuario (NombreUsuario, Contraseña, Correo, Telefono, Tipo, rutaImagenPerfil, Valoracion) values("Merlinicos", "$2y$10$ZxRL.REa30Ppmlakypip9.rrla6oykP2IwYs6nQV5XS/ZAdgyMpUu", "mariapallares03@gmail.com", null, "base", "../resources/perfiles/usuarioDefault.png", null);
 
 --Para creacion de conversaciones
 
