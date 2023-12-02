@@ -12,6 +12,7 @@ $user = CurrentUser::getConfig();
 $consultor = DbConector::singleton();
 $userChats = $consultor->getUserChats($user["ID_usuario"]);
 $userGroups = $consultor->getUserGroups($user["ID_usuario"]);
+$userImage = ($consultor->getUserImage($user["ID_usuario"]));
 
 function ei() {
     echo "<script>alert('a')</script>";
@@ -47,8 +48,9 @@ function ei() {
                     <?php if(empty($userChats)){ ?>
                         <span class="menuVacio">Aqui no hay nada :(</span>
                     <?php }else{ ?>
-                        <?php foreach ($userChats as $key=>$userChat) { ?>
-                            <a class="marcoButton" target="iframe" href="chat.php?conversacion=<?= $userChat[0]?>"><button class="Button" formaction="<?php ei() ?>" value="<?=$key?>"><?php echo $consultor->getUsernameFromChat($userChat[0],$user["ID_usuario"]) ?></button></a>
+                        <?php foreach ($userChats as $key=>$userChat) { 
+                            $userChatId = ($consultor->getUserIdFromName($consultor->getUsernameFromChat($userChat[0],$user["ID_usuario"]))); ?>
+                            <a class="marcoButton" target="iframe" href="chat.php?conversacion=<?= $userChat[0]?>"><button class="Button" formaction="<?php ei() ?>" value="<?=$key?>"><img class="imagenPerfil" src="<?php echo $consultor->getUserImage($userChatId) ?>"> <?php echo $consultor->getUsernameFromChat($userChat[0],$user["ID_usuario"]) ?></button></a>
                         <?php } ?>
                     <?php } ?>
                     <div class="addDivButton">
@@ -84,7 +86,7 @@ function ei() {
 
         <div id="perfil">
             <!--TODO: Implemnetar que esta imagen cambie segun el perfil.-->
-            <img id="usuario" src="<?=$user["rutaImagenPerfil"]?>" alt="Imagen usuario">
+            <img id="usuario" src="<?=$userImage?>" alt="Imagen usuario">
             <div id="contendedorInfo">
                 <!--TODO: Implemnetar que estos tesxtos cambien segun el perfil.-->
                 <p id="nombre"><?php echo $user["NombreUsuario"]?></p>

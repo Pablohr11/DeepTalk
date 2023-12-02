@@ -11,6 +11,8 @@ if (!isset($user["rutaImagenPerfil"])) {
 }
 $consultor = DbConector::singleton();
 
+$userImage = ($consultor->getUserImage($user["ID_usuario"]));
+
 if (isset($_POST["closeSession"])) {
     session_unset();
     header("Location: ../index.php");
@@ -43,7 +45,6 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
         if (move_uploaded_file($_FILES["recursoSubir"]["tmp_name"], $archivo)) {
             if ($consultor->actualizarRutaFotoPerfil($user["ID_usuario"], $archivo)) {
                 header("Location: perfil.php");
-                $user["rutaImagenPerfil"] = $archivo;
                 die();
             }
         } else {
@@ -82,7 +83,7 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
             <div id="cuenta">
                 <div id="preview">
                     <div id="contenedorImagenPerfil">
-                        <img id="imagenPerfil" src="<?=$user["rutaImagenPerfil"]?>"/>
+                        <img id="imagenPerfil" src="<?=$userImage?>"/>
                         <div id="editarImg" class="oculto"><span>&#9998;</span></div>
                     </div>
                     <div id="infoBasica">
