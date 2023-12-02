@@ -162,6 +162,8 @@
     background-color: rgba(30, 31, 34, 0);
     width: 100%;
     color: #cecece;
+    display: inline-block;
+    padding-top: 2px;
 }
 
 #background-video {
@@ -197,4 +199,12 @@
     border-radius: 5px;
     background-color: #6d047000;
     color: aliceblue;
+}
+
+.imagenPerfil {
+    float: left;
+    width: 30px;
+    height: 30px;
+    margin-left: 2.5px;
+    border-radius: 100%;
 }
