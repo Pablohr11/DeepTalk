@@ -23,7 +23,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    
+    text-align: center;
 }
 
 #cabecera > p{
@@ -162,8 +162,7 @@
     background-color: rgba(30, 31, 34, 0);
     width: 100%;
     color: #cecece;
-    display: inline-block;
-    padding-top: 2px;
+    display: inline-block; 
 }
 
 #background-video {
@@ -207,4 +206,20 @@
     height: 30px;
     margin-left: 2.5px;
     border-radius: 100%;
+    display: none;
+}
+
+#nombreDeConversacion {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#nombreDeConversacion .imagenPerfil {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    margin-right: 10px;
+    display: block;
 }

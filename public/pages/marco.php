@@ -50,7 +50,12 @@ function ei() {
                     <?php }else{ ?>
                         <?php foreach ($userChats as $key=>$userChat) { 
                             $userChatId = ($consultor->getUserIdFromName($consultor->getUsernameFromChat($userChat[0],$user["ID_usuario"]))); ?>
-                            <a class="marcoButton" target="iframe" href="chat.php?conversacion=<?= $userChat[0]?>"><button class="Button" formaction="<?php ei() ?>" value="<?=$key?>"><img class="imagenPerfil" src="<?php echo $consultor->getUserImage($userChatId) ?>"> <?php echo $consultor->getUsernameFromChat($userChat[0],$user["ID_usuario"]) ?></button></a>
+                            <a class="marcoButton" target="iframe" href="chat.php?conversacion=<?= $userChat[0]?>">
+                                <button class="Button" formaction="<?php ei() ?>" value="<?=$key?>">
+                                    <img class="imagenPerfil" src="<?php echo $consultor->getUserImage($userChatId) ?>">
+                                    <?php echo $consultor->getUsernameFromChat($userChat[0],$user["ID_usuario"]) ?>
+                                </button>
+                            </a>
                         <?php } ?>
                     <?php } ?>
                     <div class="addDivButton">
