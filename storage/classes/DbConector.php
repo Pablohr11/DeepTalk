@@ -349,6 +349,16 @@ class DbConector {
         
     }
 
+    public function getUserImage($userId) {
+        $consulta = $this->db->prepare("select rutaImagenPerfil from Usuario where ID_usuario = :userId");
+                
+        $consulta->bindParam(":userId", $userId, PDO::PARAM_INT);
+
+        $results = $consulta->execute();
+        $data = $consulta->fetch(PDO::FETCH_NUM);
+        return $data[0];
+    }
+
 }
 ?>
 
