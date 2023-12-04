@@ -207,8 +207,8 @@
 #interfazRecurso{
     background-color: #313338;
     box-sizing: border-box;
-    height: 40vmin;
-    width: 40vmin;
+    height: 66vmin;
+    width: 66vmin;
     display: flex;
     align-items: center;
     justify-content: center;

@@ -50,7 +50,7 @@ CREATE TABLE MensajeGrupal (
     Cuerpo varchar(600),
     Tipo varchar(20),
     foreign key (ID_usuario) references Usuario(ID_usuario) ON DELETE CASCADE,
-    foreign key (ID_grupo) references Conversacion(ID_conversacion) ON DELETE CASCADE,
+    foreign key (ID_grupo) references Grupo(ID_grupo) ON DELETE CASCADE,
     primary key(Num_Mensaje, ID_grupo, ID_usuario) 
 );
 

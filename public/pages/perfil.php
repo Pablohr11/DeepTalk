@@ -43,10 +43,14 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
     
     if ($subidaCorrecta) {
         if (move_uploaded_file($_FILES["recursoSubir"]["tmp_name"], $archivo)) {
-            if ($consultor->actualizarRutaFotoPerfil($user["ID_usuario"], $archivo)) {
-                header("Location: perfil.php");
-                die();
+
+            if($userImage != DIRECTORIO_IMAGENES_PERFIL . "usuarioDefault.png" && $userImage!=$archivo){
+                unlink($userImage);
             }
+
+            $consultor->actualizarRutaFotoPerfil($user["ID_usuario"], $archivo);
+            header("Location: perfil.php");
+            die();
         } else {
             echo "Hubo un error al subir tu archivo: ". $_FILES["recursoSubir"]["tmp_name"]. $archivo;
         }
