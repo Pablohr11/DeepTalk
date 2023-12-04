@@ -72,3 +72,19 @@ cerrarRecurso.addEventListener('click', function(){
     let pantallaRecurso = document.getElementById("pantallaRecurso");
     pantallaRecurso.classList.add("oculto");
 });
+
+var pantallaRecurso = document.getElementById("pantallaRecurso");
+pantallaRecurso.addEventListener("drop", function(evento){
+    var seleccionRecurso = document.getElementById("seleccionRecurso");
+    evento.preventDefault();
+    if (evento.dataTransfer.items) {
+        if (evento.dataTransfer.items[0].kind === "file") {
+            seleccionRecurso.files = evento.dataTransfer.files;
+        }
+    }
+});
+
+pantallaRecurso.addEventListener("dragover", function(evento){
+    evento.preventDefault();
+    evento.stopPropagation();
+});

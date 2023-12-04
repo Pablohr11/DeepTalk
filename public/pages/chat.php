@@ -138,7 +138,7 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
                     <p id="cerrarRecurso">X</p>
                     <form enctype="multipart/form-data" action="chat.php?conversacion=<?=$_GET['conversacion']?>" method="post">
                         <label for="seleccionRecurso">Seleccione la imagen que desea subir: </label>
-                        <input type="file" name="recursoSubir" id="seleccionRecurso">
+                        <br><input type="file" name="recursoSubir" id="seleccionRecurso">
                         <br><input name="recursoEnviado" type="submit" value="¡Subir!">
                     </form>
                 </div>
