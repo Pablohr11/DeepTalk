@@ -271,11 +271,12 @@
 
 .fecha hr {
     height: 1px;
-    width: 80%;
+    width: 100%;
     border: none;
     background-color: antiquewhite;
 }
 
 .fecha span {
-    width: 20%;
+    width: 15%;
+    padding: 0 2px;
 }

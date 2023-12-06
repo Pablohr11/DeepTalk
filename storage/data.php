@@ -55,7 +55,54 @@ function obtenerHoraDeFecha($fecha){
 
 function obtenerFechaDeMensaje($fecha){
     $date =  new DateTime(substr($fecha, 0,10));
-    return $date->format("F dS");
+    $mes = monthToSpanish($date->format("F"));
+    return $date->format("d")." de ".$mes;
+}
+
+function monthToSpanish(string $month) {
+    $palabra = "error";
+
+    switch (strtolower($month)) {
+        case "january":
+            $palabra = "Enero";
+            break;
+        case "february":
+            $palabra = "Febrero";
+            break;
+        case "march":
+            $palabra = "Marzo";
+            break;
+        case "april":
+            $palabra = "Abril";
+            break;
+        case "may":
+            $palabra = "Mayo";
+            break;
+        case "june":
+            $palabra = "Junio";
+            break;
+        case "july":
+            $palabra = "Julio";
+            break;
+        case "august":
+            $palabra = "Agosto";
+            break;
+        case "september":
+            $palabra = "Septiembre";
+            break;
+        case "october":
+            $palabra = "Octubre";
+            break;
+        case "november":
+            $palabra = "Noviembre";
+            break;
+        case "december":
+            $palabra = "Diciembre";
+            break;
+    }
+
+    return $palabra;
+
 }
 
 ?>

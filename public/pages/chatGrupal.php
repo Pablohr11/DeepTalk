@@ -140,7 +140,7 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
             </div>
             <div id="mensajes">
                 <?php foreach ($messages as $key => $mensaje) { ?><?php if ($fechaMensaje != obtenerFechaDeMensaje($mensaje[3])) { ?>
-                    <span class="fecha"><hr><?php echo obtenerFechaDeMensaje($mensaje[3])?><hr></span>
+                    <span class="fecha"><hr><span><?php echo obtenerFechaDeMensaje($mensaje[3])?></span><hr></span>
                     <?php $fechaMensaje = obtenerFechaDeMensaje($mensaje[3]);?>
                 <?php }?>
                     <div class="mensaje <?=($mensaje[0] == $user["ID_usuario"]) ? "propio" : "ajeno" ?>">
