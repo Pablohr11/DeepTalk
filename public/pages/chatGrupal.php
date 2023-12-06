@@ -15,6 +15,13 @@ $chatId = $_GET['conversacion'];
 $messages = $consultor->getGroupMessages($chatId);
 $groupName = $consultor->getGroupName($chatId);
 $lastMessage = $consultor->getLastMessageFromGroup($chatId);
+
+$fechaMensaje = 0;
+
+if ($lastMessage == null) {
+    $lastMessage = 0;
+}
+
 $arrayAux = $consultor->getGroupUsers($chatId);
 
 $allowedUser = false;
@@ -132,7 +139,10 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
                 <a href="addGroupMember.php?conversacion=<?=$chatId?>"><button id="addGroupMember">+</button></a>
             </div>
             <div id="mensajes">
-                <?php foreach ($messages as $key => $mensaje) { ?>
+                <?php foreach ($messages as $key => $mensaje) { ?><?php if ($fechaMensaje != obtenerFechaDeMensaje($mensaje[3])) { ?>
+                    <span class="fecha"><hr><?php echo obtenerFechaDeMensaje($mensaje[3])?><hr></span>
+                    <?php $fechaMensaje = obtenerFechaDeMensaje($mensaje[3]);?>
+                <?php }?>
                     <div class="mensaje <?=($mensaje[0] == $user["ID_usuario"]) ? "propio" : "ajeno" ?>">
                         <div class="remitente"><?= $consultor->getUsernameById($mensaje[0]) ?></div>
                         <pre class="contenedorTexto"><?php if($mensaje[5]==="texto"){ ?><span class="texto"><?=htmlspecialchars($mensaje[4])?></span><div class="horaMensaje"><span><?=obtenerHoraDeFecha($mensaje[3])?></span></div><?php }else if($mensaje[5]==="imagen"){ ?><img class="imagen" src="<?=htmlspecialchars($mensaje[4])?>"><div class="horaImagen"><span><?=obtenerHoraDeFecha($mensaje[3])?></span></div><?php } ?></pre>

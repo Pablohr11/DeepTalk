@@ -15,6 +15,8 @@ $consultor = DbConector::singleton();
 
 $usersId = $consultor->getChatIds($_GET["conversacion"]);
 
+$fechaMensaje = 0;
+
 if ($usersId[0] != $user["ID_usuario"] && $usersId[1] != $user["ID_usuario"]) {
         header("Location: ../index.php");
         die();
@@ -24,6 +26,9 @@ $messages = $consultor->getMessages($_GET['conversacion']);
 $otherUserName = $consultor->getUsernameFromChat($_GET['conversacion'], $user["ID_usuario"]);
 $chatId = $_GET['conversacion'];
 $lastMessage = $consultor->getLastMessageFromChat($chatId);
+if ($lastMessage == null) {
+    $lastMessage = 0;
+}
 
 if (isset($_POST["mensajeEscrito"]) && $_POST["mensajeEscrito"] != "Enviar mensaje a $otherUserName" && trim($_POST["mensajeEscrito"]) != "") {
     if ($consultor->insertMessage($_GET['conversacion'], $user["ID_usuario"], $_POST["mensajeEscrito"], "texto")) {
@@ -118,7 +123,12 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
 
             <div id="mensajes">
                 <?php foreach ($messages as $key => $mensaje) { ?>
+                    <?php if ($fechaMensaje != obtenerFechaDeMensaje($mensaje[3])) { ?>
+                        <span class="fecha"><hr><span><?php echo obtenerFechaDeMensaje($mensaje[3])?></span><hr></span>
+                        <?php $fechaMensaje = obtenerFechaDeMensaje($mensaje[3]);?>
+                    <?php }?>
                     <div class="mensaje <?=($mensaje[0] == $user["ID_usuario"]) ? "propio" : "ajeno" ?>">
+                        
                         <div class="remitente"><?= $consultor->getUsernameById($mensaje[0])?></div>
                         <pre class="contenedorTexto"><?php if($mensaje[5]==="texto"){ ?><span class="texto"><?=htmlspecialchars($mensaje[4])?></span><div class="horaMensaje"><span><?=obtenerHoraDeFecha($mensaje[3])?></span></div><?php }else if($mensaje[5]==="imagen"){ ?><img class="imagen" src="<?=htmlspecialchars($mensaje[4])?>"><div class="horaImagen"><span><?=obtenerHoraDeFecha($mensaje[3])?></span></div><?php } ?></pre>
                     </div>

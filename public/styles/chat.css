@@ -88,7 +88,8 @@
     height: min-content;
     background-color: rgba(56, 58, 64, 0.75);
     max-width: 48%;
-    margin-top: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     position: relative;
 }
 
@@ -255,4 +256,26 @@
     width: 20px;
     border: 2px solid aliceblue;
     border-radius: 5px;
+}
+
+.fecha {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    gap:10px;
+    color: antiquewhite;
+}
+
+.fecha hr {
+    height: 1px;
+    width: 80%;
+    border: none;
+    background-color: antiquewhite;
+}
+
+.fecha span {
+    width: 20%;
 }

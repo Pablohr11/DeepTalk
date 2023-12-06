@@ -130,12 +130,12 @@ insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (2
 insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (1, 1, "2023-10-23", "¡Eso suena divertido! Seguro que será genial. Cambiando de tema, ¿has probado el nuevo restaurante italiano que abrieron en el centro?", "texto");
 insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (2, 1, "2023-10-23", "Todavía no, ¿vale la pena?", "texto");
 insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (1, 1, "2023-10-23", "Definitivamente. La pasta es deliciosa. Podríamos ir a cenar allí después de la película el sábado.", "texto");
-insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (2, 1, "2023-10-23", " ¡Buena idea! Me apunto. ¿Y cómo van las cosas en casa?", "texto");
-insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (1, 1, "2023-10-23", "Todo tranquilo. Mi hermana está planeando visitarnos el próximo mes. Será agradable verla.", "texto");
-insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (2, 1, "2023-10-23", "Eso suena bien. Hace tiempo que no la veo. ¡Espero que tengamos tiempo para ponernos al día!", "texto");
-insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (1, 1, "2023-10-23", "Seguro que sí. Ya sabes cómo es ella, siempre llena de historias. Pero suficiente sobre mí. ¿Cómo va todo contigo?", "texto");
-insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (2, 1, "2023-10-23", "Bien, en general. Algunos altibajos, ya sabes. Pero estoy enfocado en lo positivo. ¿Has tenido alguna noticia emocionante últimamente?", "texto");
-insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (1, 1, "2023-10-23", "No mucho, solo la rutina diaria. Pero estoy buscando nuevas aventuras. Tal vez planee unas", "texto");
+insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (2, 1, "2023-10-24", " ¡Buena idea! Me apunto. ¿Y cómo van las cosas en casa?", "texto");
+insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (1, 1, "2023-10-24", "Todo tranquilo. Mi hermana está planeando visitarnos el próximo mes. Será agradable verla.", "texto");
+insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (2, 1, "2023-10-24", "Eso suena bien. Hace tiempo que no la veo. ¡Espero que tengamos tiempo para ponernos al día!", "texto");
+insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (1, 1, "2023-10-25", "Seguro que sí. Ya sabes cómo es ella, siempre llena de historias. Pero suficiente sobre mí. ¿Cómo va todo contigo?", "texto");
+insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (2, 1, "2023-10-25", "Bien, en general. Algunos altibajos, ya sabes. Pero estoy enfocado en lo positivo. ¿Has tenido alguna noticia emocionante últimamente?", "texto");
+insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (1, 1, "2023-10-26", "No mucho, solo la rutina diaria. Pero estoy buscando nuevas aventuras. Tal vez planee unas", "texto");
 
 
 insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (1, 2, "2023-10-23", "HOLA MARIAAAA QUE TAAAAAAAAAAL", "texto");

@@ -52,4 +52,10 @@ function sendMail($to, $username, $subject, $message) {
 function obtenerHoraDeFecha($fecha){
     return substr($fecha, 11,5);
 }
+
+function obtenerFechaDeMensaje($fecha){
+    $date =  new DateTime(substr($fecha, 0,10));
+    return $date->format("F dS");
+}
+
 ?>
