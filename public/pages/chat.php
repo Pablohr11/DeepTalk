@@ -2,7 +2,8 @@
 include("../../config/init.php");
 
 if (!isset($_SESSION["user"])) {
-    header("Location: ../index.php");
+    
+    header("Location: ./reloadSession.php");
     die();
 }
 
@@ -18,7 +19,7 @@ $usersId = $consultor->getChatIds($_GET["conversacion"]);
 $fechaMensaje = 0;
 
 if ($usersId[0] != $user["ID_usuario"] && $usersId[1] != $user["ID_usuario"]) {
-        header("Location: ../index.php");
+    header("Location: ./reloadSession.php");
         die();
 }
 

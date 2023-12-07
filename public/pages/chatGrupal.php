@@ -5,7 +5,7 @@ define('TAMANO_MAX_IMG', 5000000);
 define("DIRECTORIO_IMAGENES_MENSAJES", "../resources/mensajes/");
 
 if (!isset($_SESSION["user"])) {
-    header("Location: ../index.php");
+    header("Location: ./reloadSession.php");
     die();
 }
 
@@ -32,7 +32,7 @@ foreach ($arrayAux as $checkableUser) {
 }
 
 if (!$allowedUser) {
-    header("Location: ../index.php");
+    header("Location: ./reloadSession.php");
     die();
 }
 
