@@ -168,7 +168,11 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
                     </form>
                 </div>
             </div>
-
+            <div id="pantallaImagen" class="oculto">
+                <p id="cerrarImagen">X</p>
+                <a id="descargarImagen" download="" >↓</a>  
+                <img id="imagenAmpliada">
+            </div>
         </div>
     </div>
 </body>

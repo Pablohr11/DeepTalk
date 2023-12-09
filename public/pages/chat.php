@@ -31,6 +31,10 @@ if ($lastMessage == null) {
     $lastMessage = 0;
 }
 
+if (isset($_POST["downloadImage"])) {
+    
+}
+
 if (isset($_POST["mensajeEscrito"]) && $_POST["mensajeEscrito"] != "Enviar mensaje a $otherUserName" && trim($_POST["mensajeEscrito"]) != "") {
     if ($consultor->insertMessage($_GET['conversacion'], $user["ID_usuario"], $_POST["mensajeEscrito"], "texto")) {
         header("Location: chat.php?conversacion=$chatId");
@@ -154,7 +158,11 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
                     </form>
                 </div>
             </div>
-
+            <div id="pantallaImagen" class="oculto">
+                <p id="cerrarImagen">X</p>
+                <a id="descargarImagen" download="" >↓</a>  
+                <img id="imagenAmpliada">
+            </div>
         </div>
     </div>
 </body>

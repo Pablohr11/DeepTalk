@@ -88,3 +88,20 @@ pantallaRecurso.addEventListener("dragover", function(evento){
     evento.preventDefault();
     evento.stopPropagation();
 });
+
+var imagenes = document.querySelectorAll(".imagen");
+imagenes.forEach(image => {
+    image.addEventListener('click', function() {
+        document.getElementById("imagenAmpliada").src = image.src;
+        document.getElementById("descargarImagen").href = image.src;
+        let pantallaImagen = document.getElementById("pantallaImagen");
+        pantallaImagen.classList.remove("oculto");
+        
+    });
+});
+
+var cerrarImagen = document.getElementById("cerrarImagen");
+cerrarImagen.addEventListener('click', function(){
+    let pantallaImagen = document.getElementById("pantallaImagen");
+    pantallaImagen.classList.add("oculto");
+});
