@@ -7,7 +7,7 @@ if (!isset($_SESSION["user"])) {
     die();
 }
 
-setcookie("theme","dark", time()+60*60*1);
+setcookie("theme","dark", time()+60*60, "../");
 
 $user = CurrentUser::getConfig();
 $consultor = DbConector::singleton();
