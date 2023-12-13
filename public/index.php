@@ -2,7 +2,6 @@
 
     include("../storage/classes/DbConector.php");
     include("../storage/classes/CurrentUser.php");
-    include("../config/themes.php");
 
     $userSet = false;
 
@@ -27,8 +26,7 @@
 
 <body>
     <video id="background-video" autoplay loop muted>
-        <source src="resources/<?=$bgVid?>" type="video/mp4">
-        <script>console.log(<?=$bgVid?>)</script>
+        <source src="resources/bg_3.mp4" type="video/mp4">
     </video>
     <img src="resources/indexWaves.png" id="wavesImage">
 

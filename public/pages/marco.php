@@ -7,7 +7,6 @@ if (!isset($_SESSION["user"])) {
     die();
 }
 
-setcookie("theme","dark", time()+60*60, "../");
 
 $user = CurrentUser::getConfig();
 $consultor = DbConector::singleton();
@@ -85,7 +84,7 @@ function ei() {
 
         <div id="contenido">
             <video id="background-video" autoplay loop muted>
-                <source src="../resources/<?=$bgVid?>" type="video/mp4">
+                <source src="../resources/bg_3.mp4" type="video/mp4">
             </video>
             <iframe name="iframe" ></iframe>
         </div>

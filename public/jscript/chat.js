@@ -82,11 +82,25 @@ pantallaRecurso.addEventListener("drop", function(evento){
             seleccionRecurso.files = evento.dataTransfer.files;
         }
     }
+    pantallaRecurso.classList.remove("bordeArrastraArchivo");
+    let interfazRecurso = document.getElementById("interfazRecurso");
+    interfazRecurso.classList.remove("oculto");
 });
 
 pantallaRecurso.addEventListener("dragover", function(evento){
     evento.preventDefault();
     evento.stopPropagation();
+    pantallaRecurso.classList.add("bordeArrastraArchivo");
+    let interfazRecurso = document.getElementById("interfazRecurso");
+    interfazRecurso.classList.add("oculto");
+});
+
+pantallaRecurso.addEventListener("dragleave", function(evento){
+    evento.preventDefault();
+    evento.stopPropagation();
+    pantallaRecurso.classList.remove("bordeArrastraArchivo");
+    let interfazRecurso = document.getElementById("interfazRecurso");
+    interfazRecurso.classList.remove("oculto");
 });
 
 var imagenes = document.querySelectorAll(".imagen");

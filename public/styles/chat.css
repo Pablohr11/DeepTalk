@@ -362,3 +362,12 @@
     background-color: rebeccapurple;
     color:wheat
 }
+
+.bordeArrastraArchivo{
+    border: 6px dashed grey;
+    background-image: url("../resources/ImagenArrastra.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 60%;
+}
+

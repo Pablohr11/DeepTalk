@@ -120,12 +120,6 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
         }
         setInterval(obtenerLosNuevos, 1000);
     </script>
-
-    <style>
-        .ajeno {
-            background-color: rgba(27, 28, 31, 0.75) !important;
-        }
-    </style>
 </head>
 
 <body onload="init()">
@@ -164,6 +158,7 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
                     </form>
                 </div>
             </div>
+
             <div id="pantallaImagen" class="oculto">
                 <p id="cerrarImagen">X</p>
                 <a id="descargarImagen" download="" >↓</a>  
