@@ -15,10 +15,6 @@ $userChats = $consultor->getUserChats($user["ID_usuario"]);
 $userGroups = $consultor->getUserGroups($user["ID_usuario"]);
 $userImage = ($consultor->getUserImage($user["ID_usuario"]));
 
-function ei() {
-    echo "<script>alert('a')</script>";
-}
-
 ?>
 
 <!DOCTYPE html>
