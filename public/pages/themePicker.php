@@ -10,6 +10,10 @@
         setcookie("theme", "dark", time()+60*60,"/");
         header("Location: marco.php");
         die();
+    } else if (isset($_GET["claro"])) {
+        setcookie("theme", "light", time()+60*60,"/");
+        header("Location: marco.php");
+        die();
     }
 
 ?>
@@ -34,7 +38,7 @@
             <div id="claro">
                 <h2>MODO CLARO</h2>
                 <video class="show-video" autoplay loop muted>
-                    <source src="../resources/<?=$bgVid?>" type="video/mp4">
+                    <source src="../resources/bg_1.mp4" type="video/mp4">
                 </video>
                 <input class="botonSeleccion" value="SELECCIONAR" type="submit" name="claro">
             </div>

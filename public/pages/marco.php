@@ -26,6 +26,11 @@ $userImage = ($consultor->getUserImage($user["ID_usuario"]));
     <script src="../jscript/marco.js" defer></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="icon" type="image/jpg" href="../resources/logo.png"/>
+    <?php if ($_COOKIE["theme"] == "dark") { ?>
+        <link rel="stylesheet" href="../styles/darkMarco.css">
+    <?php } else if ($_COOKIE["theme"] == "light"){ ?>
+        <link rel="stylesheet" href="../styles/lightMarco.css">
+    <?php }?>
 </head>
 <body>
     <div id="cuerpo">

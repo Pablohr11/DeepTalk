@@ -121,17 +121,10 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
         setInterval(obtenerLosNuevos, 1000);
     </script>
     <?php if ($_COOKIE["theme"] == "dark") { ?>
-
-        <style>
-            .ajeno {
-                background-color: rgba(27, 28, 31, 0.75) !important;
-                color: rgb(182, 118, 0);
-            }
-            .texto {
-                color: rgb(151, 151, 151);
-            }
-        </style>
-    <?php } ?>
+        <link rel="stylesheet" href="../styles/darkChat.css">
+    <?php } else if ($_COOKIE["theme"] == "light"){ ?>
+        <link rel="stylesheet" href="../styles/lightChat.css">
+    <?php }?>
 </head>
 
 <body onload="init()">
