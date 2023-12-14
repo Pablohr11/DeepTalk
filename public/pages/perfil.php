@@ -95,6 +95,9 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
                         <div id="logros">
                             <img class="trofeo" src="../resources/trofeoFundador.png" alt="trofeo">
                         </div>
+                        <form>
+                            <button id="themeButton" formaction="./themePicker.php">Elegir Tema</button>
+                        </form>
                     </div>
                 </div>
 

@@ -7,7 +7,6 @@ if (!isset($_SESSION["user"])) {
     die();
 }
 
-setcookie("theme","dark", time()+60*60, "../");
 
 $user = CurrentUser::getConfig();
 $consultor = DbConector::singleton();
@@ -48,7 +47,7 @@ $userImage = ($consultor->getUserImage($user["ID_usuario"]));
                         <?php foreach ($userChats as $key=>$userChat) { 
                             $userChatId = ($consultor->getUserIdFromName($consultor->getUsernameFromChat($userChat[0],$user["ID_usuario"]))); ?>
                             <a class="marcoButton" target="iframe" href="chat.php?conversacion=<?= $userChat[0]?>">
-                                <button class="Button" formaction="<?php ei() ?>" value="<?=$key?>">
+                                <button class="Button" formaction="" value="<?=$key?>">
                                     <img class="imagenPerfil" src="<?php echo $consultor->getUserImage($userChatId) ?>">
                                     <?php echo $consultor->getUsernameFromChat($userChat[0],$user["ID_usuario"]) ?>
                                 </button>
@@ -65,7 +64,7 @@ $userImage = ($consultor->getUserImage($user["ID_usuario"]));
                         <span class="menuVacio">Aqui no hay nada :(</span>
                     <?php }else{ ?>
                         <?php foreach ($userGroups as $userGroup) {?>
-                            <a class="marcoButton" target="iframe" href="chatGrupal.php?conversacion=<?= $userGroup[0]?>"><button class="Button" formaction="<?php ei() ?>" value="<?=$key?>"><?= $userGroup[1] ?></button></a>
+                            <a class="marcoButton" target="iframe" href="chatGrupal.php?conversacion=<?= $userGroup[0]?>"><button class="Button" formaction="" value="<?=$key?>"><?= $userGroup[1] ?></button></a>
                         <?php } ?>
                     <?php } ?>
                     <div class="addDivButton">
