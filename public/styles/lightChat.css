@@ -1,7 +1,36 @@
 .ajeno {
-    background-color: rgba(27, 28, 31, 0.75) !important;
+    background-color: rgba(123, 125, 129, 0.75) !important;
     color: rgb(26, 110, 9);
 }
 .texto {
     color: rgb(211, 211, 211);
+}
+
+.enter{
+    background-color: #022507;
+}
+
+.horaMensaje > span, .horaImagen > span{
+    color: rgb(26, 110, 9);
+}
+
+.propio {
+    color: rgb(145, 125, 100);
+}
+
+#cajaMensaje{
+    color: rgb(129, 129, 146);
+    border: 1px solid black;
+}
+
+#contenedorBarraMensaje{
+    background-color: #202020;
+}
+
+.fecha {
+    color: #03360b;
+}
+
+.fecha hr {
+    background-color: #022507;
 }
