@@ -70,6 +70,11 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="icon" type="image/jpg" href="../resources/logo.png"/>
     <script src="../jscript/perfil.js" defer></script>
+    <?php if ($_COOKIE["theme"] == "dark") { ?>
+        <link rel="stylesheet" href="../styles/darkPerfil.css">
+    <?php } else if ($_COOKIE["theme"] == "light"){ ?>
+        <link rel="stylesheet" href="../styles/lightPerfil.css">
+    <?php }?>
 </head>
 <body>
     <div id="cuerpo">

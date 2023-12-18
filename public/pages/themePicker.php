@@ -3,15 +3,15 @@
     include("../../config/init.php");
 
     if (isset($_GET["clasico"])) {
-        setcookie("theme", "classic", time()+60*60,"/");
+        setcookie("theme", "classic", time()+60*60*24*7,"/");
         header("Location: marco.php");
         die();
     } else if (isset($_GET["oscuro"])) {
-        setcookie("theme", "dark", time()+60*60,"/");
+        setcookie("theme", "dark", time()+60*60*24*7,"/");
         header("Location: marco.php");
         die();
     } else if (isset($_GET["claro"])) {
-        setcookie("theme", "light", time()+60*60,"/");
+        setcookie("theme", "light", time()+60*60*24*7,"/");
         header("Location: marco.php");
         die();
     }

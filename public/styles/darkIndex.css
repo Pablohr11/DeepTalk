@@ -1,0 +1,37 @@
+#userLabel {
+    color: #8c8d8d !important;
+}
+
+#contenido, body {
+    background-color: #151518;
+}
+
+#signUpButton {
+    border: 2px solid #8c8d8d;
+    background-color: #4c4d4d00;
+    color: #8c8d8d;
+    cursor: pointer;
+}
+#logInButton {
+    border: 2px solid #575757;
+    background-color: #4c4d4d00;
+    color: #575757;
+    cursor: pointer;
+}
+
+.barra{
+    background: #8c8d8d;
+}
+
+#titBienvenida{
+    color: rgb(1rgb(104, 104, 104), 199);
+}
+
+
+.contenedorPresentacion > div > h2{
+    color: rgb(185, 185, 185);
+}
+
+.contenedorPresentacion > div > p{
+    color: rgb(175, 175, 175);
+}

@@ -23,6 +23,11 @@
     <link rel="stylesheet" href="./styles/index.css" type="text/css">
     <script src="./jscript/main.js"></script>
     <link rel="icon" type="image/jpg" href="./resources/logo.png"/>
+    <?php if ($_COOKIE["theme"] == "dark") { ?>
+        <link rel="stylesheet" href="../styles/darkIndex.css">
+    <?php } else if ($_COOKIE["theme"] == "light"){ ?>
+        <link rel="stylesheet" href="../styles/lightIndex.css">
+    <?php }?>
 </head>
 
 <body>
