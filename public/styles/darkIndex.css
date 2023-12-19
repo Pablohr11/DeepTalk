@@ -3,7 +3,7 @@
 }
 
 #contenido, body {
-    background-color: #151518;
+    background-color: #151515;
 }
 
 #signUpButton {
@@ -34,4 +34,9 @@
 
 .contenedorPresentacion > div > p{
     color: rgb(175, 175, 175);
+}
+
+
+#background-video {
+    background-image: url("../resources/loadingVideoImageDark.jpg");
 }

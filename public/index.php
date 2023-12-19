@@ -30,12 +30,12 @@
     <?php }?>
 </head>
 
-<body>
+<body onload="enableDarkMode()">
     <video id="background-video" autoplay loop muted>
         <source src="resources/<?=$bgVid?>" type="video/mp4">
         <script>console.log(<?=$bgVid?>)</script>
     </video>
-    <img src="resources/indexWaves.png" id="wavesImage">
+    <img src="resources/<?=$wavesImage?>" id="wavesImage">
 
     <div id="contenedorImagen">
         <img src="resources/logo_completo.png" id="logoImage">
