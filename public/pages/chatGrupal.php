@@ -5,7 +5,7 @@ define('TAMANO_MAX_IMG', 5000000);
 define("DIRECTORIO_IMAGENES_MENSAJES", "../resources/mensajes/");
 
 if (!isset($_SESSION["user"])) {
-    header("Location: ../index.php");
+    header("Location: ./reloadSession.php");
     die();
 }
 
@@ -15,6 +15,13 @@ $chatId = $_GET['conversacion'];
 $messages = $consultor->getGroupMessages($chatId);
 $groupName = $consultor->getGroupName($chatId);
 $lastMessage = $consultor->getLastMessageFromGroup($chatId);
+
+$fechaMensaje = 0;
+
+if ($lastMessage == null) {
+    $lastMessage = 0;
+}
+
 $arrayAux = $consultor->getGroupUsers($chatId);
 
 $allowedUser = false;
@@ -25,7 +32,7 @@ foreach ($arrayAux as $checkableUser) {
 }
 
 if (!$allowedUser) {
-    header("Location: ../index.php");
+    header("Location: ./reloadSession.php");
     die();
 }
 
@@ -119,6 +126,11 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
         }
         setInterval(obtenerLosNuevos, 1000);
     </script>
+    <?php if ($_COOKIE["theme"] == "dark") { ?>
+        <link rel="stylesheet" href="../styles/darkChat.css">
+    <?php } else if ($_COOKIE["theme"] == "light"){ ?>
+        <link rel="stylesheet" href="../styles/lightChat.css">
+    <?php }?>
 </head>
 
 <body onload="init()">
@@ -132,11 +144,13 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
                 <a href="addGroupMember.php?conversacion=<?=$chatId?>"><button id="addGroupMember">+</button></a>
             </div>
             <div id="mensajes">
-                <?php foreach ($messages as $key => $mensaje) { ?>
+                <?php foreach ($messages as $key => $mensaje) { ?><?php if ($fechaMensaje != obtenerFechaDeMensaje($mensaje[3])) { ?>
+                    <span class="fecha"><hr><span><?php echo obtenerFechaDeMensaje($mensaje[3])?></span><hr></span>
+                    <?php $fechaMensaje = obtenerFechaDeMensaje($mensaje[3]);?>
+                <?php }?>
                     <div class="mensaje <?=($mensaje[0] == $user["ID_usuario"]) ? "propio" : "ajeno" ?>">
                         <div class="remitente"><?= $consultor->getUsernameById($mensaje[0]) ?></div>
-                        <pre class="contenedorTexto"><?php if($mensaje[5]==="texto"){ ?><p class="texto"><?=htmlspecialchars($mensaje[4])?></p><?php }else if($mensaje[5]==="imagen"){ ?><img class="imagen" src="<?=htmlspecialchars($mensaje[4])?>"><?php } ?></pre>
-                        <div class="horaMensaje"><span><?=obtenerHoraDeFecha($mensaje[3])?></span></div>
+                        <pre class="contenedorTexto"><?php if($mensaje[5]==="texto"){ ?><span class="texto"><?=htmlspecialchars($mensaje[4])?></span><div class="horaMensaje"><span><?=obtenerHoraDeFecha($mensaje[3])?></span></div><?php }else if($mensaje[5]==="imagen"){ ?><img class="imagen" src="<?=htmlspecialchars($mensaje[4])?>"><div class="horaImagen"><span><?=obtenerHoraDeFecha($mensaje[3])?></span></div><?php } ?></pre>
                     </div>
                 <?php } ?>
             </div>
@@ -154,12 +168,16 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
                     <p id="cerrarRecurso">X</p>
                     <form enctype="multipart/form-data" action="chatGrupal.php?conversacion=<?=$_GET['conversacion']?>" method="post">
                         <label for="seleccionRecurso">Seleccione la imagen que desea subir: </label>
-                        <input type="file" name="recursoSubir" id="seleccionRecurso">
+                        <br><input type="file" name="recursoSubir" id="seleccionRecurso">
                         <br><input name="recursoEnviado" type="submit" value="¡Subir!">
                     </form>
                 </div>
             </div>
-
+            <div id="pantallaImagen" class="oculto">
+                <p id="cerrarImagen">X</p>
+                <a id="descargarImagen" download="" >↓</a>  
+                <img id="imagenAmpliada">
+            </div>
         </div>
     </div>
 </body>

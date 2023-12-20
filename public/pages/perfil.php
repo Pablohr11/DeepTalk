@@ -4,14 +4,20 @@ require_once("../../storage/data.php");
 define('TAMANO_MAX_IMG', 5000000);
 define("DIRECTORIO_IMAGENES_PERFIL", "../resources/perfiles/");
 
-if (!isset($_SESSION["user"])) {
-    header("Location: ../index.php");
-    die();
-}
+comprobarSiTieneSesion();
 
 $user = CurrentUser::getConfig();
 $consultor = DbConector::singleton();
-session_start();
+$userImage = ($consultor->getUserImage($user["ID_usuario"]));
+
+if (isset($_POST["closeSession"])) {
+    session_unset();
+    if(isset($_COOKIE["Recuerdame"])){
+        $consultor->eliminarUnToken($_COOKIE["Recuerdame"]);
+        setcookie("Recuerdame", "", (time() - 1));
+    }
+    header("Location: ../index.php");
+}
 
 if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FILES["recursoSubir"]["name"]=="")){
 
@@ -38,10 +44,14 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
     
     if ($subidaCorrecta) {
         if (move_uploaded_file($_FILES["recursoSubir"]["tmp_name"], $archivo)) {
-            if ($consultor->actualizarRutaFotoPerfil($user["ID_usuario"], $archivo)) {
-                header("Location: perfil.php");
-                die();
+
+            if($userImage != DIRECTORIO_IMAGENES_PERFIL . "usuarioDefault.png" && $userImage!=$archivo){
+                unlink($userImage);
             }
+
+            $consultor->actualizarRutaFotoPerfil($user["ID_usuario"], $archivo);
+            header("Location: perfil.php");
+            die();
         } else {
             echo "Hubo un error al subir tu archivo: ". $_FILES["recursoSubir"]["tmp_name"]. $archivo;
         }
@@ -78,7 +88,7 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
             <div id="cuenta">
                 <div id="preview">
                     <div id="contenedorImagenPerfil">
-                        <img id="imagenPerfil" src="<?=$user["rutaImagenPerfil"]?>"/>
+                        <img id="imagenPerfil" src="<?=$userImage?>"/>
                         <div id="editarImg" class="oculto"><span>&#9998;</span></div>
                     </div>
                     <div id="infoBasica">
@@ -86,6 +96,9 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
                         <div id="logros">
                             <img class="trofeo" src="../resources/trofeoFundador.png" alt="trofeo">
                         </div>
+                        <form>
+                            <button id="themeButton" formaction="./themePicker.php">Elegir Tema</button>
+                        </form>
                     </div>
                 </div>
 
@@ -93,15 +106,7 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
                     <div class="contDato">
                         <div class="textoDato">
                             <span class="idDato">NOMBRE DE USUARIO</span>
-                            <span class="dato"><?php echo $user["NombreUsuario"]?></span>
-                        </div>
-                        <button class="editarDato">Editar</button>
-                    </div>
-
-                    <div class="contDato">
-                        <div class="textoDato">
-                            <span class="idDato">ID DE USUARIO</span>
-                            <span class="dato">#<?php echo $user["ID_usuario"]?></span>
+                            <span class="dato"><?php echo $user["NombreUsuario"]?>#<?php echo $user["ID_usuario"]?></span>
                         </div>
                     </div>
 
@@ -110,7 +115,6 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
                             <span class="idDato">CORREO ELECTRONICO</span>
                             <span class="dato"><?php echo $user["Correo"]?></span>
                         </div>
-                        <button class="editarDato">Editar</button>
                     </div>
 
                     <div class="contDato">
@@ -118,9 +122,13 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
                             <span class="idDato">NÚMERO DE TELEFONO</span>
                             <span class="dato"><?php echo (isset($user["Telefono"]))?$user["Telefono"]:"No has introducido ningún telefono"?></span>
                         </div>
-                        <button class="editarDato">Editar</button>
                     </div>
 
+                    <div class="contDato ultimo">
+                        <form method="post" action="./perfil.php">
+                            <button id="closeButton" name="closeSession">Cerrar Sesión</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -130,7 +138,8 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
                 <p id="cerrarRecurso">X</p>
                 <form enctype="multipart/form-data" action="./perfil.php" method="post">
                     <label for="seleccionRecurso">Seleccione la imagen que desea subir: </label>
-                    <input type="file" name="recursoSubir" id="seleccionRecurso">
+                    <br><input type="file" name="recursoSubir" id="seleccionRecurso">
+                    <br><span class="recordatorio">Solo se aceptaran archivos de tipo : .jpg, .png, .jpeg y .gif</span>
                     <br><input name="recursoEnviado" type="submit" value="¡Subir!">
                 </form>
             </div>

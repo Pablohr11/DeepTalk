@@ -2,7 +2,8 @@
 include("../../config/init.php");
 
 if (!isset($_SESSION["user"])) {
-    header("Location: ../index.php");
+    
+    header("Location: ./reloadSession.php");
     die();
 }
 
@@ -15,8 +16,10 @@ $consultor = DbConector::singleton();
 
 $usersId = $consultor->getChatIds($_GET["conversacion"]);
 
+$fechaMensaje = 0;
+
 if ($usersId[0] != $user["ID_usuario"] && $usersId[1] != $user["ID_usuario"]) {
-        header("Location: ../index.php");
+    header("Location: ./reloadSession.php");
         die();
 }
 
@@ -24,6 +27,13 @@ $messages = $consultor->getMessages($_GET['conversacion']);
 $otherUserName = $consultor->getUsernameFromChat($_GET['conversacion'], $user["ID_usuario"]);
 $chatId = $_GET['conversacion'];
 $lastMessage = $consultor->getLastMessageFromChat($chatId);
+if ($lastMessage == null) {
+    $lastMessage = 0;
+}
+
+if (isset($_POST["downloadImage"])) {
+    
+}
 
 if (isset($_POST["mensajeEscrito"]) && $_POST["mensajeEscrito"] != "Enviar mensaje a $otherUserName" && trim($_POST["mensajeEscrito"]) != "") {
     if ($consultor->insertMessage($_GET['conversacion'], $user["ID_usuario"], $_POST["mensajeEscrito"], "texto")) {
@@ -110,6 +120,11 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
         }
         setInterval(obtenerLosNuevos, 1000);
     </script>
+    <?php if ($_COOKIE["theme"] == "dark") { ?>
+        <link rel="stylesheet" href="../styles/darkChat.css">
+    <?php } else if ($_COOKIE["theme"] == "light"){ ?>
+        <link rel="stylesheet" href="../styles/lightChat.css">
+    <?php }?>
 </head>
 
 <body onload="init()">
@@ -118,7 +133,12 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
 
             <div id="mensajes">
                 <?php foreach ($messages as $key => $mensaje) { ?>
+                    <?php if ($fechaMensaje != obtenerFechaDeMensaje($mensaje[3])) { ?>
+                        <span class="fecha"><hr><span><?php echo obtenerFechaDeMensaje($mensaje[3])?></span><hr></span>
+                        <?php $fechaMensaje = obtenerFechaDeMensaje($mensaje[3]);?>
+                    <?php }?>
                     <div class="mensaje <?=($mensaje[0] == $user["ID_usuario"]) ? "propio" : "ajeno" ?>">
+                        
                         <div class="remitente"><?= $consultor->getUsernameById($mensaje[0])?></div>
                         <pre class="contenedorTexto"><?php if($mensaje[5]==="texto"){ ?><span class="texto"><?=htmlspecialchars($mensaje[4])?></span><div class="horaMensaje"><span><?=obtenerHoraDeFecha($mensaje[3])?></span></div><?php }else if($mensaje[5]==="imagen"){ ?><img class="imagen" src="<?=htmlspecialchars($mensaje[4])?>"><div class="horaImagen"><span><?=obtenerHoraDeFecha($mensaje[3])?></span></div><?php } ?></pre>
                     </div>
@@ -138,12 +158,17 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
                     <p id="cerrarRecurso">X</p>
                     <form enctype="multipart/form-data" action="chat.php?conversacion=<?=$_GET['conversacion']?>" method="post">
                         <label for="seleccionRecurso">Seleccione la imagen que desea subir: </label>
-                        <input type="file" name="recursoSubir" id="seleccionRecurso">
+                        <br><input type="file" name="recursoSubir" id="seleccionRecurso">
                         <br><input name="recursoEnviado" type="submit" value="¡Subir!">
                     </form>
                 </div>
             </div>
 
+            <div id="pantallaImagen" class="oculto">
+                <p id="cerrarImagen">X</p>
+                <a id="descargarImagen" download="" >↓</a>  
+                <img id="imagenAmpliada">
+            </div>
         </div>
     </div>
 </body>

@@ -1,21 +1,15 @@
 <?php 
 
 include("../../config/init.php");
+require_once("../../storage/data.php");
 
-if (!isset($_SESSION["user"])) {
-    header("Location: ../index.php");
-    die();
-}
-
+comprobarSiTieneSesion();
 
 $user = CurrentUser::getConfig();
 $consultor = DbConector::singleton();
 $userChats = $consultor->getUserChats($user["ID_usuario"]);
 $userGroups = $consultor->getUserGroups($user["ID_usuario"]);
-
-function ei() {
-    echo "<script>alert('a')</script>";
-}
+$userImage = ($consultor->getUserImage($user["ID_usuario"]));
 
 ?>
 
@@ -29,6 +23,11 @@ function ei() {
     <script src="../jscript/marco.js" defer></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="icon" type="image/jpg" href="../resources/logo.png"/>
+    <?php if ($_COOKIE["theme"] == "dark") { ?>
+        <link rel="stylesheet" href="../styles/darkMarco.css">
+    <?php } else if ($_COOKIE["theme"] == "light"){ ?>
+        <link rel="stylesheet" href="../styles/lightMarco.css">
+    <?php }?>
 </head>
 <body>
     <div id="cuerpo">
@@ -47,8 +46,14 @@ function ei() {
                     <?php if(empty($userChats)){ ?>
                         <span class="menuVacio">Aqui no hay nada :(</span>
                     <?php }else{ ?>
-                        <?php foreach ($userChats as $key=>$userChat) { ?>
-                            <a class="marcoButton" target="iframe" href="chat.php?conversacion=<?= $userChat[0]?>"><button class="Button" formaction="<?php ei() ?>" value="<?=$key?>"><?php echo $consultor->getUsernameFromChat($userChat[0],$user["ID_usuario"]) ?></button></a>
+                        <?php foreach ($userChats as $key=>$userChat) { 
+                            $userChatId = ($consultor->getUserIdFromName($consultor->getUsernameFromChat($userChat[0],$user["ID_usuario"]))); ?>
+                            <a class="marcoButton" target="iframe" href="chat.php?conversacion=<?= $userChat[0]?>">
+                                <button class="Button" formaction="" value="<?=$key?>">
+                                    <img class="imagenPerfil" src="<?php echo $consultor->getUserImage($userChatId) ?>">
+                                    <?php echo $consultor->getUsernameFromChat($userChat[0],$user["ID_usuario"]) ?>
+                                </button>
+                            </a>
                         <?php } ?>
                     <?php } ?>
                     <div class="addDivButton">
@@ -61,7 +66,7 @@ function ei() {
                         <span class="menuVacio">Aqui no hay nada :(</span>
                     <?php }else{ ?>
                         <?php foreach ($userGroups as $userGroup) {?>
-                            <a class="marcoButton" target="iframe" href="chatGrupal.php?conversacion=<?= $userGroup[0]?>"><button class="Button" formaction="<?php ei() ?>" value="<?=$key?>"><?= $userGroup[1] ?></button></a>
+                            <a class="marcoButton" target="iframe" href="chatGrupal.php?conversacion=<?= $userGroup[0]?>"><button class="Button" formaction="" value="<?=$key?>"><?= $userGroup[1] ?></button></a>
                         <?php } ?>
                     <?php } ?>
                     <div class="addDivButton">
@@ -77,14 +82,14 @@ function ei() {
 
         <div id="contenido">
             <video id="background-video" autoplay loop muted>
-                <source src="../resources/bg_3.mp4" type="video/mp4">
+                <source src="../resources/<?=$bgVid?>" type="video/mp4">
             </video>
             <iframe name="iframe" ></iframe>
         </div>
 
         <div id="perfil">
             <!--TODO: Implemnetar que esta imagen cambie segun el perfil.-->
-            <img id="usuario" src="<?=$user["rutaImagenPerfil"]?>" alt="Imagen usuario">
+            <img id="usuario" src="<?=$userImage?>" alt="Imagen usuario">
             <div id="contendedorInfo">
                 <!--TODO: Implemnetar que estos tesxtos cambien segun el perfil.-->
                 <p id="nombre"><?php echo $user["NombreUsuario"]?></p>

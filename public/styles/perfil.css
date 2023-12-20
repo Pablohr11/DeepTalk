@@ -182,8 +182,8 @@
 #interfazRecurso{
     background-color: #313338;
     box-sizing: border-box;
-    height: 40vmin;
-    width: 40vmin;
+    height: 66vmin;
+    width: 66vmin;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -216,9 +216,27 @@
     background-color: transparent;
 }
 
-#usersDiv {
-    padding: 5px;
-    padding-left: 10px;
-    background-color: #383a40b4;
-    color: aliceblue;
+.recordatorio{
+    text-decoration: underline;
+    color: gray;
+    font-size: 0.9rem;
+}
+
+#closeButton {   
+    margin-top: 10px;
+    border: 2px solid #b41e1e;
+    background-color: #4d4c4c00;
+    color: #b41e1e;
+    border-radius: 5px;
+}
+
+#themeButton {
+    position: absolute;
+    right: 14px;
+    top: 14px;
+    border: 3px solid #6d0470;
+    border-radius: 6px;
+    background-color: #4c4d4d00;
+    color: #6d0470;
+    cursor: pointer;
 }

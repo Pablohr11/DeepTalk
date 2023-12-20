@@ -74,11 +74,13 @@ body {
     border: 2px solid #8c8d8d;
     background-color: #4c4d4d00;
     color: #8c8d8d;
+    cursor: pointer;
 }
 #logInButton {
     border: 2px solid #6d0470;
     background-color: #4c4d4d00;
     color: #6d0470;
+    cursor: pointer;
 }
 
 #contenido {
