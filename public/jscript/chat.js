@@ -31,11 +31,10 @@ function showGroupMessage(message, arrayUsuarios, userId) {
 
 
     if(message[5]==="texto"){
-        html+= '<p class="texto">'+message[4]+'</p>';
+        html+= '<span class="texto">'+message[4]+'</span></pre><div class="horaMensaje"><span>'+obtenerHoraDeFecha(message[3])+'</span></div></div>';
     }else if(message[5]==="imagen"){
-        html+= '<img class="imagen" src="'+message[4]+'"></img>';
+        html+= '<img class="imagen" src="'+message[4]+'"></img></pre><div class="horaImagen"><span>'+obtenerHoraDeFecha(message[3])+'</span></div></div>';
     }
-    html+= '</pre><div class="horaMensaje"><span>'+obtenerHoraDeFecha(message[3])+'</span></div></div>';
     container.innerHTML+= html;
 
     var objDiv = document.getElementById("contenido");
@@ -72,4 +71,51 @@ var cerrarRecurso = document.getElementById("cerrarRecurso");
 cerrarRecurso.addEventListener('click', function(){
     let pantallaRecurso = document.getElementById("pantallaRecurso");
     pantallaRecurso.classList.add("oculto");
+});
+
+var pantallaRecurso = document.getElementById("pantallaRecurso");
+pantallaRecurso.addEventListener("drop", function(evento){
+    var seleccionRecurso = document.getElementById("seleccionRecurso");
+    evento.preventDefault();
+    if (evento.dataTransfer.items) {
+        if (evento.dataTransfer.items[0].kind === "file") {
+            seleccionRecurso.files = evento.dataTransfer.files;
+        }
+    }
+    pantallaRecurso.classList.remove("bordeArrastraArchivo");
+    let interfazRecurso = document.getElementById("interfazRecurso");
+    interfazRecurso.classList.remove("oculto");
+});
+
+pantallaRecurso.addEventListener("dragover", function(evento){
+    evento.preventDefault();
+    evento.stopPropagation();
+    pantallaRecurso.classList.add("bordeArrastraArchivo");
+    let interfazRecurso = document.getElementById("interfazRecurso");
+    interfazRecurso.classList.add("oculto");
+});
+
+pantallaRecurso.addEventListener("dragleave", function(evento){
+    evento.preventDefault();
+    evento.stopPropagation();
+    pantallaRecurso.classList.remove("bordeArrastraArchivo");
+    let interfazRecurso = document.getElementById("interfazRecurso");
+    interfazRecurso.classList.remove("oculto");
+});
+
+var imagenes = document.querySelectorAll(".imagen");
+imagenes.forEach(image => {
+    image.addEventListener('click', function() {
+        document.getElementById("imagenAmpliada").src = image.src;
+        document.getElementById("descargarImagen").href = image.src;
+        let pantallaImagen = document.getElementById("pantallaImagen");
+        pantallaImagen.classList.remove("oculto");
+        
+    });
+});
+
+var cerrarImagen = document.getElementById("cerrarImagen");
+cerrarImagen.addEventListener('click', function(){
+    let pantallaImagen = document.getElementById("pantallaImagen");
+    pantallaImagen.classList.add("oculto");
 });

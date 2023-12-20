@@ -10,7 +10,7 @@ var botonesDeConversaciones = document.getElementsByClassName("Button");
 
 for(let botonConversacion of botonesDeConversaciones){
     botonConversacion.addEventListener('click', function(){
-        nombreDeConversacion.innerText = botonConversacion.innerText;
+        nombreDeConversacion.innerHTML = botonConversacion.innerHTML;
     });
 }
 

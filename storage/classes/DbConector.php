@@ -1,5 +1,6 @@
 <?php 
 
+require_once($_SERVER["DOCUMENT_ROOT"]."/storage/data.php");
 
 class DbConector {
     
@@ -347,6 +348,96 @@ class DbConector {
         $consulta->bindParam(":username", $userId, PDO::PARAM_INT);
         $results = $consulta->execute();
         
+    }
+
+    public function getUserImage($userId) {
+        $consulta = $this->db->prepare("select rutaImagenPerfil from Usuario where ID_usuario = :userId");
+                
+        $consulta->bindParam(":userId", $userId, PDO::PARAM_INT);
+
+        $results = $consulta->execute();
+        $data = $consulta->fetch(PDO::FETCH_NUM);
+        return $data[0];
+    }
+
+    public function crearUnTipoDeTokenParaUnUsuario($userId, $tipoToken) {
+            switch($tipoToken){
+                case TIPOS_DE_TOKENS_ADMITIDOS[0]["Tipo"]:
+                    $tiempoLimite = TIPOS_DE_TOKENS_ADMITIDOS[0]["Duracion"];
+                    break;
+                case TIPOS_DE_TOKENS_ADMITIDOS[1]["Tipo"]:
+                    $tiempoLimite = TIPOS_DE_TOKENS_ADMITIDOS[1]["Duracion"];
+                    break;
+            }
+            $fechaCaducidad = date("Y-m-d H:i:s", (time()+$tiempoLimite));
+            if(!in_array($tipoToken, TIPOS_DE_TOKENS_UNICOS) || (in_array($tipoToken, TIPOS_DE_TOKENS_UNICOS) && ($this->consultarTokenDeUnUsuarioPorTipo($userId, $tipoToken)===false || $this->consultarTokenDeUnUsuarioPorTipo($userId, $tipoToken)===null))){
+                //NUMERO_DE_CARACTERES_DE_UN_TOKEN viene desde data.php, y se divide entre dos para que salga ese numero por como funciona el metodo.
+                $token = bin2hex(openssl_random_pseudo_bytes((NUMERO_DE_CARACTERES_DE_UN_TOKEN/2)));
+                $creacion = $this->db->prepare("INSERT INTO Tokens (Token, ID_usuario, Tipo, FechaExpiracion) values ('$token',:userId, :tipo, :fechaCad)");
+                
+                $creacion->bindParam(":userId", $userId, PDO::PARAM_INT);
+                $creacion->bindParam(":tipo", $tipoToken, PDO::PARAM_STR);
+                $creacion->bindParam(":fechaCad", $fechaCaducidad, PDO::PARAM_STR);
+        
+                $creacion->execute();
+            }
+    }
+
+    public function consultarTokenDeUnUsuarioPorTipo($userId, $tipoToken) {
+        $consulta = $this->db->prepare("SELECT Token FROM Tokens WHERE ID_usuario = :userId AND  Tipo = :tipo");
+        
+        $consulta->bindParam(":userId", $userId, PDO::PARAM_INT);
+        $consulta->bindParam(":tipo", $tipoToken, PDO::PARAM_STR);
+
+        $consulta->execute();
+        $resultados = $consulta->fetch(PDO::FETCH_NUM);
+        return $resultados[0];
+    }
+
+    public function consultarUnUsuarioTipoDeUnToken($token) {
+        $consulta = $this->db->prepare("SELECT ID_usuario, Tipo FROM Tokens WHERE Token = :token");
+        
+        $consulta->bindParam(":token", $token, PDO::PARAM_STR);
+
+        $consulta->execute();
+        $resultados = $consulta->fetch(PDO::FETCH_ASSOC);
+        return $resultados;
+    }
+
+    public function eliminarUnToken($token) {
+        $eliminacion = $this->db->prepare("DELETE FROM Tokens WHERE Token = :token");
+        
+        $eliminacion->bindParam(":token", $token, PDO::PARAM_STR);
+
+        $eliminacion->execute();
+    }
+
+    public function obtenerMailDeUsuario($nombreUsuario){
+        $consulta = $this->db->prepare("SELECT Correo FROM Usuario WHERE NombreUsuario = :userName");
+        $consulta->bindParam(":userName", $nombreUsuario, PDO::PARAM_STR);
+        $resultado = $consulta->execute();
+        $mail = $consulta->fetch(PDO::FETCH_NUM)[0];
+        return $mail;
+    }
+
+    public function cambiarPasswordDeUsuario($nuevaPass, $ID_usuario) {
+        $passwdHash = password_hash($nuevaPass, PASSWORD_DEFAULT);
+        $actualizacion = $this->db->prepare("UPDATE Usuario SET Contraseña=:passwd WHERE ID_usuario = :id_usuario");
+        
+        $actualizacion->bindParam(":passwd", $passwdHash, PDO::PARAM_STR);
+        $actualizacion->bindParam(":id_usuario", $ID_usuario, PDO::PARAM_INT);
+
+        $actualizacion->execute();
+    }
+    
+    public function obtenerDatosDeUnUsuarioPorSuId($ID_usuario) {
+        $consulta = $this->db->prepare("SELECT ID_usuario, NombreUsuario, Correo, Telefono, Tipo, rutaImagenPerfil, Valoracion FROM Usuario WHERE ID_usuario = :userId");
+                
+        $consulta->bindParam(":userId", $ID_usuario, PDO::PARAM_INT);
+
+        $consulta->execute();
+        $datosUsuario = $consulta->fetch(PDO::FETCH_ASSOC);
+        return $datosUsuario;
     }
 
 }

@@ -1,3 +1,4 @@
+drop table if exists Tokens cascade;
 drop table if exists Hilo cascade;
 drop table if exists Mensaje cascade;
 drop table if exists MensajeGrupal cascade;
@@ -18,12 +19,20 @@ CREATE TABLE Usuario (
 	Valoracion varchar(10)
 );
 
+CREATE TABLE Tokens (
+    Token VARCHAR(32) PRIMARY KEY,
+    ID_usuario INT,
+	Tipo VARCHAR(25),
+    FechaExpiracion DATETIME,
+    CONSTRAINT FK_Tokens FOREIGN KEY (ID_usuario) REFERENCES Usuario(ID_usuario)
+);
+
 CREATE TABLE Conversacion(
 	ID_conversacion int AUTO_INCREMENT,
     ID_usuario1 int,
 	ID_usuario2 int,
-    constraint fk_us1 foreign key (ID_usuario1) references Usuario(ID_usuario) ON DELETE CASCADE,
-    constraint fk_us2 foreign key (ID_usuario2) references Usuario(ID_usuario) ON DELETE CASCADE,
+    constraint fk_conv1 foreign key (ID_usuario1) references Usuario(ID_usuario) ON DELETE CASCADE,
+    constraint fk_conv2 foreign key (ID_usuario2) references Usuario(ID_usuario) ON DELETE CASCADE,
     constraint pk_conv primary key(ID_Conversacion, ID_usuario1, ID_usuario2)
 );
 
@@ -32,14 +41,14 @@ CREATE TABLE Grupo(
 	ID_grupo int AUTO_INCREMENT primary key,
     NombreGrupo varchar(50),
     ID_usuario int,
-    constraint fk_usuario foreign key (ID_usuario) references Usuario(ID_usuario)
+    constraint fk_grupo foreign key (ID_usuario) references Usuario(ID_usuario)
 );
 
 CREATE TABLE GrupoUsuario (
 	ID_grupo int,
     ID_usuario int,
-    constraint fk_us foreign key (ID_usuario) references Usuario(ID_usuario) ON DELETE CASCADE,
-    constraint pk_grupo primary key (ID_grupo, ID_usuario) 
+    constraint fk_grupoUsu foreign key (ID_usuario) references Usuario(ID_usuario) ON DELETE CASCADE,
+    constraint pk_grupoUsu primary key (ID_grupo, ID_usuario) 
 );
 
 CREATE TABLE MensajeGrupal (
@@ -50,7 +59,7 @@ CREATE TABLE MensajeGrupal (
     Cuerpo varchar(600),
     Tipo varchar(20),
     foreign key (ID_usuario) references Usuario(ID_usuario) ON DELETE CASCADE,
-    foreign key (ID_grupo) references Conversacion(ID_conversacion) ON DELETE CASCADE,
+    foreign key (ID_grupo) references Grupo(ID_grupo) ON DELETE CASCADE,
     primary key(Num_Mensaje, ID_grupo, ID_usuario) 
 );
 
@@ -107,15 +116,15 @@ insert into MensajeGrupal(ID_usuario, ID_grupo, Fecha, Cuerpo, Tipo) values (1, 
 
 --PARA CREACION DE MENSAJES
 
-insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (1, 1, "2023-10-23", "HOLA EPIERI", "texto");
-insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (2, 1, "2023-10-23", "HOLA PABLO", "texto");
-insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (1, 1, "2023-10-23", "Que tal epieri", "texto");
-insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (2, 1, "2023-10-23", "Bien...", "texto");
-insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (1, 1, "2023-10-23", "¡Hola! ¿Cómo estás hoy?", "texto");
-insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (2, 1, "2023-10-23", "¡Hola! Bien, gracias. ¿Y tú? ¿Cómo ha sido tu día?", "texto");
-insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (1, 1, "2023-10-23", "Todo bien, ocupado con el trabajo, ya sabes. Pero ahora tengo un descanso. ¿Qué has estado haciendo?", "texto");
-insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (2, 1, "2023-10-23", "Lo mismo de siempre. Trabajo, trabajo y más trabajo. Pero en fin, así es la vida. ¿Has tenido tiempo para alguna actividad recreativa?", "texto");
-insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (1, 1, "2023-10-23", "No mucho, la verdad. Pero estoy pensando en tomarme un fin de semana libre. ¿Tú qué planes tienes?", "texto");
+insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (1, 1, "2023-1-23", "HOLA EPIERI", "texto");
+insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (2, 1, "2023-2-23", "HOLA PABLO", "texto");
+insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (1, 1, "2023-3-23", "Que tal epieri", "texto");
+insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (2, 1, "2023-4-23", "Bien...", "texto");
+insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (1, 1, "2023-5-23", "¡Hola! ¿Cómo estás hoy?", "texto");
+insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (2, 1, "2023-6-23", "¡Hola! Bien, gracias. ¿Y tú? ¿Cómo ha sido tu día?", "texto");
+insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (1, 1, "2023-7-23", "Todo bien, ocupado con el trabajo, ya sabes. Pero ahora tengo un descanso. ¿Qué has estado haciendo?", "texto");
+insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (2, 1, "2023-8-23", "Lo mismo de siempre. Trabajo, trabajo y más trabajo. Pero en fin, así es la vida. ¿Has tenido tiempo para alguna actividad recreativa?", "texto");
+insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (1, 1, "2023-9-23", "No mucho, la verdad. Pero estoy pensando en tomarme un fin de semana libre. ¿Tú qué planes tienes?", "texto");
 insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (2, 1, "2023-10-23", "Pues estoy pensando en ir al cine este sábado. ¿Te gustaría unirte?", "texto");
 insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (1, 1, "2023-10-23", "¡Suena genial! ¿Qué película quieres ver?", "texto");
 insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (2, 1, "2023-10-23", "Hay una nueva de ciencia ficción que parece interesante. ¿Te apuntas?", "texto");
@@ -130,12 +139,12 @@ insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (2
 insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (1, 1, "2023-10-23", "¡Eso suena divertido! Seguro que será genial. Cambiando de tema, ¿has probado el nuevo restaurante italiano que abrieron en el centro?", "texto");
 insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (2, 1, "2023-10-23", "Todavía no, ¿vale la pena?", "texto");
 insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (1, 1, "2023-10-23", "Definitivamente. La pasta es deliciosa. Podríamos ir a cenar allí después de la película el sábado.", "texto");
-insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (2, 1, "2023-10-23", " ¡Buena idea! Me apunto. ¿Y cómo van las cosas en casa?", "texto");
-insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (1, 1, "2023-10-23", "Todo tranquilo. Mi hermana está planeando visitarnos el próximo mes. Será agradable verla.", "texto");
-insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (2, 1, "2023-10-23", "Eso suena bien. Hace tiempo que no la veo. ¡Espero que tengamos tiempo para ponernos al día!", "texto");
-insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (1, 1, "2023-10-23", "Seguro que sí. Ya sabes cómo es ella, siempre llena de historias. Pero suficiente sobre mí. ¿Cómo va todo contigo?", "texto");
-insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (2, 1, "2023-10-23", "Bien, en general. Algunos altibajos, ya sabes. Pero estoy enfocado en lo positivo. ¿Has tenido alguna noticia emocionante últimamente?", "texto");
-insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (1, 1, "2023-10-23", "No mucho, solo la rutina diaria. Pero estoy buscando nuevas aventuras. Tal vez planee unas", "texto");
+insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (2, 1, "2023-10-24", " ¡Buena idea! Me apunto. ¿Y cómo van las cosas en casa?", "texto");
+insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (1, 1, "2023-10-24", "Todo tranquilo. Mi hermana está planeando visitarnos el próximo mes. Será agradable verla.", "texto");
+insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (2, 1, "2023-10-24", "Eso suena bien. Hace tiempo que no la veo. ¡Espero que tengamos tiempo para ponernos al día!", "texto");
+insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (1, 1, "2023-10-25", "Seguro que sí. Ya sabes cómo es ella, siempre llena de historias. Pero suficiente sobre mí. ¿Cómo va todo contigo?", "texto");
+insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (2, 1, "2023-11-25", "Bien, en general. Algunos altibajos, ya sabes. Pero estoy enfocado en lo positivo. ¿Has tenido alguna noticia emocionante últimamente?", "texto");
+insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (1, 1, "2023-12-26", "No mucho, solo la rutina diaria. Pero estoy buscando nuevas aventuras. Tal vez planee unas", "texto");
 
 
 insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (1, 2, "2023-10-23", "HOLA MARIAAAA QUE TAAAAAAAAAAL", "texto");
