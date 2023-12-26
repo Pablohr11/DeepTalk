@@ -25,3 +25,30 @@ for(let botonesMas of coleccioneBotonesMas){
         }
     });
 }
+
+var contendedorLogo = document.getElementById("contendedorLogo");
+var barraLateral = document.getElementById("barraLateral");
+var perfil = document.getElementById("perfil");
+
+var botonesConversacionales = document.getElementsByClassName("marcoButton");
+for(let botonConversacion of botonesConversacionales){
+    botonConversacion.addEventListener('click', function(){
+        contendedorLogo.classList.remove("visible");
+        barraLateral.classList.remove("visible");
+        perfil.classList.remove("visibleFlex");
+    });
+}
+
+var flechaOcultarChats = document.getElementById("flechaOcultarChats");
+flechaOcultarChats.addEventListener('click', function(){
+    contendedorLogo.classList.remove("visible");
+    barraLateral.classList.remove("visible");
+    perfil.classList.remove("visibleFlex");
+});
+
+var flechaMostrarChats = document.getElementById("flechaMostrarChats");
+flechaMostrarChats.addEventListener('click', function(){
+    contendedorLogo.classList.add("visible");
+    barraLateral.classList.add("visible");
+    perfil.classList.add("visibleFlex");
+});

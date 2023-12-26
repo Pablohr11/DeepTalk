@@ -79,6 +79,10 @@
     border-radius: 10px;
 }
 
+#flechaOcultarChats, #flechaMostrarChats{
+    display: none;
+}
+
 .oculto{
     display: none;
 }
@@ -177,8 +181,10 @@
     z-index: -1;
     opacity: 100%;
     background-image: url("../resources/loadingVideoImage.jpg");
-    background-size: 99vw;
+    background-size: 100vw;
     background-position: center;
+    box-sizing: border-box;
+    z-index: -3;
 }
 
 .menuVacio{
@@ -222,4 +228,68 @@
     border-radius: 5px;
     margin-right: 10px;
     display: block;
+}
+
+
+
+@media (max-width: 550px) {
+	
+    #contendedorLogo, #barraLateral, #perfil{
+        display: none;
+        z-index: 3;
+    }
+
+    #cabecera{
+        width: 100vw;
+        height: 10%;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        z-index: 2;
+    }
+
+    #contenido{
+        box-sizing: border-box;
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+        left: 0px;
+        z-index: 1;
+        padding-top: 10vh;
+    }
+
+    .visible{
+        display: block !important;
+    }
+
+    .visibleFlex{
+        display: flex !important;
+    }
+
+    #barraLateral{
+        position: relative;
+    }
+
+    #flechaOcultarChats, #flechaMostrarChats{
+        display: inline-block;
+        text-align: center;
+        font-weight: bolder;
+        font-size: 3rem;
+        margin: 0px;
+        padding: 0px;
+        color: white;
+        cursor: pointer;
+        position: absolute;
+        box-sizing: border-box;
+    }
+
+    #flechaOcultarChats{
+        top: 40%;
+        right: -20px;
+    }
+
+    #flechaMostrarChats{
+        top: 0px;
+        left: 10px;
+    }
 }

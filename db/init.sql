@@ -1,3 +1,4 @@
+drop table if exists Tokens cascade;
 drop table if exists Hilo cascade;
 drop table if exists Mensaje cascade;
 drop table if exists MensajeGrupal cascade;
@@ -18,12 +19,20 @@ CREATE TABLE Usuario (
 	Valoracion varchar(10)
 );
 
+CREATE TABLE Tokens (
+    Token VARCHAR(32) PRIMARY KEY,
+    ID_usuario INT,
+	Tipo VARCHAR(25),
+    FechaExpiracion DATETIME,
+    CONSTRAINT FK_Tokens FOREIGN KEY (ID_usuario) REFERENCES Usuario(ID_usuario)
+);
+
 CREATE TABLE Conversacion(
 	ID_conversacion int AUTO_INCREMENT,
     ID_usuario1 int,
 	ID_usuario2 int,
-    constraint fk_us1 foreign key (ID_usuario1) references Usuario(ID_usuario) ON DELETE CASCADE,
-    constraint fk_us2 foreign key (ID_usuario2) references Usuario(ID_usuario) ON DELETE CASCADE,
+    constraint fk_conv1 foreign key (ID_usuario1) references Usuario(ID_usuario) ON DELETE CASCADE,
+    constraint fk_conv2 foreign key (ID_usuario2) references Usuario(ID_usuario) ON DELETE CASCADE,
     constraint pk_conv primary key(ID_Conversacion, ID_usuario1, ID_usuario2)
 );
 
@@ -32,14 +41,14 @@ CREATE TABLE Grupo(
 	ID_grupo int AUTO_INCREMENT primary key,
     NombreGrupo varchar(50),
     ID_usuario int,
-    constraint fk_usuario foreign key (ID_usuario) references Usuario(ID_usuario)
+    constraint fk_grupo foreign key (ID_usuario) references Usuario(ID_usuario)
 );
 
 CREATE TABLE GrupoUsuario (
 	ID_grupo int,
     ID_usuario int,
-    constraint fk_us foreign key (ID_usuario) references Usuario(ID_usuario) ON DELETE CASCADE,
-    constraint pk_grupo primary key (ID_grupo, ID_usuario) 
+    constraint fk_grupoUsu foreign key (ID_usuario) references Usuario(ID_usuario) ON DELETE CASCADE,
+    constraint pk_grupoUsu primary key (ID_grupo, ID_usuario) 
 );
 
 CREATE TABLE MensajeGrupal (

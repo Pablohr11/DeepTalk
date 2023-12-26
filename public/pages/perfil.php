@@ -4,17 +4,18 @@ require_once("../../storage/data.php");
 define('TAMANO_MAX_IMG', 5000000);
 define("DIRECTORIO_IMAGENES_PERFIL", "../resources/perfiles/");
 
-$user = CurrentUser::getConfig();
-if (!isset($user["rutaImagenPerfil"])) {
-    header("Location: ../index.php");
-    die();
-}
-$consultor = DbConector::singleton();
+comprobarSiTieneSesion();
 
+$user = CurrentUser::getConfig();
+$consultor = DbConector::singleton();
 $userImage = ($consultor->getUserImage($user["ID_usuario"]));
 
 if (isset($_POST["closeSession"])) {
     session_unset();
+    if(isset($_COOKIE["Recuerdame"])){
+        $consultor->eliminarUnToken($_COOKIE["Recuerdame"]);
+        setcookie("Recuerdame", "", (time() - 1));
+    }
     header("Location: ../index.php");
 }
 
@@ -95,6 +96,9 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
                         <div id="logros">
                             <img class="trofeo" src="../resources/trofeoFundador.png" alt="trofeo">
                         </div>
+                        <form>
+                            <button id="themeButton" formaction="./themePicker.php">Elegir Tema</button>
+                        </form>
                     </div>
                 </div>
 

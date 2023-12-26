@@ -229,3 +229,14 @@
     color: #b41e1e;
     border-radius: 5px;
 }
+
+#themeButton {
+    position: absolute;
+    right: 14px;
+    top: 14px;
+    border: 3px solid #6d0470;
+    border-radius: 6px;
+    background-color: #4c4d4d00;
+    color: #6d0470;
+    cursor: pointer;
+}

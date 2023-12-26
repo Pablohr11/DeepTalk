@@ -120,6 +120,11 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
         }
         setInterval(obtenerLosNuevos, 1000);
     </script>
+    <?php if ($_COOKIE["theme"] == "dark") { ?>
+        <link rel="stylesheet" href="../styles/darkChat.css">
+    <?php } else if ($_COOKIE["theme"] == "light"){ ?>
+        <link rel="stylesheet" href="../styles/lightChat.css">
+    <?php }?>
 </head>
 
 <body onload="init()">

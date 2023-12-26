@@ -1,0 +1,45 @@
+.ajeno {
+    background-color: rgba(27, 28, 31, 0.75) !important;
+    color: rgb(105, 70, 3);
+}
+.texto {
+    color: rgb(168, 168, 168);
+}
+.enter{
+    background-color: #161616;
+}
+
+.horaMensaje > span, .horaImagen > span{
+    color: rgb(124, 112, 89);
+}
+
+.propio {
+    color: rgb(145, 125, 100);
+}
+
+#cajaMensaje{
+    color: rgb(129, 129, 146);
+    border: 1px solid black;
+}
+
+#contenedorBarraMensaje{
+    background-color: #202020;
+}
+
+.fecha {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    gap:10px;
+    color: rgb(124, 122, 117);
+}
+
+.fecha hr {
+    height: 1px;
+    width: 100%;
+    border: none;
+    background-color: rgb(94, 94, 94);
+}

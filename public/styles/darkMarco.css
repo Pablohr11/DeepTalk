@@ -1,0 +1,48 @@
+
+#cabecera{
+    background-color: #151518;
+}
+
+#cabecera > p{
+    color: #585858;
+}
+
+#contendedorLogo{
+    background-color: #151618;
+}
+
+#barraLateral{
+    background-color: #151618;
+}
+#barraLateral > ul > li{
+    background-color: black;
+    color: #acacac;
+}
+
+.desplegableVisible{
+    background-color: #1c1d20;
+    color: #969696;
+}
+#perfil{
+    background-color: #101113;
+}
+
+#nombre{
+    color: #adadad;
+}
+
+#id{
+    color: #adadad;
+}
+
+.marcoButton {
+    border: 2px solid black;
+    background-color: #222222;
+    background-color: rgb(83, 75, 60);
+}
+
+.addNew {
+    border: 2px solid rgb(185, 185, 185);
+    background-color: #6d047000;
+    color: rgb(185, 185, 185);
+}

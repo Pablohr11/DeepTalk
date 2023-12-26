@@ -1,0 +1,106 @@
+#background-video {
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: -1;
+    background-image: url("../resources/loadingVideoImage.jpg");
+    background-size: 99vw;
+    background-position: center;
+}
+
+#logoImage {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    margin-top: 20px;
+    margin-left: 20px;
+    width: 200px;
+}
+
+#contenedorPrincipal {
+    position: relative;
+    margin: auto;
+    align-self: center;
+    width: 50vw;
+    min-width: 500px;
+    max-width: 1000px;
+    height: 30vh;
+    min-height: 350px;
+    grid-gap: 1%;
+    background-color: rgba(14, 14, 14, 0.815);
+    border: 2px solid rgb(16, 16, 16);
+    border-radius: 10px;
+    z-index: 10;
+    margin-top: 30vh;
+    align-content: space-evenly;
+    padding: 10px;
+}
+
+form {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    grid-gap: 1%;
+}
+
+#contenedorPrincipal form div {
+    border: 3px solid white;
+    border-radius: 6px;
+    width: 96%;
+    height: 30vh;
+    min-height: 350px;
+    display: grid;
+    grid-template-columns: 100%;
+    justify-items: center;
+    text-align: center;
+    background-color: rgba(24, 24, 24, 0.705);
+}
+
+
+#claro {
+    color: aliceblue;
+    border-color: aliceblue;
+}
+
+#clasico {
+    color: #660469;
+    border-color: #660469 !important;
+}
+
+#oscuro {
+    border-color: rgb(27, 28, 31) !important;
+}
+
+.show-video {
+    width: 96%;
+    height: 80%;
+}
+
+.botonSeleccion {
+    margin-bottom: 15px;
+    width: 90%;
+    font-size: small;
+    border-radius: 6px;
+    border: 2px solid;
+    background-color: rgba(0, 0, 0, 0.493);
+    cursor: pointer;
+}
+
+#claro .botonSeleccion{
+    color: aliceblue;
+    border-color: aliceblue;
+}
+
+#clasico .botonSeleccion{
+    color: #660469;
+    border-color: #660469 !important;
+}
+
+#oscuro .botonSeleccion{
+    
+    border-color: rgb(27, 28, 31) !important;
+}

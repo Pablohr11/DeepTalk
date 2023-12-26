@@ -1,5 +1,37 @@
 <?php
 
+require_once($_SERVER["DOCUMENT_ROOT"]."/storage/classes/DbConector.php");
+require_once($_SERVER["DOCUMENT_ROOT"]."/storage/classes/CurrentUser.php");
+
+define("NUMERO_DE_CARACTERES_DE_UN_TOKEN", 32);
+//La duracion del token se situará en segundos
+define("TIPOS_DE_TOKENS_ADMITIDOS", [["Tipo"=>"Recuperacion", "Duracion"=>600], ["Tipo"=>"Recuerdame", "Duracion"=>604800]]);
+define("TIPOS_DE_TOKENS_UNICOS", [TIPOS_DE_TOKENS_ADMITIDOS[0]["Tipo"]]);
+
+function comprobarSiTieneSesion(){
+    if (!isset($_SESSION["user"])) {
+        if(isset($_COOKIE["Recuerdame"]) && $_COOKIE["Recuerdame"] !== null && strlen($_COOKIE["Recuerdame"]) == NUMERO_DE_CARACTERES_DE_UN_TOKEN){
+            $consultor = DbConector::singleton();
+            $tokenProporcionado = $_COOKIE["Recuerdame"];
+            $arrayIdTipo = $consultor->consultarUnUsuarioTipoDeUnToken($tokenProporcionado);
+            //este if basicamente dice, si hay una fila en la tabla Tokens de la base de datos, que tenga ese token, hacer lo siguiente:
+            if($arrayIdTipo!= false && $arrayIdTipo!= null){
+                //ID del propietario de ese token
+                $ID_usuario = $arrayIdTipo["ID_usuario"];
+                //Tipo del token proporcionado.
+                $tipoToken = $arrayIdTipo["Tipo"];
+                if($tipoToken === TIPOS_DE_TOKENS_ADMITIDOS[1]["Tipo"]){
+                    $datosUsuario = $consultor->obtenerDatosDeUnUsuarioPorSuId($ID_usuario);
+                    CurrentUser::setConfig($datosUsuario);
+                }
+            }
+        }else{
+            setcookie("paginaRedireccion", $_SERVER['REQUEST_URI'], 0);
+            header("Location: /public/pages/login.php");
+            die();
+        }
+    }
+}
 //Import PHPMailer classes into the global namespace
 //These must be at the top of your script, not inside a function
 use PHPMailer\PHPMailer\PHPMailer;

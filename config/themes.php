@@ -4,6 +4,8 @@
 
     if($_COOKIE["theme"] == "dark") {
         $bgVid = "bg_2.mp4";
+    } else if($_COOKIE["theme"] == "light") {
+        $bgVid = "bg_1.mp4";
     } 
 
 ?>

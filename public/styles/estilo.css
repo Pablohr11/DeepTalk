@@ -59,8 +59,9 @@
     bottom: 0;
     z-index: -1;
     background-image: url("../resources/loadingVideoImage.jpg");
-    background-size: 99vw;
+    background-size: 100%;
     background-position: center;
+    box-sizing: border-box;
 }
 
 #contenedor span {
@@ -76,6 +77,16 @@
     border-radius: 0px;
     min-height: 35px;
     font-size: 16;
+}
+
+.input:focus {
+    outline: none;
+    border-bottom-color: #550358;
+}
+
+.labelMantener{
+    text-align: center;
+    color: #8c8d8d;
 }
 
 #logoImage {
@@ -151,6 +162,12 @@ a {
     flex-direction: column;
     gap: 0px;
     margin: auto;
+}
+
+.tituloCont{
+    margin: 0px;
+    text-align: center;
+    color: #8c8d8d;
 }
 
 #campoBotones {
