@@ -17,8 +17,9 @@ body {
     bottom: 0;
     z-index: -1;
     background-image: url("../resources/loadingVideoImage.jpg");
-    background-size: 99vw;
+    background-size: 100vw;
     background-position: center;
+    box-sizing: border-box;
 }
 
 #wavesImage {
@@ -86,6 +87,7 @@ body {
 #contenido {
     margin-top: 105vh;
     padding: 30px;
+    overflow: hidden;
 }
 
 #menuOculto {
@@ -178,12 +180,32 @@ body {
         margin: auto;
     }
 
+    .contenedorPresentacion{
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        align-items: center;
+        margin: 10% 0px;
+    }
+    
+    .contenedorPresentacion > img{
+        border-radius: 50%;
+        height: 20vmin;
+        width: 20vmin;
+        margin: 0px 6%;
+    }
+
 }
 
-#centerImage {
-    width: 40vw;
-    position: absolute;
-    top: 30vh;
-    left: 25vw;
-    float: inline-end;
+@media (max-width: 300px){
+    #titBienvenida{
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 235px){
+    #logoImage{
+        width: 66%;
+        margin: auto;
+    }
 }

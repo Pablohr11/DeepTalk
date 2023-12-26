@@ -32,14 +32,15 @@ $userImage = ($consultor->getUserImage($user["ID_usuario"]));
 <body>
     <div id="cuerpo">
         <header id="cabecera">
+            <span id="flechaMostrarChats">←</span>
             <p id="nombreDeConversacion"></p>
         </header>
 
-        <div id="contendedorLogo">
+        <div id="contendedorLogo" class="visible">
             <a href="../index.php"><img id="logo" src="../resources/logo_completo.png" alt="logo"/></a>
         </div>
 
-        <div id="barraLateral">
+        <div id="barraLateral" class="visible">
             <ul>
                 <li onclick="desplegar(0)">Mensajes</li>
                 <div class="oculto">
@@ -77,6 +78,8 @@ $userImage = ($consultor->getUserImage($user["ID_usuario"]));
                 <div class="oculto"><p>Implementar los chats</p></div>
                 <!--<li onclick="desplegar(3)">Recomendados</li>
                 <div class="oculto"><p>Implementar los chats</p></div>!-->
+
+                <span id="flechaOcultarChats">←</span>
             </ul>
         </div>
 
@@ -87,7 +90,7 @@ $userImage = ($consultor->getUserImage($user["ID_usuario"]));
             <iframe name="iframe" ></iframe>
         </div>
 
-        <div id="perfil">
+        <div id="perfil" class="visibleFlex">
             <!--TODO: Implemnetar que esta imagen cambie segun el perfil.-->
             <img id="usuario" src="<?=$userImage?>" alt="Imagen usuario">
             <div id="contendedorInfo">
