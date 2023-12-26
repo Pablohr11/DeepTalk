@@ -46,3 +46,7 @@
     background-color: #6d047000;
     color: rgb(185, 185, 185);
 }
+
+#background-video {
+    background-image: url("../resources/loadingVideoImageDark.jpg");
+}

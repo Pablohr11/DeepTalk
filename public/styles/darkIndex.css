@@ -36,7 +36,9 @@
     color: rgb(175, 175, 175);
 }
 
-
+#background-video {
+    background-image: url("../resources/loadingVideoImageDark.jpg");
+}
 #background-video {
     background-image: url("../resources/loadingVideoImageDark.jpg");
 }

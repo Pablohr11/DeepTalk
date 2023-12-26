@@ -1,6 +1,8 @@
 <?php
 
     $bgVid = "bg_3.mp4";
+    $loadingBgVid = "loadingVideoImage.jpg";
+    $wavesImage = "indexWaves.png";
 
     if($_COOKIE["theme"] == "dark") {
         $bgVid = "bg_2.mp4";

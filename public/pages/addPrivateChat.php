@@ -24,8 +24,10 @@ if (isset($_POST["enviar"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../styles/addPrivateChat.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="../jscript/addUsers.js"></script>
 </head>
-<body>
+<body onload="init()">
     <form method="post" action="addPrivateChat.php">
         <div id="container">
             <div id="image">
@@ -34,7 +36,9 @@ if (isset($_POST["enviar"])) {
             <h3>Nueva conversacion privada</h3>
             <p>Por favor, introduce el nombre de otro usuario para crear la conversación</p>
             <div id="botDiv">
-                <input type="text" id="inpu" name="userName">
+                <span class="myarrow"><input id="inpu" name="userName" list="selector"></span>
+                <datalist id="selector">
+                </datalist>
                 <input type="submit" name="enviar" id="enviar" value="+">
             </div>
         </div>

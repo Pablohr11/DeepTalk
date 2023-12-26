@@ -359,6 +359,16 @@ class DbConector {
         return $data[0];
     }
 
+    function getUsersBySearch(string $string) {
+        $consulta = $this->db->prepare("select NombreUsuario from Usuario where NombreUsuario like CONCAT('%',:NombreUsuario,'%')");
+                
+        $consulta->bindParam(":NombreUsuario", $string, PDO::PARAM_STR);
+
+        $results = $consulta->execute();
+        $data = $consulta->fetchAll(PDO::FETCH_NUM);
+        return $data;
+    }
+
 }
 ?>
 
