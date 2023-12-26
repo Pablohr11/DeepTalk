@@ -1,0 +1,18 @@
+
+#contIzq {
+    background-image: url("../resources/bck_image_dark.png");
+}
+
+#signUpButton {
+    border: 2px solid #575757;
+    background-color: #4c4d4d00;
+    color: #575757;
+    cursor: pointer;
+}
+
+#botonEnvio {
+    border: 2px solid #121212;
+    color: #121212;
+    background-color: #575757;
+    cursor: pointer;
+}

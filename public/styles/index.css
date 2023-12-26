@@ -24,13 +24,11 @@ body {
 
 #wavesImage {
     width: 100vw;
-    height: 33vh;
-    object-fit: cover;
+    height: 40vh;
     position: absolute;
     left: 0;
     right: 0;
-    top: 68vh;
-    bottom: 0;
+    bottom: 0vh;
     z-index: -1;
 }
 

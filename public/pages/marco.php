@@ -1,9 +1,13 @@
 <?php 
 
 include("../../config/init.php");
-require_once("../../storage/data.php");
 
-comprobarSiTieneSesion();
+if (!isset($_SESSION["user"])) {
+    header("Location: ../index.php");
+    die();
+}
+
+setcookie("theme","dark", time()+60*60, "../");
 
 $user = CurrentUser::getConfig();
 $consultor = DbConector::singleton();

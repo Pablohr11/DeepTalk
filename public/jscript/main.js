@@ -17,3 +17,17 @@ function mostrarMenu(){
 
 
 /*Estas funciones se usa para mostrar y ocultar el menu del media en el index*/
+
+function enableDarkMode() {
+    var theme = getCookieValue("theme");
+    if (theme == "dark") {
+    }
+}
+
+function getCookieValue(name) {
+    const regex = new RegExp(`(^| )${name}=([^;]+)`)
+    const match = document.cookie.match(regex)
+    if (match) {
+        return match[2]
+    }
+}

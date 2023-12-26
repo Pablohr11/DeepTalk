@@ -1,6 +1,6 @@
 <?php
 
-include("../../storage/data.php");
+include("../../config/init.php");
 include("../../storage/classes/DbConector.php");
 include("../../storage/classes/FormChecker.php");
 
@@ -30,12 +30,16 @@ if (isset($_POST["envio"])) {
     <title>DeepTalk</title>
     <link rel="stylesheet" href="../styles/estilo.css" type="text/css">
     <link rel="stylesheet" href="../styles/signUp.css" type="text/css">
-    <link rel="icon" type="image/jpg" href="../resources/logo.png"/>
+    <?php if ($_COOKIE["theme"] == "dark") { ?>
+        <link rel="stylesheet" href="../styles/darkEstilo.css">
+    <?php } else if ($_COOKIE["theme"] == "light"){ ?>
+        <link rel="stylesheet" href="../styles/lightEstilo.css">
+    <?php }?>
 </head>
 
 <body>
     <video id="background-video" autoplay loop muted>
-        <source src="../resources/bg_3.mp4" type="video/mp4">
+        <source src="../resources/<?=$bgVid?>" type="video/mp4">
     </video>
     <form method="post">
         <div id="contenedor">
