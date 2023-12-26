@@ -1,6 +1,7 @@
 <?php 
 
     include("../storage/classes/DbConector.php");
+    include("../storage/data.php");
     require_once("../storage/classes/CurrentUser.php");
     include("../config/themes.php");
 

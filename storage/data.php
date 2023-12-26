@@ -1,7 +1,7 @@
 <?php
 
-require_once($_SERVER["DOCUMENT_ROOT"]."/storage/classes/DbConector.php");
-require_once($_SERVER["DOCUMENT_ROOT"]."/storage/classes/CurrentUser.php");
+include("storage/classes/DbConector.php");
+include("storage/classes/CurrentUser.php");
 
 define("NUMERO_DE_CARACTERES_DE_UN_TOKEN", 32);
 //La duracion del token se situará en segundos
