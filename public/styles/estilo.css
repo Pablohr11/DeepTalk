@@ -18,6 +18,34 @@
     align-content: space-evenly;
 }
 
+@media (max-width: 480px) {
+    #contenedor {
+        grid-template-columns: 100%;
+        grid-template-rows: 50% 50%;
+        min-width: 60% !important;
+        width: 80vw !important;
+        max-width: 90vw !important;
+        height: 70vh;
+        margin-top: 17vh;
+    }
+
+    #contDcha, #contIzq {
+        min-width: none;
+        max-width: 440px;
+        max-height: 300px;
+        min-height: 200px !important;
+        height: 100% !important;
+    }
+
+    #contIzq {
+        border-top-right-radius: 10px !important;
+        border-top-left-radius: 10px !important;
+        border-bottom-right-radius: 0px !important;
+        border-bottom-left-radius: 0px !important;
+    }
+
+}
+
 #contenedorSignUp {
     position: relative;
     top: 1vh;

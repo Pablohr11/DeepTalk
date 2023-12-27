@@ -72,10 +72,6 @@ if (isset($_POST["envio"])) {
                 </div>
             </div>
         </div>
-        <!-- <div id="contenedorSignUp">
-            <span>¿No tienes una cuenta?</span>
-            <button id="signUpButton" formaction="signUp.html">Crea una cuenta</button>
-        </div> -->
     </form>
     <div id="cotenedorImagen">
         <a href="../index.php"><img src="../resources/logo_completo.png" id="logoImage"></a>

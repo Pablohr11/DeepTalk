@@ -61,7 +61,7 @@
             <div id="logDivOculto">
                 <form>
                     <button formaction="./pages/signUp.php" id="signUpButton" value="Registrarse">Registrarse</button>
-                    <button formaction="./pages/signUp.php" id="logInButton" value="Iniciar Sesion">Iniciar Sesion</button>
+                    <button formaction="./pages/login.php" id="logInButton" value="Iniciar Sesion">Iniciar Sesion</button>
                 </form>
             </div>
         </div>

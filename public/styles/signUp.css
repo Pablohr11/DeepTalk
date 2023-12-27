@@ -2,3 +2,13 @@
     height: 27vh;
     min-height: 350px;
 }
+
+@media (max-width: 480px) {
+    #contenedor {
+        min-width: 60% !important;
+        width: 80vw !important;
+        max-width: 90vw !important;
+        height: 600px;
+        margin-top: 15vh;
+    }
+}
