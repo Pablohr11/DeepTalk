@@ -124,6 +124,29 @@
     display: none !important;
 }
 
+#logros{
+    position: relative;
+}
+
+.logro{
+    position: relative;
+    display: inline-block;
+}
+
+.descripcionLogro{
+    background-color: #2B2D31;
+    border-radius: 6px;
+    position: absolute;
+    display: none;
+    text-align: justify;
+    padding: 6px;
+    width: max-content;
+}
+
+.logro:hover .descripcionLogro{
+    display: block !important;
+}
+
 @keyframes subidita{
     from{
         margin-top: 133px;
@@ -145,6 +168,7 @@
 .trofeo{
     height: 20px;
     width: 20px;
+    display: inline;
 }
 
 #pantallaRecurso{

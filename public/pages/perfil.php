@@ -9,6 +9,7 @@ comprobarSiTieneSesion();
 $user = CurrentUser::getConfig();
 $consultor = DbConector::singleton();
 $userImage = ($consultor->getUserImage($user["ID_usuario"]));
+$trofeosDeUsuario = ($consultor->obtenerTrofeosDeUnUsuarioPorSuId($user["ID_usuario"]));
 
 if (isset($_POST["closeSession"])) {
     session_unset();
@@ -94,7 +95,14 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
                     <div id="infoBasica">
                         <span class="nombreUsuario"><?php echo $user["NombreUsuario"]?></span>
                         <div id="logros">
-                            <img class="trofeo" src="../resources/trofeoFundador.png" alt="trofeo">
+                            <?php foreach($trofeosDeUsuario as $trofeo){ ?>
+                                <div class="logro">
+                                    <img class="trofeo" src="<?=$trofeo["RutaRecurso"]?>" alt="trofeo">
+                                    <div class="descripcionLogro">
+                                        <span><?=$trofeo["Descripcion"]?></span>
+                                    </div>
+                                </div>
+                            <?php } ?>
                         </div>
                         <form>
                             <button id="themeButton" formaction="./themePicker.php">Elegir Tema</button>

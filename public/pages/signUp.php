@@ -1,8 +1,8 @@
 <?php
 
-include("../../storage/data.php");
-include("../../storage/classes/DbConector.php");
-include("../../storage/classes/FormChecker.php");
+require_once("../../storage/data.php");
+require_once("../../storage/classes/DbConector.php");
+require_once("../../storage/classes/FormChecker.php");
 
 if (isset($_POST["envio"])) {
     $user = $_POST["user"];

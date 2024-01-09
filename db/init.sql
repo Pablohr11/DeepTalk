@@ -1,3 +1,5 @@
+drop table if exists UsuariosTrofeos cascade;
+drop table if exists Trofeos cascade;
 drop table if exists Tokens cascade;
 drop table if exists Hilo cascade;
 drop table if exists Mensaje cascade;
@@ -17,6 +19,19 @@ CREATE TABLE Usuario (
 	Tipo varchar(25),
     rutaImagenPerfil varchar(66),
 	Valoracion varchar(10)
+);
+
+CREATE TABLE Trofeos(
+    ID_Trofeo INT AUTO_INCREMENT PRIMARY KEY,
+    Descripcion VARCHAR(250),
+	RutaRecurso VARCHAR(50)
+);
+
+CREATE TABLE UsuariosTrofeos(
+    ID_usuario INT,
+    ID_Trofeo INT,
+    CONSTRAINT FK_UsuariosTrofeos FOREIGN KEY (ID_usuario) REFERENCES Usuario(ID_usuario),
+    CONSTRAINT FK_UsuariosTrofeos1 FOREIGN KEY (ID_Trofeo) REFERENCES Trofeos(ID_Trofeo)
 );
 
 CREATE TABLE Tokens (
@@ -88,6 +103,15 @@ CREATE TABLE Hilo(
 insert into Usuario (NombreUsuario, Contraseña, Correo, Telefono, Tipo, rutaImagenPerfil, Valoracion) values("Pablohr11", "$2y$10$UaepmEegovq1Qm4vbl7cnutgHivrusQl5.chLfk8UeGwPnkKpdAwm", "pablo993968@gmail.com", null, "admin", "../resources/perfiles/usuarioDefault.png", null);
 insert into Usuario (NombreUsuario, Contraseña, Correo, Telefono, Tipo, rutaImagenPerfil, Valoracion) values("Epic Erik", "$2y$10$HmLPVyYjMJZIChqNSaBUaOjMmxbw1lTb/ejT02IReXAu8gGU.qcL2", "lolamento77w@gmail.com", null, "admin", "../resources/perfiles/usuarioDefault.png", null);
 insert into Usuario (NombreUsuario, Contraseña, Correo, Telefono, Tipo, rutaImagenPerfil, Valoracion) values("Merlinicos", "$2y$10$ZxRL.REa30Ppmlakypip9.rrla6oykP2IwYs6nQV5XS/ZAdgyMpUu", "mariapallares03@gmail.com", null, "base", "../resources/perfiles/usuarioDefault.png", null);
+
+--Creacion de Trofeos y Asignacion(Solo Fundadores).
+
+insert into Trofeos (Descripcion, RutaRecurso) values("Si estas en posesion de este trofeo, eres el más perron aqui.", "../resources/trofeos/trofeoFundador.png");
+insert into UsuariosTrofeos (ID_usuario, ID_Trofeo) values(1, 1);
+insert into UsuariosTrofeos (ID_usuario, ID_Trofeo) values(2, 1);
+
+insert into Trofeos (Descripcion, RutaRecurso) values("Prueba.", "../resources/trofeos/trofeoFundador.png");
+insert into UsuariosTrofeos (ID_usuario, ID_Trofeo) values(2, 2);
 
 --Para creacion de conversaciones
 
