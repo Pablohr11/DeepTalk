@@ -440,6 +440,16 @@ class DbConector {
         return $datosUsuario;
     }
 
+    public function obtenerTrofeosDeUnUsuarioPorSuId($ID_usuario) {
+        $consulta = $this->db->prepare("SELECT Descripcion, RutaRecurso FROM UsuariosTrofeos, Trofeos WHERE ID_usuario = :userId AND UsuariosTrofeos.ID_Trofeo=Trofeos.ID_Trofeo");
+                
+        $consulta->bindParam(":userId", $ID_usuario, PDO::PARAM_INT);
+
+        $consulta->execute();
+        $trofeosUsuario = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        return $trofeosUsuario;
+    }
+
 }
 ?>
 
