@@ -450,6 +450,14 @@ class DbConector {
         return $data;
     }
 
+    public function obtenerObjetoUsuarioDeNombreUsuario($userName){
+        $consulta = $this->db->prepare("SELECT ID_usuario, NombreUsuario, Correo, Telefono, Tipo, rutaImagenPerfil, Valoracion FROM Usuario WHERE NombreUsuario=:userName");
+        $consulta->bindParam(":userName", $userName, PDO::PARAM_STR);
+        $consulta->execute();
+        $objetoUsuario = $consulta->fetch(PDO::FETCH_ASSOC);
+        return $objetoUsuario;
+    }
+
 }
 ?>
 
