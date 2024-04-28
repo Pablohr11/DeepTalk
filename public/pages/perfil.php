@@ -4,10 +4,19 @@ require_once("../../storage/data.php");
 define('TAMANO_MAX_IMG', 5000000);
 define("DIRECTORIO_IMAGENES_PERFIL", "../resources/perfiles/");
 
-comprobarSiTieneSesion();
 
-$user = CurrentUser::getConfig();
 $consultor = DbConector::singleton();
+comprobarSiTieneSesion();
+/*
+    La variable $perfilPropio la emplearemos para saber si el perfil que se esta
+    cargando es es el perfil propio del usuario o si por el contrario esta 
+    visitando el perfil de otro usuario.
+*/
+$perfilPropio = !isset($_GET["usuarioPropietario"]);
+$user = (($perfilPropio)?CurrentUser::getConfig():$consultor->obtenerObjetoUsuarioDeNombreUsuario($_GET["usuarioPropietario"]));
+if($user==false || $user == null || $user==0){
+    header("Location: marco.php");
+}
 $userImage = ($consultor->getUserImage($user["ID_usuario"]));
 
 if (isset($_POST["closeSession"])) {
@@ -24,7 +33,7 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
     $nombreArchivo = basename($_FILES["recursoSubir"]["name"]);
     $archivo = DIRECTORIO_IMAGENES_PERFIL . $nombreArchivo;
     $formatoImagen = strtolower(pathinfo($archivo, PATHINFO_EXTENSION));
-    $tamanoImagen = getimagesize($_FILES["recursoSubir"]["tmp_name"]);
+    $tamanoImagen = (($_FILES["recursoSubir"]["error"]!=0)?false:getimagesize($_FILES["recursoSubir"]["tmp_name"]));
     $archivo = DIRECTORIO_IMAGENES_PERFIL . $user["NombreUsuario"] .'.'. $formatoImagen;
     $nombreArchivo = $user["NombreUsuario"] .'.'. $formatoImagen;
 
@@ -55,8 +64,10 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
         } else {
             echo "Hubo un error al subir tu archivo: ". $_FILES["recursoSubir"]["tmp_name"]. $archivo;
         }
+    }else{
+        echo "Hubo un error al procesar su imagen pruebe de nuevo o trate con otra imagen.";
     }
-
+    
 }
 
 ?>
@@ -94,16 +105,20 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
                 <div id="preview">
                     <div id="contenedorImagenPerfil">
                         <img id="imagenPerfil" src="<?=$userImage?>"/>
+                        <?php if($perfilPropio){ ?>
                         <div id="editarImg" class="oculto"><span>&#9998;</span></div>
+                        <?php } ?>
                     </div>
                     <div id="infoBasica">
                         <span class="nombreUsuario"><?php echo $user["NombreUsuario"]?></span>
                         <div id="logros">
                             <img class="trofeo" src="../resources/trofeoFundador.png" alt="trofeo">
                         </div>
+                        <?php if($perfilPropio){ ?>
                         <form>
                             <button id="themeButton" formaction="./themePicker.php">Elegir Tema</button>
                         </form>
+                        <?php } ?>
                     </div>
                 </div>
 
@@ -128,12 +143,13 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
                             <span class="dato"><?php echo (isset($user["Telefono"]))?$user["Telefono"]:"No has introducido ningún telefono"?></span>
                         </div>
                     </div>
-
+                    <?php if($perfilPropio){ ?>
                     <div class="contDato ultimo">
                         <form method="post" action="./perfil.php">
                             <button id="closeButton" name="closeSession">Cerrar Sesión</button>
                         </form>
                     </div>
+                    <?php } ?>
                 </div>
             </div>
         </div>

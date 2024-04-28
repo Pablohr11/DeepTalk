@@ -12,7 +12,7 @@ contenedorImagenPerfil.addEventListener('mouseout', function(){
     panelEditarImagen.classList.add("oculto");
 });
 
-contenedorImagenPerfil.addEventListener('click', function(){
+panelEditarImagen.addEventListener('click', function(){
     pantallaRecurso.classList.remove("oculto");
 });
 
