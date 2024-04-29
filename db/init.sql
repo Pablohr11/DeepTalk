@@ -1,3 +1,5 @@
+drop table if exists LogrosDeUsuarios cascade;
+drop table if exists Logros cascade;
 drop table if exists Tokens cascade;
 drop table if exists Hilo cascade;
 drop table if exists Mensaje cascade;
@@ -26,6 +28,23 @@ CREATE TABLE Tokens (
     FechaExpiracion DATETIME,
     CONSTRAINT FK_Tokens FOREIGN KEY (ID_usuario) REFERENCES Usuario(ID_usuario)
 );
+
+CREATE TABLE Logros (
+    ID_Logro int AUTO_INCREMENT PRIMARY KEY,
+    NombreLogro VARCHAR(25),
+	Descripcion VARCHAR(255),
+	NombreDeImagenAsociada VARCHAR(33)
+);
+
+CREATE TABLE LogrosDeUsuarios (
+    ID_Logro INT,
+    ID_usuario INT,
+    FechaConseguido DATE,
+    CONSTRAINT PK_LogrosDeUsuarios PRIMARY KEY (ID_Logro, ID_usuario),
+    CONSTRAINT FK_LogrosDeUsuarios FOREIGN KEY (ID_Logro) REFERENCES Logros(ID_Logro),
+    CONSTRAINT FK1_LogrosDeUsuarios FOREIGN KEY (ID_usuario) REFERENCES Usuario(ID_usuario)
+);
+
 
 CREATE TABLE Conversacion(
 	ID_conversacion int AUTO_INCREMENT,
@@ -151,3 +170,8 @@ insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (1
 insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (3, 2, "2023-10-23", "HOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA BIEEEEEEEEEEEEEEN", "texto");
 insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (1, 2, "2023-10-23", "WEOOOOOOOOOOOOOOOOOOOOOOOOON", "texto");
 insert into Mensaje (ID_usuario, ID_conversacion, Fecha, Cuerpo, Tipo) values (3, 2, "2023-10-23", "(COMPLETA AUSENCIA DE RESPUESTA)", "texto");
+
+insert into Logros (ID_Logro, NombreLogro, Descripcion, NombreDeImagenAsociada) values (1, "Fundador", "Los reales en la casa.","trofeoFundador.png");
+
+insert into LogrosDeUsuarios (ID_Logro, ID_usuario, FechaConseguido) values (1,1,"2003-12-23");
+insert into LogrosDeUsuarios (ID_Logro, ID_usuario, FechaConseguido) values (1,2,"1999-01-01");
