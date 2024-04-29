@@ -458,6 +458,14 @@ class DbConector {
         return $objetoUsuario;
     }
 
+    public function getUserAchievements($userID){
+        $consulta = $this->db->prepare("SELECT NombreLogro, Descripcion, NombreDeImagenAsociada, FechaConseguido FROM LogrosDeUsuarios, Logros WHERE LogrosDeUsuarios.ID_Logro=Logros.ID_Logro AND ID_usuario=:userID");
+        $consulta->bindParam(":userID", $userID, PDO::PARAM_INT);
+        $consulta->execute();
+        $arrayLogros = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        return $arrayLogros;
+    }
+
 }
 ?>
 
