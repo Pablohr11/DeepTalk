@@ -1,8 +1,9 @@
 <?php 
 include("../../config/init.php");
 require_once("../../storage/data.php");
-define('TAMANO_MAX_IMG', 5000000);
+define("TAMANO_MAX_IMG", 5000000);
 define("DIRECTORIO_IMAGENES_PERFIL", "../resources/perfiles/");
+define("DIRECTORIO_IMAGENES_LOGROS", "../resources/logros/");
 
 
 $consultor = DbConector::singleton();
@@ -19,6 +20,7 @@ if($user==false || $user == null || $user==0){
     die();
 }
 $userImage = ($consultor->getUserImage($user["ID_usuario"]));
+$logrosDelUsuario = ($consultor->getUserAchievements($user["ID_usuario"]));
 
 if (isset($_POST["closeSession"])) {
     session_unset();
@@ -114,7 +116,13 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
                     <div id="infoBasica">
                         <span class="nombreUsuario"><?php echo $user["NombreUsuario"]?></span>
                         <div id="logros">
-                            <img class="trofeo" src="../resources/trofeoFundador.png" alt="trofeo">
+                            <?php foreach($logrosDelUsuario as $objetoLogro){ ?>
+                            <img class="trofeo" src="<?=DIRECTORIO_IMAGENES_LOGROS.$objetoLogro["NombreDeImagenAsociada"]?>" alt="trofeo">
+                            <div class="contenedorInfoTrofeo">
+                                <p><span class="tituloDelTrofeo"><?=$objetoLogro["NombreLogro"]?></span> [<?=$objetoLogro["FechaConseguido"]?>]</p>
+                                <p><?=$objetoLogro["Descripcion"]?></p>
+                            </div>
+                            <?php } ?>
                         </div>
                         <?php if($perfilPropio){ ?>
                         <form>

@@ -142,9 +142,34 @@
     font-weight: bolder;
     font-size: 16px;
 }
+
 .trofeo{
     height: 20px;
     width: 20px;
+    cursor: pointer;
+}
+
+.contenedorInfoTrofeo{
+    border-radius: 6px;
+    padding: 6px;
+    background-color: #6d0470;
+    position: absolute;
+    display: none;
+}
+
+.trofeo:hover ~ .contenedorInfoTrofeo{
+    display: block;
+}
+
+.contenedorInfoTrofeo > p {
+    margin: 0px;
+    padding: 0px;
+}
+
+.contenedorInfoTrofeo  .tituloDelTrofeo {
+    font-weight: bold;
+    text-decoration: underline;
+    font-style: italic;
 }
 
 #pantallaRecurso{
@@ -240,3 +265,4 @@
     color: #6d0470;
     cursor: pointer;
 }
+
