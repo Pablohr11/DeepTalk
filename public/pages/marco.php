@@ -54,7 +54,7 @@ $userImage = ($consultor->getUserImage($user["ID_usuario"]));
                             <a class="marcoButton" target="iframe" href="chat.php?conversacion=<?= $userChat[0]?>">
                                 <button class="Button" formaction="" value="<?=$key?>">
                                     <img class="imagenPerfil" src="<?php echo $consultor->getUserImage($userChatId) ?>">
-                                    <?php echo $consultor->getUsernameFromChat($userChat[0],$user["ID_usuario"]) ?>
+                                    <span class="nombreUsuario"><?php echo $consultor->getUsernameFromChat($userChat[0],$user["ID_usuario"]) ?></span>
                                 </button>
                             </a>
                         <?php } ?>

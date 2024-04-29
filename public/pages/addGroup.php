@@ -19,6 +19,7 @@ if (isset($_POST["enviar"]) && isset($_POST["groupName"])) {
         $idUsuario = $user["ID_usuario"];
         $_SESSION["ngId"] = $gid;
         header("Location: addGroupStage2.php?gkey=$gid");
+        die();
     }
 }
 

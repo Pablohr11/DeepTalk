@@ -12,6 +12,11 @@ contenedorImagenPerfil.addEventListener('mouseout', function(){
     panelEditarImagen.classList.add("oculto");
 });
 
+/*
+    Si visitamos el perfil de otro usuario en la consola del navegador
+    nos saldrá un error pues tratará este panel como null, pues no aparece
+    solucionarse si se puede y si no pues nada.
+*/
 panelEditarImagen.addEventListener('click', function(){
     pantallaRecurso.classList.remove("oculto");
 });

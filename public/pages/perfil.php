@@ -16,6 +16,7 @@ $perfilPropio = !isset($_GET["usuarioPropietario"]);
 $user = (($perfilPropio)?CurrentUser::getConfig():$consultor->obtenerObjetoUsuarioDeNombreUsuario($_GET["usuarioPropietario"]));
 if($user==false || $user == null || $user==0){
     header("Location: marco.php");
+    die();
 }
 $userImage = ($consultor->getUserImage($user["ID_usuario"]));
 
@@ -26,6 +27,7 @@ if (isset($_POST["closeSession"])) {
         setcookie("Recuerdame", "", (time() - 1));
     }
     header("Location: ../index.php");
+    die();
 }
 
 if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FILES["recursoSubir"]["name"]=="")){

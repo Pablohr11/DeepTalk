@@ -18,6 +18,7 @@ if (isset($_POST["envio"])) {
         if( $insert ) {
             sendMail($mail, $user, "Te has registrado en Deeptalk", "El usuario $user se ha registrado correctamente en nuestro servicio ¡Un saludo!");
             header("Location: login.php?user=$user");
+            die();
         }
     }
 }

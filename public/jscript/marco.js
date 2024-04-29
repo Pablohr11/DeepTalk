@@ -10,7 +10,8 @@ var botonesDeConversaciones = document.getElementsByClassName("Button");
 
 for(let botonConversacion of botonesDeConversaciones){
     botonConversacion.addEventListener('click', function(){
-        nombreDeConversacion.innerHTML = botonConversacion.innerHTML;
+        let nombreDelUsuario = botonConversacion.querySelector(".nombreUsuario").innerText;
+        nombreDeConversacion.innerHTML = "<a class='hiperVinculoPerfilAjeno' href='../pages/perfil.php?usuarioPropietario="+nombreDelUsuario+"'>"+ botonConversacion.innerHTML +"</a>";
     });
 }
 
