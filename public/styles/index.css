@@ -156,7 +156,46 @@ body {
     font-size: 1.2em;
 }
 
+#popUp{
+    height: 3rem;
+    padding: 1rem;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    transition: linear;
+    animation: aparecerPopUp 1s;
+    top: 1%;
+    right: 1%;
+    opacity: 0.9;
+    font-weight: bolder;
+    color: black;
+}
 
+@keyframes aparecerPopUp {
+    0% {
+        right: -200px;
+        opacity: 0.3;
+    }
+}
+
+.popUpPerfecto{
+    background-color: yellowgreen;
+}
+
+.popUpRegulero{
+    background-color: yellow;
+}
+
+.popUpError{
+    background-color: red;
+}
+
+.imagenEstado{
+    height: 2rem;
+    width: 2rem;
+    opacity: 0.777;
+}
 
 
 @media (max-width: 480px) {

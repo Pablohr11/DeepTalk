@@ -77,6 +77,7 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
                 die();
             }
         } else {
+            echo '<script src="../jscript/main.js" defer></script>';
             echo "Hubo un error al subir tu archivo: ". $_FILES["recursoSubir"]["tmp_name"]. $archivo;
         }
     }
@@ -91,6 +92,7 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/index.css">
     <link rel="stylesheet" href="../styles/chat.css">
     <title>DeepTalk</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>

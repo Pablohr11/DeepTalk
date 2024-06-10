@@ -31,3 +31,29 @@ function getCookieValue(name) {
         return match[2]
     }
 }
+
+
+/*Esta funcion creará y mostrará un popUP*/
+
+const tiempoPorDefectoDelPopUp = 6000;
+
+function crearMostrarPopUp(estadoDelPopUp, mensajeDelPopUp, tiempoEnPantallaDelPopUp){
+    let contenido = document.getElementById("contenido");
+    let popUp = document.createElement("div");
+    popUp.setAttribute("id", "popUp");
+    if(estadoDelPopUp == "correcto"){
+        popUp.innerHTML = "<img class='imagenEstado' src='../resources/correcto.png'/> <span>"+ mensajeDelPopUp +"</span>";
+        popUp.setAttribute("class", "popUpPerfecto");
+    }else if(estadoDelPopUp == "advertencia"){
+        popUp.innerHTML = "<img class='imagenEstado' src='../resources/advertencia.png'/> <span>"+ mensajeDelPopUp +"</span>";
+        popUp.setAttribute("class", "popUpRegulero");
+    }else if(estadoDelPopUp == "error"){
+        popUp.innerHTML = "<img class='imagenEstado' src='../resources/error.png'/> <span>"+ mensajeDelPopUp +"</span>";
+        popUp.setAttribute("class", "popUpError");
+    }
+    contenido.appendChild(popUp);
+    setTimeout(function(){
+        let popUpBorrar = document.getElementById("popUp");
+        contenido.removeChild(popUpBorrar);
+    },tiempoEnPantallaDelPopUp);
+}
