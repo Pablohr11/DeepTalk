@@ -42,7 +42,7 @@ class DbConector {
             }
       //      }
         } catch (PDOException $e) {
-            echo $e->getMessage();
+            /*echo $e->getMessage();*/
         }
         return false;
     }
@@ -61,7 +61,7 @@ class DbConector {
 
             
         } catch (PDOException $e) {
-            echo $e->getMessage();
+            /*echo $e->getMessage();*/
             return false;
         }
         return true;
@@ -146,7 +146,7 @@ class DbConector {
     
             $results = $consulta->execute();
         } catch (PDOException $e) {
-            echo $e->getMessage();
+            /*echo $e->getMessage();*/
             return false;
         }
         return true;
@@ -163,7 +163,7 @@ class DbConector {
     
             $results = $consulta->execute();
         } catch (PDOException $e) {
-            echo $e->getMessage();
+            /*echo $e->getMessage();*/
             return false;
         }
         return true;
@@ -269,7 +269,7 @@ class DbConector {
 
             $results = $consulta->execute();
         } catch (PDOException $e) {
-            echo $e->getMessage();
+            /*echo $e->getMessage();*/
             return false;
         }
         return true;
@@ -317,7 +317,7 @@ class DbConector {
             $results = $consulta->execute();
             $id = $consulta->fetch(PDO::FETCH_NUM)[0];
         } catch (PDOException $e) {
-            echo $e->getMessage();
+            /*echo $e->getMessage();*/
             return false;
         }
         return true;
@@ -334,7 +334,7 @@ class DbConector {
 
             $results = $consulta->execute();
         } catch (PDOException $e) {
-            echo $e->getMessage();
+            /*echo $e->getMessage();*/
             return false;
         }
         return true;
