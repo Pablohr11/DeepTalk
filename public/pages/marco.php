@@ -76,7 +76,7 @@ $userImage = ($consultor->getUserImage($user["ID_usuario"]));
                         <a target="iframe" href="./addGroup.php"><button class="addNew" >+</button></a>
                     </div>
                 </div>
-                <li onclick="desplegar(4)">Hilos</li>
+                <li style="appearence: none" onclick="desplegar(4)">Hilos</li>
                 <div class="oculto"><p>Implementar los chats</p></div>
                 <!--<li onclick="desplegar(3)">Recomendados</li>
                 <div class="oculto"><p>Implementar los chats</p></div>!-->
