@@ -10,7 +10,6 @@ $consultor = DbConector::singleton();
 
 $gid = $_SESSION["ngId"];
 if (isset($_POST["enviar"]) && isset($_POST["user1"]) && isset($_POST["user2"])) {
-    echo "<br>aaaaaa$gid<br>";
     $consultor->insertIntoGroup($user["NombreUsuario"], $gid);
     $consultor->insertIntoGroup($_POST["user1"], $gid);
     $consultor->insertIntoGroup($_POST["user2"], $gid);

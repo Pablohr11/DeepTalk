@@ -66,10 +66,10 @@ if (isset($_POST["recursoEnviado"]) && isset($_FILES["recursoSubir"]) && !($_FIL
             header("Location: perfil.php");
             die();
         } else {
-            echo "Hubo un error al subir tu archivo: ". $_FILES["recursoSubir"]["tmp_name"]. $archivo;
+            /*echo "Hubo un error al subir tu archivo: ". $_FILES["recursoSubir"]["tmp_name"]. $archivo;*/
         }
     }else{
-        echo "Hubo un error al procesar su imagen pruebe de nuevo o trate con otra imagen.";
+        /*echo "Hubo un error al procesar su imagen pruebe de nuevo o trate con otra imagen.";*/
     }
     
 }
