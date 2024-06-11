@@ -35,15 +35,8 @@
     </div>
     <div id="contenedorPrincipal">
         <form action="themePicker.php" method="get">
-            <div id="claro">
-                <h2>MODO CLARO</h2>
-                <video class="show-video" autoplay loop muted>
-                    <source src="../resources/bg_1.mp4" type="video/mp4">
-                </video>
-                <input class="botonSeleccion" value="SELECCIONAR" type="submit" name="claro">
-            </div>
             <div id="clasico">
-                <h2>MODO CLÁSICO</h2>
+                <h2>MODO CLARO</h2>
                 <video class="show-video" autoplay loop muted>
                     <source src="../resources/bg_3.mp4" type="video/mp4">
                 </video>
